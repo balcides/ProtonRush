@@ -6,7 +6,9 @@ using UnityEngine;
 ///
 /// Spawner.cs
 /// 
+/// Should also be known as EnemySpawner
 /// The idea is to have a prefab and spawn point offset for this. Keeping it simple
+/// 
 /// 
 /// </summary>
 
@@ -22,6 +24,10 @@ public class Spawner : MonoBehaviour {
 	public int spawnCooldown;
 	float countdown;
 	float countStart;
+
+	void Awake(){
+
+	}
 
 	// Use this for initialization
 	void Start () {
