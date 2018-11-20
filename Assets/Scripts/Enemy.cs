@@ -24,11 +24,13 @@ public class Enemy : MonoBehaviour {
 	//scripts
 	//AssetManager AM;
 	GameMechanics GMX;
+	GameManager GM;
 
 	void Awake(){
 
 		//AM = Camera.main.GetComponent<AssetManager> ();
 		GMX= Camera.main.GetComponent<GameMechanics> ();
+		GM= Camera.main.GetComponent<GameManager> ();
 	}
 
 	// Use this for initialization
@@ -62,6 +64,9 @@ public class Enemy : MonoBehaviour {
 
 		//if we run out of hit points, die or destroy self
 		if (GetComponent<Unit>().hp <= 0) {
+
+			//Award player XP for kill
+			GM.playerXP += GetComponent<Unit>().xp;
 			
 			//SelfDestruct ();
 			GMX.SelfDestruct (gameObject);
@@ -70,6 +75,9 @@ public class Enemy : MonoBehaviour {
 
 		//if enemy runs into the player, destroy self
 		if (col.gameObject.tag == "Player") {
+
+			//Award player XP for kill
+			GM.playerXP += GetComponent<Unit>().xp;
 
 			//SelfDestruct();
 			GMX.SelfDestruct (gameObject);

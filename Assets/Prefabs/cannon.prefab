@@ -834,7 +834,7 @@ MonoBehaviour:
   attack: 10
   defense: 10
   speed: 10
-  xp: 0
+  xp: 100
 --- !u!114 &114503471487527178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -849,6 +849,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1672611935801388, guid: c3ff15620d8d740a4844f3e484b0ea7d,
     type: 2}
   bulletSpawn: {fileID: 4452723866562066}
+  tileSpawer: {fileID: 0}
   cooldown: 0.75
 --- !u!114 &114929385101900476
 MonoBehaviour:

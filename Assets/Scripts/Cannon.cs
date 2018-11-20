@@ -29,7 +29,6 @@ public class Cannon : MonoBehaviour {
 	float countdown;
 	float countStart;
 
-
 	//scripts
 	GameMechanics GMX;
 	Unit unit;
@@ -49,11 +48,11 @@ public class Cannon : MonoBehaviour {
 		countStart = cooldown;
 		countdown = countStart;
 
-		Debug.Log ("Name=" + Unit.instance.modelname);
-		Debug.Log ("speed=" + speed);
-		Debug.Log ("attack=" + speed);
-		Debug.Log ("countdown=" + countdown);
-		Debug.Log ("countStart=" + countStart);
+		//Debug.Log ("Name=" + Unit.instance.modelname);
+		//Debug.Log ("speed=" + speed);
+		//Debug.Log ("attack=" + speed);
+		//Debug.Log ("countdown=" + countdown);
+		//Debug.Log ("countStart=" + countStart);
 		
 	}
 	
@@ -90,20 +89,24 @@ public class Cannon : MonoBehaviour {
 		Generate projectile and it shoots towards it's target
 
 	 */
-
-		// Create the Bullet from the Bullet Prefab
-
+		Quaternion rotateDir = Quaternion.Euler(Vector3.forward);
+			
 		//find closest enemy
 		Transform aimTarget = FindClosestEnemy();
 
-		//calculate cross product
-		Vector3 relativePos = aimTarget.position - bulletSpawn.position;
+		//if there's an aim target, get aim rotation
+		if (aimTarget) {
 
-		//set aim
-		Quaternion aimRotation = Quaternion.LookRotation(relativePos, Vector3.up);
+			//calculate cross product
+			Vector3 relativePos = aimTarget.position - bulletSpawn.position;
+
+			//set aim
+			Quaternion aimRotation = Quaternion.LookRotation (relativePos, Vector3.up);
+			rotateDir = aimRotation;
+		} 
 
 		//fire!
-		var bullet = (GameObject)Instantiate (bulletPrefab, bulletSpawn.position, aimRotation);
+		var bullet = (GameObject)Instantiate (bulletPrefab, bulletSpawn.position, rotateDir);
 
 		// Add velocity to the bullet
 		bullet.GetComponent<Photon>().speed = speed;
@@ -151,18 +154,27 @@ public class Cannon : MonoBehaviour {
 		//loop through all enemies to find nearest
 		GameObject closest = null;
 		float distance = Mathf.Infinity;
+			
+		//Calculate if any enemies found, else return null
+		if (enemies.Any ()) {
+			
+			foreach (GameObject enemy in enemies) {
+				Vector3 diff = enemy.transform.position - transform.position;
+				float curDistance = diff.sqrMagnitude;
 
-		foreach(GameObject enemy in enemies){
-			Vector3 diff = enemy.transform.position - transform.position;
-			float curDistance = diff.sqrMagnitude;
-			if (curDistance < distance)
-			{
-				closest = enemy;
-				distance = curDistance;
+				if (curDistance < distance) {
+					closest = enemy;
+					distance = curDistance;
+				}
 			}
-		}
 
-		return closest.transform;
+			return closest.transform;
+		
+			//return nothing if no enemies found
+		} else {
+			return null;
+		}
+			
 
 	}
 		

@@ -14,6 +14,9 @@ public class AssetManager : MonoBehaviour {
 
 	public Transform explosion;
 
+	//HUD
+	public Transform xpCounter;
+
 	// Use this for initialization
 	void Start () {
 		
