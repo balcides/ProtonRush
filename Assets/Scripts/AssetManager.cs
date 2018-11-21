@@ -16,6 +16,7 @@ public class AssetManager : MonoBehaviour {
 
 	//HUD
 	public Transform xpCounter;
+	public Transform gameStatus;
 
 	// Use this for initialization
 	void Start () {

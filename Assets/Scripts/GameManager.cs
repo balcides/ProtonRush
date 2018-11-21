@@ -37,7 +37,5 @@ public class GameManager : MonoBehaviour {
 		AM.xpCounter.GetComponent<Text> ().text = "XP " + playerXP.ToString("00000");
 		
 	}
-
-	//when you destroy a spidercrab, award crab's XP
 		
 }
