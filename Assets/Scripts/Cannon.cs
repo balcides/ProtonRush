@@ -138,6 +138,7 @@ public class Cannon : MonoBehaviour {
 			//self-destroy cannon
 			GMX.SelfDestruct (gameObject);
 
+
 		}
 	}
 
