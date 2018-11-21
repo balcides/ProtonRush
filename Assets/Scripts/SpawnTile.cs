@@ -47,8 +47,6 @@ public class SpawnTile : MonoBehaviour {
 			int playerXP = GM.playerXP;
 			int xpDiff = playerXP - unitXP;
 
-			Debug.Log ("xpDiff=" + xpDiff);
-
 			//if there's enough XP, spawn, else nothing. Note: we're using playerXP as a cost per unit
 			if (xpDiff >= 0) {
 				

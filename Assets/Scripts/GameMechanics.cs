@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// 
@@ -41,12 +42,33 @@ public class GameMechanics : MonoBehaviour {
 	*/
 
 		//release explosion effect
-		var explosion = (GameObject)Instantiate (AM.explosion.gameObject, asset.transform.position, asset.transform.rotation);
+		Instantiate (AM.explosion.gameObject, asset.transform.position, asset.transform.rotation);
 
 		//destroy self 
 		Destroy (asset.gameObject);
 
 
+	}
+
+	//Game over
+	public void GameOver(){
+
+		//Print game over message
+		AM.gameStatus.GetComponent<Text>().text = "GAME OVER";
+
+		//stop all bugs (or destroy)
+		//TODO: maybe make this a global command (allEnemies() or something)
+		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+		foreach (GameObject enemy in enemies){ SelfDestruct (enemy); }
+
+		//disable all the spawners
+		GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
+		GameObject[] spawnTiles = GameObject.FindGameObjectsWithTag("SpawnTile");
+		GameObject[] cannons = GameObject.FindGameObjectsWithTag("Player");
+
+		foreach (GameObject spawner in spawners) {		spawner.GetComponent<Spawner> ().enabled = false;	}		
+		foreach (GameObject spawnTile in spawnTiles) {	spawnTile.GetComponent<SpawnTile> ().isSpawned = true; }
+		foreach (GameObject cannon in cannons) {  		cannon.GetComponent<Cannon> ().enabled = false; }
 	}
 
 }

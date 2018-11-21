@@ -103,16 +103,16 @@ public class Cannon : MonoBehaviour {
 			//set aim
 			Quaternion aimRotation = Quaternion.LookRotation (relativePos, Vector3.up);
 			rotateDir = aimRotation;
+
+			//fire!
+			var bullet = (GameObject)Instantiate (bulletPrefab, bulletSpawn.position, rotateDir);
+
+			// Add velocity to the bullet
+			bullet.GetComponent<Photon>().speed = speed;
+			bullet.GetComponent<Photon> ().damage = attack;
+			//bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
 		} 
-
-		//fire!
-		var bullet = (GameObject)Instantiate (bulletPrefab, bulletSpawn.position, rotateDir);
-
-		// Add velocity to the bullet
-		bullet.GetComponent<Photon>().speed = speed;
-		bullet.GetComponent<Photon> ().damage = attack;
-		//bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
-
+			
 	}
 
 	void OnCollisionEnter (Collision col){
