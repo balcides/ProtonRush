@@ -1278,10 +1278,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modelname: spidercrabMX
   level: 1
-  hp: 50
-  attack: 30
+  hp: 25
+  attack: 10
   defense: 20
-  speed: 3
+  speed: 1
   xp: 10
 --- !u!114 &114842181428177962
 MonoBehaviour:

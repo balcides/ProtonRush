@@ -17,6 +17,7 @@ using UnityEngine.UI;
 public class GameMechanics : MonoBehaviour {
 
 	//scripts
+	public float random;
 	AssetManager AM;
 
 	void Awake(){
@@ -31,7 +32,8 @@ public class GameMechanics : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+		random = Random.Range (0, 100);
 	}
 		
 	public void SelfDestruct(GameObject asset){
@@ -69,6 +71,16 @@ public class GameMechanics : MonoBehaviour {
 		foreach (GameObject spawner in spawners) {		spawner.GetComponent<Spawner> ().enabled = false;	}		
 		foreach (GameObject spawnTile in spawnTiles) {	spawnTile.GetComponent<SpawnTile> ().isSpawned = true; }
 		foreach (GameObject cannon in cannons) {  		cannon.GetComponent<Cannon> ().enabled = false; }
+	}
+
+
+	public float Randomizer(float min, float max, float multiplier){
+
+		random = random * multiplier;
+		if (random < min) {			random = min; 
+		} else if (random > max) {	random = max;	}
+
+		return random;
 	}
 
 }

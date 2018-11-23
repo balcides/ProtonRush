@@ -24,8 +24,14 @@ public class Spawner : MonoBehaviour {
 	public int spawnCooldown;
 	float countdown;
 	float countStart;
+	public bool randomCooldown;
+
+	//scripts
+	GameMechanics GMX;
 
 	void Awake(){
+
+		GMX = Camera.main.GetComponent<GameMechanics> ();
 
 	}
 
@@ -49,11 +55,12 @@ public class Spawner : MonoBehaviour {
 
 	 */
 
+
 		countdown = countdown - Time.deltaTime;
 
 		//every num of seconds
 		if (countdown <= 0) {
-
+			
 			//spawn asset from target position
 			SpawnAsset();
 
