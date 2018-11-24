@@ -12,11 +12,21 @@ using UnityEngine;
 
 public class AssetManager : MonoBehaviour {
 
+	//Gameplay
+	public Transform[] cannons = new Transform[2];
+
+	//FX
 	public Transform explosion;
 
 	//HUD
 	public Transform xpCounter;
+	public Transform killCounter;
 	public Transform gameStatus;
+
+	//Assign vars before start
+	void Active(){
+
+	}
 
 	// Use this for initialization
 	void Start () {

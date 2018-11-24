@@ -31,11 +31,16 @@ public class Cannon : MonoBehaviour {
 
 	//scripts
 	GameMechanics GMX;
+	GameManager GM;
+	AssetManager AM;
 	Unit unit;
 
 	void Awake(){
 
 		GMX= Camera.main.GetComponent<GameMechanics> ();
+		GM= Camera.main.GetComponent<GameManager> ();
+		AM= Camera.main.GetComponent<AssetManager> ();
+
 		unit = GetComponent<Unit> ();
 		speed = unit.speed;
 		attack = unit.attack;
@@ -53,7 +58,6 @@ public class Cannon : MonoBehaviour {
 		//Debug.Log ("attack=" + speed);
 		//Debug.Log ("countdown=" + countdown);
 		//Debug.Log ("countStart=" + countStart);
-		
 	}
 	
 	// Update is called once per frame
@@ -62,6 +66,54 @@ public class Cannon : MonoBehaviour {
 		AutoFire ();
 		
 	}
+
+
+	void OnMouseDown(){
+	/*
+
+		Upgrade unit on click
+
+	 */
+		//TODO: used also in SpawnTile.cs, should be a global method. Level2Credits should be refactored
+		//look at num of credits
+		int numOfCredits = GM.playerXP;
+		Transform tileSpawnAsset = tileSpawer.GetComponent<SpawnTile>().spawnAsset;
+
+		//if there's enough, convert to level 2
+		if (numOfCredits >= GM.creditCostLvl2) {
+
+			//if it's a level 1 cannon, convert to level 2, else, it's maxed out
+			if (tileSpawnAsset.GetComponent<Unit> ().modelname == "photonSE") {
+
+				//set the tile's new asset for the next level
+				tileSpawer.GetComponent<SpawnTile>().spawnAsset = AM.cannons [1];
+
+				//spawn asset after setting prefab
+				tileSpawer.GetComponent<SpawnTile> ().SpawnAsset ();
+
+				//reduce credits 
+				GM.playerXP -= GM.creditCostLvl2;
+
+				//destroy current one
+				GMX.SelfDestruct (gameObject);
+
+			} else {
+				print ("it's already a level 2 cannon.");
+			}
+
+		} else {
+
+			//TODO: This condition is called again under 'if(numOfCredits..' and should probably be refactored to be called once
+			if (tileSpawnAsset.GetComponent<Unit> ().modelname == "photonSE2") {
+				print ("Unit maxed out!");
+
+			} else {
+				//else warn you need more credits
+				print ("Not enough XP to purchase cannon. Must have" + (GMX.creditsRemaining (GM.creditCostLvl2)) + " credits to purchase");
+			}
+		}
+	}
+
 
 	void AutoFire(){
 	/*
