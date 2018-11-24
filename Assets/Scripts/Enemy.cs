@@ -67,6 +67,7 @@ public class Enemy : MonoBehaviour {
 
 			//Award player XP for kill
 			GM.playerXP += GetComponent<Unit>().xp;
+			GM.playerKillCount += 1;
 			
 			//SelfDestruct ();
 			GMX.SelfDestruct (gameObject);

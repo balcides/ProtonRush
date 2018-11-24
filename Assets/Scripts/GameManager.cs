@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour {
 
 	//values
 	public int playerXP;
+	public int playerKillCount;
+	public int creditCostLvl2 = 200;
 
 	//script
 	AssetManager AM;
@@ -22,7 +24,7 @@ public class GameManager : MonoBehaviour {
 	void Awake(){
 		
 		AM = GetComponent<AssetManager> ();
-		playerXP = 0;
+		playerXP = 200;
 	}
 
 	// Use this for initialization
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviour {
 
 		//update xp count in GUI
 		AM.xpCounter.GetComponent<Text> ().text = "XP " + playerXP.ToString("00000");
+		AM.killCounter.GetComponent<Text> ().text = "Kill " + playerKillCount.ToString("00000");
 		
 	}
 		

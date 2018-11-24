@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 114929385101900476}
   - component: {fileID: 65705961464915634}
   m_Layer: 0
-  m_Name: cannon
+  m_Name: cannon-lv1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -831,7 +831,7 @@ MonoBehaviour:
   modelname: photonSE
   level: 1
   hp: 100
-  attack: 10
+  attack: 5
   defense: 10
   speed: 10
   xp: 100
