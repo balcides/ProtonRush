@@ -14,6 +14,7 @@ public class AssetManager : MonoBehaviour {
 
 	//Gameplay
 	public Transform[] cannons = new Transform[2];
+	public Transform[] spidercrab = new Transform[2];
 
 	//FX
 	public Transform explosion;

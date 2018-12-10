@@ -22,25 +22,32 @@ public class Spawner : MonoBehaviour {
 
 	//spawn time
 	public int spawnCooldown;
+	public int spawnCooldownMin;
+	public int spawnCooldownMax;
 	float countdown;
 	float countStart;
 	public bool randomCooldown;
 
 	//scripts
 	GameMechanics GMX;
+	AssetManager AM;
 
 	void Awake(){
 
 		GMX = Camera.main.GetComponent<GameMechanics> ();
+		AM = Camera.main.GetComponent<AssetManager> ();
 
 	}
 
 	// Use this for initialization
 	void Start () {
 
-		countStart = spawnCooldown;
+		spawnCooldownMin = 1;
+		spawnCooldownMax = 20;
+
+		countStart = Random.Range(spawnCooldownMin, spawnCooldownMax);;
 		countdown = countStart;
-		
+
 	}
 	
 	// Update is called once per frame
@@ -65,7 +72,7 @@ public class Spawner : MonoBehaviour {
 			SpawnAsset();
 
 			//reset count
-			countdown = countStart;
+			countdown = Random.Range(spawnCooldownMin, spawnCooldownMax);
 		}
 	}
 
@@ -80,6 +87,35 @@ public class Spawner : MonoBehaviour {
 			                     		  transform.position.y + spawnPointOffset.y,
 		                    		  	  transform.position.z);
 
+		//set default spidercrab asset as level 1
+		spawnAsset = AM.spidercrab[0];
+
+		//check all player assets to see if they're above level 1
+		GameObject[] cannons = GameObject.FindGameObjectsWithTag("Player");
+		int highestLevel = 0;
+
+		foreach (GameObject cannon in cannons) {
+			int currentLevel = cannon.GetComponent<Unit> ().level;
+
+			if (currentLevel > highestLevel) {
+				highestLevel = currentLevel;
+			}
+		}
+			
+		//if so, random gen between level 1 and 2 assets
+		if (highestLevel > 1) {
+			//set spawn to that range item
+			float randomGen = GMX.random;
+
+			//spawn level2 spider if 75% over chance
+			if (randomGen > 75) {
+				spawnAsset = AM.spidercrab [1];
+				spawnPoint = new Vector3 (transform.position.x,
+					transform.position.y + (spawnPointOffset.y * 2),
+					transform.position.z);
+			}
+		}
+			
 		// Create the Bullet from the Bullet Prefab
 		var enemy = (GameObject)Instantiate (spawnAsset.gameObject, spawnPoint, transform.rotation);
 

@@ -77,6 +77,7 @@ public class SpawnTile : MonoBehaviour {
 		var spawned = (GameObject)Instantiate (spawnAsset.gameObject, spawnPoint, transform.rotation);
 
 		//random num to name for ID
+		//TODO: use random generated from camera
 		spawned.name = spawned.name + Random.Range (0, 100);
 
 		//assign this as cannon's tile spawner
