@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour {
 	void Awake(){
 		
 		AM = GetComponent<AssetManager> ();
-		playerXP = 200;
+		playerXP = 400;
 	}
 
 	// Use this for initialization
