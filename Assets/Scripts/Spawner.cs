@@ -108,7 +108,7 @@ public class Spawner : MonoBehaviour {
 			float randomGen = GMX.random;
 
 			//spawn level2 spider if 75% over chance
-			if (randomGen > 66) {
+			if (randomGen > 75) {
 				spawnAsset = AM.spidercrab [1];
 				spawnPoint = new Vector3 (transform.position.x,
 					transform.position.y + (spawnPointOffset.y * 2),
