@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
 	public int playerXP;
 	public int playerKillCount;
 	public int creditCostLvl2 = 200;
+	public int creditCostRepairCmdCenter = 500;
 
 	//script
 	AssetManager AM;
