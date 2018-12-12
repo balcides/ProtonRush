@@ -30,11 +30,13 @@ public class Spawner : MonoBehaviour {
 
 	//scripts
 	GameMechanics GMX;
+	GameManager GM;
 	AssetManager AM;
 
 	void Awake(){
 
 		GMX = Camera.main.GetComponent<GameMechanics> ();
+		GM = Camera.main.GetComponent<GameManager> ();
 		AM = Camera.main.GetComponent<AssetManager> ();
 
 	}
@@ -45,7 +47,7 @@ public class Spawner : MonoBehaviour {
 		spawnCooldownMin = 1;
 		spawnCooldownMax = 20;
 
-		countStart = Random.Range(spawnCooldownMin, spawnCooldownMax);;
+		countStart = Random.Range(spawnCooldownMin, spawnCooldownMax);
 		countdown = countStart;
 
 	}
@@ -72,6 +74,15 @@ public class Spawner : MonoBehaviour {
 			SpawnAsset();
 
 			//reset count
+			int killCount = GM.playerKillCount;
+
+			if (killCount >= 10) { spawnCooldownMax = 17; }
+			if (killCount >= 20) { spawnCooldownMax = 14; }
+			if (killCount >= 30) { spawnCooldownMax = 10; }
+			if (killCount >= 40) { spawnCooldownMax = 7; }
+			if (killCount >= 50) { spawnCooldownMax = 4; }
+			if (killCount >= 100) { spawnCooldownMax = 2; }
+
 			countdown = Random.Range(spawnCooldownMin, spawnCooldownMax);
 		}
 	}
