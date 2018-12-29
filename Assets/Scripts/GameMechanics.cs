@@ -27,17 +27,20 @@ public class GameMechanics : MonoBehaviour {
 		GM = GetComponent<GameManager> ();
 	}
 
+
 	// Use this for initialization
 	void Start () {
 		
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
 
 		random = Random.Range (0, 100);
 	}
 		
+
 	public void SelfDestruct(GameObject asset){
 	/*
 
@@ -50,9 +53,8 @@ public class GameMechanics : MonoBehaviour {
 
 		//destroy self 
 		Destroy (asset.gameObject);
-
-
 	}
+
 
 	//Game over
 	public void GameOver(){
@@ -124,5 +126,7 @@ public class GameMechanics : MonoBehaviour {
 
 		return creditDiff;
 	}
+
+
 
 }
