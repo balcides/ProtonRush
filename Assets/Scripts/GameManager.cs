@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Linq;
 
 /// <summary>
@@ -21,8 +22,8 @@ public class GameManager : MonoBehaviour {
 	public int creditCostLvl2 = 200;
 	public int creditCostRepairCmdCenter = 500;
 
-	float tempTimer;
-	float leaderboardTimer;
+	public float tempTimer;
+	public bool enableTempTimer;
 
 	//script
 	AssetManager AM;
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		tempTimer = 10;
-		leaderboardTimer = 3;
+	//	leaderboardTimer = 3;
 	}
 	
 	// Update is called once per frame
@@ -52,21 +53,26 @@ public class GameManager : MonoBehaviour {
 		AM.killCounter.GetComponent<Text> ().text = "Kill " + playerKillCount.ToString("00000");
 		AM.xpTotalScore.GetComponent<Text> ().text = "XP Score " + playerXPscore.ToString("00000");
 
-		//created for testing game over and score mechanic
+		//enable temp timer for testing if needed
+		if (enableTempTimer) {    TempTimer ();   }
+	}
+		
+
+	void TempTimer(){
+	/*
+
+			Created for testing game over and score mechanic
+
+	*/
+
 		//print("Temp timer = " + tempTimer);
 		tempTimer -= 1 * Time.deltaTime;
 		if(tempTimer <= 0){
 			tempTimer = 0;
 			GMX.GameOver ();
-
-			//start leaderboard timer
-			leaderboardTimer -= 1 * Time.deltaTime;
-			if (leaderboardTimer <= 0) {
-				leaderboardTimer = 0;
-				LoadLeaderboard ();
-			}
 		}
 	}
+
 
 	public void LoadLeaderboard(){
 		//Once the game is over, check the high scores
@@ -78,18 +84,40 @@ public class GameManager : MonoBehaviour {
 		AM.playerScoreName.GetComponent<Text>().enabled = true;
 		AM.playerScoreKills.GetComponent<Text>().enabled = true;
 		AM.playerScoreXpScore.GetComponent<Text>().enabled = true;
-
-		//enable input
 		AM.playerScoreBKG.gameObject.SetActive(true);
-		AM.playerScoreNameInput.gameObject.SetActive (true);
-		AM.playerScoreSubmitBtn.gameObject.SetActive (true);
 
-		//if the kill count is greater than the smallest value in the highscore 
-		//prompt player name input
-		//load high scores
+		//load high scores and update text
+		string[] loadScores = leaderboard.LoadScores ();
+		//foreach (string score in loadScores) {
+		//	print (score);
+		//}
+		leaderboard.UpdateScoreText (loadScores, AM.playerScoreName, AM.playerScoreKills, AM.playerScoreXpScore);
+
+		//convert scores to list
+		List<PlayerScore> playerscore = new List<PlayerScore>();
+		playerscore = leaderboard.StringToListScores (loadScores);
+
+		//get value of the last item in list
+		int lowestTotalXP = playerscore [playerscore.Count - 1].totalxp;
+
+		//if kill count is greater, prompt player input
+		if (playerXPscore > lowestTotalXP) {
+			print ("player kill count is greater than lowest = " + playerXPscore + " > " + lowestTotalXP);
+
+			//enable input
+			AM.playerScoreNameInput.gameObject.SetActive (true);
+			AM.playerScoreSubmitBtn.gameObject.SetActive (true);
+
+			//Note: sort, trim, and save handled by SubmitScores() when button is enabled
+
+		} else {
+			
+			//enable try again button (optional)
+			AM.tryAgainBtn.gameObject.SetActive(true);
+
+		}
 
 
-		//enable try again button (optional)
 	}
 
 
@@ -104,32 +132,44 @@ public class GameManager : MonoBehaviour {
 		Designed to submit scores at the press of a button.
 
 	*/
-		//take the current score
-		//submit to leaderboard
-		//get player scores by loading player prefs to list
-		//string prefNames = PlayerPrefs.GetString("Name", leaderboard.defaultNames);
-
-		//take pref names and add to list
-		//string[] names = prefNames.Split('\n');
 
 		//create list based on current scores
 		List<PlayerScore> playerScore = new List<PlayerScore>();
-		playerScore = leaderboard.playerScore;
+		string[] loadScores = leaderboard.LoadScores ();
+		playerScore = leaderboard.StringToListScores (loadScores);
 
-		//List<Leaderboard.PlayerScore> playersScore = new List<Leaderboard.PlayerScore> ();
+		//Add score from input
 		leaderboard.AddScore (playerScore, AM.playerScoreNameInput.GetComponent<InputField> ().text, playerKillCount, playerXPscore);
 
 		//sort the scores by kills, total, and name
-		//List<PlayerScore> sortedPlayerScore = playersScore.OrderBy(x => x.kills).ThenBy(x => x.totalxp).ThenBy(x => x.name).ToList();
 		List<PlayerScore> sortedPlayerScore = leaderboard.SortScore(playerScore);
 
-		//set scores (TEST)
-		string[] scores = leaderboard.ScoresToString(sortedPlayerScore) ;
+		//remove the last item on the list
+		List<PlayerScore> trimScore = leaderboard.TrimScore (sortedPlayerScore, 10);
+
+		//convert list to string
+		string[] scores = leaderboard.ListToStringScores(trimScore);
+
+		//display results and update text
 		leaderboard.UpdateScoreText (scores, AM.playerScoreName, AM.playerScoreKills, AM.playerScoreXpScore);
 
-		//remove the last item on the list
 		//save to playerPrefs
+		leaderboard.SaveScores(scores);
 
+		//enable try again button (optional)
+		AM.tryAgainBtn.gameObject.SetActive(true);
+
+	}
+
+
+	public void ReloadGame(){
+	/*
+
+		Restarts game with retry button by reloading the scene
+
+	*/
+
+		SceneManager.LoadScene("FirstPlayable");
 	}
 		
 }

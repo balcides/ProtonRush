@@ -11,12 +11,13 @@ public class Leaderboard : MonoBehaviour {
 	public List<PlayerScore> playerScore;
 
 	//player pref keys for save/load
-	string nameKey = "Name";
-	string killKey = "Kills";
-	string xpTotal = "XpTotal";
+	//string NameKey = "Name";
+	//string KillKey = "Kills";
+	//string XpTotalKey = "XpTotal";
 
 	//scripts
 	AssetManager AM;
+
 
 	void Awake(){
 		
@@ -31,11 +32,11 @@ public class Leaderboard : MonoBehaviour {
 		
 
 		//load player prefs, if none, set default scores
-		string[] loadScores = LoadScores (nameKey, killKey , xpTotal);
+		string[] loadScores = LoadScores ();
 		UpdateScoreText (loadScores, AM.playerScoreName, AM.playerScoreKills, AM.playerScoreXpScore);
 
-		//save player prefs
-		SaveScores(loadScores, nameKey, killKey, xpTotal);
+		//nuke or reset prefs if need be
+		//PlayerPrefs.DeleteAll();
 
 	}
 
@@ -64,7 +65,7 @@ public class Leaderboard : MonoBehaviour {
 
 	 */
 
-		List<PlayerScore> sortedPlayerScore = playerScore.OrderByDescending(x => x.kills).ThenByDescending(x => x.totalxp).ThenBy(x => x.name).ToList();
+		List<PlayerScore> sortedPlayerScore = playerScore.OrderByDescending(x => x.totalxp).ThenByDescending(x => x.kills).ThenBy(x => x.name).ToList();
 
 		return sortedPlayerScore;
 	}
@@ -111,7 +112,7 @@ public class Leaderboard : MonoBehaviour {
 	}
 
 
-	public string[] ScoresToString(List<PlayerScore> playerScore){
+	public string[] ListToStringScores(List<PlayerScore> playerScore){
 	/*
 
 		Takes player score and outputs then into string format
@@ -131,7 +132,7 @@ public class Leaderboard : MonoBehaviour {
 	}
 
 
-	public List<PlayerScore> StringToScores(string[] scores){
+	public List<PlayerScore> StringToListScores(string[] scores){
 	/*
 
 		Converts string to list format
@@ -145,8 +146,18 @@ public class Leaderboard : MonoBehaviour {
 		List<PlayerScore> playersScore = new List<PlayerScore> ();
 
 		int nameCount = names.Count () - 1;
+
 		//populate the list with string array split
 		for (int i = 0; i < nameCount; i++) {
+			//print ("nameCount =" + nameCount + " current iterator = " + i);
+
+			//handles blank score in exception
+			if (kills [i] == "") {
+				kills [i] = "0";
+				xptotals[i] = "0";
+			}
+
+			//print (names [i] + " " + kills [i] + " " + xptotals [i]);
 			AddScore (playersScore, names[i], Convert.ToInt16(kills [i]), Convert.ToInt16(xptotals [i]));
 		}
 			
@@ -169,7 +180,7 @@ public class Leaderboard : MonoBehaviour {
 	}
 
 
-	public string[] LoadScores(string nameKey, string killsKey, string xpTotalKey){
+	public string[] LoadScores(string nameKey="Name", string killsKey="Kills", string xpTotalKey="XpTotal"){
 	/*
 
 		Loads scores and sorts from player prefs. If empty, loads default list
@@ -181,34 +192,36 @@ public class Leaderboard : MonoBehaviour {
 		//		just seems easier (format friendly)
 		List<PlayerScore> defaultScores = new List<PlayerScore>();
 		defaultScores = DefaultScores (defaultScores);
+		defaultScores = SortScore (defaultScores);
 
 		//create a load scores that's empty to use for player
-		List<PlayerScore> loadScores = new List<PlayerScore>();
+		//List<PlayerScore> loadScores = new List<PlayerScore>();
 
 		//convert default list to strings
-		string[] scoresToString = ScoresToString (defaultScores);
+		string[] defaultScoresToString = ListToStringScores (defaultScores);
 	
 		//get player pref key, if not, add a default list
-		string names = PlayerPrefs.GetString (nameKey, scoresToString[0]);
-		string kills = PlayerPrefs.GetString (killsKey,scoresToString[1]);
-		string xptotal = PlayerPrefs.GetString (xpTotalKey, scoresToString[2]);
+		string names = PlayerPrefs.GetString (nameKey, defaultScoresToString[0]);
+		string kills = PlayerPrefs.GetString (killsKey,defaultScoresToString[1]);
+		string xptotal = PlayerPrefs.GetString (xpTotalKey, defaultScoresToString[2]);
 
-		//get string and convert to list
-		string[] prefLoadScores = new string[]{names, kills, xptotal};
-		loadScores = StringToScores (prefLoadScores);
+		//use player pref scores from string and convert to list
+		string[] loadedPrefScores = new string[]{names, kills, xptotal};
+		//loadScores = StringToListScores (loadPrefScores);
 
 		//sort scores and trim to limit
-		List<PlayerScore> sortedPlayerScore = SortScore(loadScores);
-		List<PlayerScore> trimScore = TrimScore (sortedPlayerScore, 10);
+		//List<PlayerScore> sortedPlayerScore = SortScore(loadScores);
+		//List<PlayerScore> trimScore = TrimScore (sortedPlayerScore, 10);
 
-		//sort them as an array of string
-		string[] scores = ScoresToString(trimScore);
+		//convert sorted and trimmed list scores to string format
+		//string[] scores = ListToStringScores(trimScore);
 
-		return scores;
+		//return scores;
+		return loadedPrefScores;
 	}
 
 
-	public void SaveScores(string[] scores, string nameKey, string killsKey, string xpTotalKey){
+	public void SaveScores(string[] scores, string nameKey="Name", string killsKey="Kills", string xpTotalKey="XpTotal"){
 	/*
 
 		Saves score from string format into playerPrefs
