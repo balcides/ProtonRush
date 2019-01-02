@@ -6,7 +6,9 @@ using System.Linq;
 using UnityEngine.UI;
 
 //AssetManager is any c# script with a refernce to object names called in this code
+//GameManager is any c# script with reference to object names called in this code
 [RequireComponent(typeof(AssetManager))]
+[RequireComponent(typeof(GameManager))]
 
 public class Leaderboard : MonoBehaviour {
 
@@ -15,15 +17,19 @@ public class Leaderboard : MonoBehaviour {
 
 	//scripts
 	AssetManager AM;
+	GameManager GM;
+
+	//Debug
+	public bool enableDeleteAllPrefs = false;
 
 
 	void Awake(){
 		
 		AM = GetComponent<AssetManager> ();
+		GM = GetComponent<GameManager> ();
 		playerScore = new List<PlayerScore>();
 
 	}
-
 
 	// Use this for initialization
 	void Start () {
@@ -33,15 +39,14 @@ public class Leaderboard : MonoBehaviour {
 		string[] loadScores = LoadScores ();
 		UpdateScoreText (loadScores, AM.playerScoreName, AM.playerScoreKills, AM.playerScoreXpScore);
 
-		//nuke or reset prefs if need be
-		PlayerPrefs.DeleteAll();
-
 	}
 
 
 	// Update is called once per frame
 	void Update () {
-		
+
+		//deletes prefs if enabled for debugging purposes
+		if (enableDeleteAllPrefs) { DeleteAllPrefs(); }
 	}
 
 
@@ -95,16 +100,16 @@ public class Leaderboard : MonoBehaviour {
 
 	 */
 
-		AddScore(playerScore, "Geves", 1, 100);
-		AddScore(playerScore, "Todd", 200, 1300);
-		AddScore(playerScore, "Mac", 300, 1400);
-		AddScore(playerScore, "Ted", 400, 1500);
-		AddScore(playerScore, "Manny", 500, 1550);
-		AddScore(playerScore, "Lou", 600, 1600);
-		AddScore(playerScore, "Steven", 700, 1750);
-		AddScore(playerScore, "Jeff", 800, 1800);
-		AddScore(playerScore, "Gath", 900, 1900);
-		AddScore(playerScore, "Mike", 1000, 2500);
+		AddScore(playerScore, "Anon", 1, 100);
+		AddScore(playerScore, "Anon", 200, 1300);
+		AddScore(playerScore, "Anon", 300, 1400);
+		AddScore(playerScore, "Anon", 400, 1500);
+		AddScore(playerScore, "Anon", 500, 1550);
+		AddScore(playerScore, "Anon", 600, 1600);
+		AddScore(playerScore, "Anon", 700, 1750);
+		AddScore(playerScore, "Anon", 800, 1800);
+		AddScore(playerScore, "Anon", 900, 1900);
+		AddScore(playerScore, "Anon", 1000, 2500);
 
 		return playerScore;
 	}
@@ -229,6 +234,93 @@ public class Leaderboard : MonoBehaviour {
 		PlayerPrefs.SetString (nameKey, scores [0]);
 		PlayerPrefs.SetString (killsKey, scores [1]);
 		PlayerPrefs.SetString (xpTotalKey, scores [2]);
+	}
+
+	public void SubmitScores(){
+	/*
+
+		Designed to submit scores at the press of a button.
+
+	*/
+
+		//create list based on current scores
+		List<PlayerScore> playerScore = new List<PlayerScore>();
+		string[] loadScores = LoadScores ();
+		playerScore = StringToListScores (loadScores);
+
+		//Add score from input
+		AddScore (playerScore, AM.playerScoreNameInput.GetComponent<InputField> ().text, GM.playerKillCount, GM.playerXPscore);
+
+		//sort the scores by kills, total, and name
+		List<PlayerScore> sortedPlayerScore = SortScore(playerScore);
+
+		//remove the last item on the list
+		List<PlayerScore> trimScore = TrimScore (sortedPlayerScore, 10);
+
+		//convert list to string
+		string[] scores = ListToStringScores(trimScore);
+
+		//display results and update text
+		UpdateScoreText (scores, AM.playerScoreName, AM.playerScoreKills, AM.playerScoreXpScore);
+
+		//save to playerPrefs
+		SaveScores(scores);
+
+		//enable try again button (optional)
+		AM.tryAgainBtn.gameObject.SetActive(true);
+
+	}
+
+	public void LoadLeaderboard(){
+	/*
+	 
+		Once the game is over, check the high scores
+		
+ 	*/
+
+		//Board.thisExample; // works!
+		// disable game over text
+		AM.gameStatus.GetComponent<Text>().enabled = false;
+
+		//enable board
+		AM.playerScoreName.GetComponent<Text>().enabled = true;
+		AM.playerScoreKills.GetComponent<Text>().enabled = true;
+		AM.playerScoreXpScore.GetComponent<Text>().enabled = true;
+		AM.playerScoreBKG.gameObject.SetActive(true);
+
+		//load high scores and update text
+		string[] loadScores = LoadScores ();
+		UpdateScoreText (loadScores, AM.playerScoreName, AM.playerScoreKills, AM.playerScoreXpScore);
+
+		//convert scores to list
+		List<PlayerScore> playerscore = new List<PlayerScore>();
+		playerscore = StringToListScores (loadScores);
+
+		//get value of the last item in list
+		int lowestTotalXP = playerscore [playerscore.Count - 1].totalxp;
+
+		//if kill count is greater, prompt player input
+		if (GM.playerXPscore > lowestTotalXP) {
+			//print ("player kill count is greater than lowest = " + playerXPscore + " > " + lowestTotalXP);
+
+			//enable input
+			AM.playerScoreNameInput.gameObject.SetActive (true);
+			AM.playerScoreSubmitBtn.gameObject.SetActive (true);
+
+			//Note: sort, trim, and save handled by SubmitScores() when button is enabled
+
+		} else {
+
+			//enable try again button (optional)
+			AM.tryAgainBtn.gameObject.SetActive(true);
+
+		}
+	}
+
+	public void DeleteAllPrefs(){
+
+		//nuke or reset prefs if need be
+		PlayerPrefs.DeleteAll();
 	}
 
 }

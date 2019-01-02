@@ -951,7 +951,7 @@ GameObject:
   - component: {fileID: 584243328}
   - component: {fileID: 584243327}
   m_Layer: 5
-  m_Name: Button-leaderboard
+  m_Name: Button-leaderboard-submit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1015,7 +1015,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1256303842}
+      - m_Target: {fileID: 1256303845}
         m_MethodName: SubmitScores
         m_Mode: 1
         m_Arguments:
@@ -2995,8 +2995,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 102.39624, y: 384.64087}
-  m_SizeDelta: {x: 128.2, y: 315.5}
+  m_AnchoredPosition: {x: 116.7, y: 384.64087}
+  m_SizeDelta: {x: 156.8, y: 315.5}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1804965924
 MonoBehaviour:

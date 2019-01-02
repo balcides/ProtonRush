@@ -24,11 +24,13 @@ public class GameMechanics : MonoBehaviour {
 	public float random;
 	AssetManager AM;
 	GameManager GM;
+	Leaderboard Scores;
 
 	void Awake(){
 
 		AM = GetComponent<AssetManager> ();
 		GM = GetComponent<GameManager> ();
+		Scores = GetComponent<Leaderboard> ();
 	}
 
 
@@ -52,7 +54,7 @@ public class GameMechanics : MonoBehaviour {
 			//load leaderboard when timer reaches 0
 			if (leaderboardTimer <= 0) {
 				leaderboardTimer = 0;
-				GM.LoadLeaderboard ();
+				Scores.LoadLeaderboard ();
 			}
 		}
 	}
