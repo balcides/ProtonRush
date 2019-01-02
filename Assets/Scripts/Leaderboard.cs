@@ -5,44 +5,48 @@ using System;
 using System.Linq;
 using UnityEngine.UI;
 
+//AssetManager is any c# script with a refernce to object names called in this code
+//GameManager is any c# script with reference to object names called in this code
+[RequireComponent(typeof(AssetManager))]
+[RequireComponent(typeof(GameManager))]
+
 public class Leaderboard : MonoBehaviour {
 
 	public string defaultNames;
 	public List<PlayerScore> playerScore;
 
-	//player pref keys for save/load
-	string nameKey = "Name";
-	string killKey = "Kills";
-	string xpTotal = "XpTotal";
-
 	//scripts
 	AssetManager AM;
+	GameManager GM;
+
+	//Debug
+	public bool enableDeleteAllPrefs = false;
+
 
 	void Awake(){
 		
 		AM = GetComponent<AssetManager> ();
+		GM = GetComponent<GameManager> ();
 		playerScore = new List<PlayerScore>();
 
 	}
-
 
 	// Use this for initialization
 	void Start () {
 		
 
 		//load player prefs, if none, set default scores
-		string[] loadScores = LoadScores (nameKey, killKey , xpTotal);
+		string[] loadScores = LoadScores ();
 		UpdateScoreText (loadScores, AM.playerScoreName, AM.playerScoreKills, AM.playerScoreXpScore);
-
-		//save player prefs
-		SaveScores(loadScores, nameKey, killKey, xpTotal);
 
 	}
 
 
 	// Update is called once per frame
 	void Update () {
-		
+
+		//deletes prefs if enabled for debugging purposes
+		if (enableDeleteAllPrefs) { DeleteAllPrefs(); }
 	}
 
 
@@ -64,7 +68,7 @@ public class Leaderboard : MonoBehaviour {
 
 	 */
 
-		List<PlayerScore> sortedPlayerScore = playerScore.OrderByDescending(x => x.kills).ThenByDescending(x => x.totalxp).ThenBy(x => x.name).ToList();
+		List<PlayerScore> sortedPlayerScore = playerScore.OrderByDescending(x => x.totalxp).ThenByDescending(x => x.kills).ThenBy(x => x.name).ToList();
 
 		return sortedPlayerScore;
 	}
@@ -96,22 +100,22 @@ public class Leaderboard : MonoBehaviour {
 
 	 */
 
-		AddScore(playerScore, "Geves", 1, 100);
-		AddScore(playerScore, "Todd", 200, 1300);
-		AddScore(playerScore, "Mac", 300, 1400);
-		AddScore(playerScore, "Ted", 400, 1500);
-		AddScore(playerScore, "Manny", 500, 1550);
-		AddScore(playerScore, "Lou", 600, 1600);
-		AddScore(playerScore, "Steven", 700, 1750);
-		AddScore(playerScore, "Jeff", 800, 1800);
-		AddScore(playerScore, "Gath", 900, 1900);
-		AddScore(playerScore, "Mike", 1000, 2500);
+		AddScore(playerScore, "Anon", 1, 100);
+		AddScore(playerScore, "Anon", 200, 1300);
+		AddScore(playerScore, "Anon", 300, 1400);
+		AddScore(playerScore, "Anon", 400, 1500);
+		AddScore(playerScore, "Anon", 500, 1550);
+		AddScore(playerScore, "Anon", 600, 1600);
+		AddScore(playerScore, "Anon", 700, 1750);
+		AddScore(playerScore, "Anon", 800, 1800);
+		AddScore(playerScore, "Anon", 900, 1900);
+		AddScore(playerScore, "Anon", 1000, 2500);
 
 		return playerScore;
 	}
 
 
-	public string[] ScoresToString(List<PlayerScore> playerScore){
+	public string[] ListToStringScores(List<PlayerScore> playerScore){
 	/*
 
 		Takes player score and outputs then into string format
@@ -131,7 +135,7 @@ public class Leaderboard : MonoBehaviour {
 	}
 
 
-	public List<PlayerScore> StringToScores(string[] scores){
+	public List<PlayerScore> StringToListScores(string[] scores){
 	/*
 
 		Converts string to list format
@@ -145,8 +149,18 @@ public class Leaderboard : MonoBehaviour {
 		List<PlayerScore> playersScore = new List<PlayerScore> ();
 
 		int nameCount = names.Count () - 1;
+
 		//populate the list with string array split
 		for (int i = 0; i < nameCount; i++) {
+			//print ("nameCount =" + nameCount + " current iterator = " + i);
+
+			//handles blank score in exception
+			if (kills [i] == "") {
+				kills [i] = "0";
+				xptotals[i] = "0";
+			}
+
+			//print (names [i] + " " + kills [i] + " " + xptotals [i]);
 			AddScore (playersScore, names[i], Convert.ToInt16(kills [i]), Convert.ToInt16(xptotals [i]));
 		}
 			
@@ -169,7 +183,7 @@ public class Leaderboard : MonoBehaviour {
 	}
 
 
-	public string[] LoadScores(string nameKey, string killsKey, string xpTotalKey){
+	public string[] LoadScores(string nameKey="Name", string killsKey="Kills", string xpTotalKey="XpTotal"){
 	/*
 
 		Loads scores and sorts from player prefs. If empty, loads default list
@@ -181,34 +195,36 @@ public class Leaderboard : MonoBehaviour {
 		//		just seems easier (format friendly)
 		List<PlayerScore> defaultScores = new List<PlayerScore>();
 		defaultScores = DefaultScores (defaultScores);
+		defaultScores = SortScore (defaultScores);
 
 		//create a load scores that's empty to use for player
-		List<PlayerScore> loadScores = new List<PlayerScore>();
+		//List<PlayerScore> loadScores = new List<PlayerScore>();
 
 		//convert default list to strings
-		string[] scoresToString = ScoresToString (defaultScores);
+		string[] defaultScoresToString = ListToStringScores (defaultScores);
 	
 		//get player pref key, if not, add a default list
-		string names = PlayerPrefs.GetString (nameKey, scoresToString[0]);
-		string kills = PlayerPrefs.GetString (killsKey,scoresToString[1]);
-		string xptotal = PlayerPrefs.GetString (xpTotalKey, scoresToString[2]);
+		string names = PlayerPrefs.GetString (nameKey, defaultScoresToString[0]);
+		string kills = PlayerPrefs.GetString (killsKey,defaultScoresToString[1]);
+		string xptotal = PlayerPrefs.GetString (xpTotalKey, defaultScoresToString[2]);
 
-		//get string and convert to list
-		string[] prefLoadScores = new string[]{names, kills, xptotal};
-		loadScores = StringToScores (prefLoadScores);
+		//use player pref scores from string and convert to list
+		string[] loadedPrefScores = new string[]{names, kills, xptotal};
+		//loadScores = StringToListScores (loadPrefScores);
 
 		//sort scores and trim to limit
-		List<PlayerScore> sortedPlayerScore = SortScore(loadScores);
-		List<PlayerScore> trimScore = TrimScore (sortedPlayerScore, 10);
+		//List<PlayerScore> sortedPlayerScore = SortScore(loadScores);
+		//List<PlayerScore> trimScore = TrimScore (sortedPlayerScore, 10);
 
-		//sort them as an array of string
-		string[] scores = ScoresToString(trimScore);
+		//convert sorted and trimmed list scores to string format
+		//string[] scores = ListToStringScores(trimScore);
 
-		return scores;
+		//return scores;
+		return loadedPrefScores;
 	}
 
 
-	public void SaveScores(string[] scores, string nameKey, string killsKey, string xpTotalKey){
+	public void SaveScores(string[] scores, string nameKey="Name", string killsKey="Kills", string xpTotalKey="XpTotal"){
 	/*
 
 		Saves score from string format into playerPrefs
@@ -218,6 +234,93 @@ public class Leaderboard : MonoBehaviour {
 		PlayerPrefs.SetString (nameKey, scores [0]);
 		PlayerPrefs.SetString (killsKey, scores [1]);
 		PlayerPrefs.SetString (xpTotalKey, scores [2]);
+	}
+
+	public void SubmitScores(){
+	/*
+
+		Designed to submit scores at the press of a button.
+
+	*/
+
+		//create list based on current scores
+		List<PlayerScore> playerScore = new List<PlayerScore>();
+		string[] loadScores = LoadScores ();
+		playerScore = StringToListScores (loadScores);
+
+		//Add score from input
+		AddScore (playerScore, AM.playerScoreNameInput.GetComponent<InputField> ().text, GM.playerKillCount, GM.playerXPscore);
+
+		//sort the scores by kills, total, and name
+		List<PlayerScore> sortedPlayerScore = SortScore(playerScore);
+
+		//remove the last item on the list
+		List<PlayerScore> trimScore = TrimScore (sortedPlayerScore, 10);
+
+		//convert list to string
+		string[] scores = ListToStringScores(trimScore);
+
+		//display results and update text
+		UpdateScoreText (scores, AM.playerScoreName, AM.playerScoreKills, AM.playerScoreXpScore);
+
+		//save to playerPrefs
+		SaveScores(scores);
+
+		//enable try again button (optional)
+		AM.tryAgainBtn.gameObject.SetActive(true);
+
+	}
+
+	public void LoadLeaderboard(){
+	/*
+	 
+		Once the game is over, check the high scores
+		
+ 	*/
+
+		//Board.thisExample; // works!
+		// disable game over text
+		AM.gameStatus.GetComponent<Text>().enabled = false;
+
+		//enable board
+		AM.playerScoreName.GetComponent<Text>().enabled = true;
+		AM.playerScoreKills.GetComponent<Text>().enabled = true;
+		AM.playerScoreXpScore.GetComponent<Text>().enabled = true;
+		AM.playerScoreBKG.gameObject.SetActive(true);
+
+		//load high scores and update text
+		string[] loadScores = LoadScores ();
+		UpdateScoreText (loadScores, AM.playerScoreName, AM.playerScoreKills, AM.playerScoreXpScore);
+
+		//convert scores to list
+		List<PlayerScore> playerscore = new List<PlayerScore>();
+		playerscore = StringToListScores (loadScores);
+
+		//get value of the last item in list
+		int lowestTotalXP = playerscore [playerscore.Count - 1].totalxp;
+
+		//if kill count is greater, prompt player input
+		if (GM.playerXPscore > lowestTotalXP) {
+			//print ("player kill count is greater than lowest = " + playerXPscore + " > " + lowestTotalXP);
+
+			//enable input
+			AM.playerScoreNameInput.gameObject.SetActive (true);
+			AM.playerScoreSubmitBtn.gameObject.SetActive (true);
+
+			//Note: sort, trim, and save handled by SubmitScores() when button is enabled
+
+		} else {
+
+			//enable try again button (optional)
+			AM.tryAgainBtn.gameObject.SetActive(true);
+
+		}
+	}
+
+	public void DeleteAllPrefs(){
+
+		//nuke or reset prefs if need be
+		PlayerPrefs.DeleteAll();
 	}
 
 }

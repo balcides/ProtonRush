@@ -31,6 +31,7 @@ public class AssetManager : MonoBehaviour {
 	public Transform playerScoreBKG;
 	public Transform playerScoreSubmitBtn;
 	public Transform playerScoreNameInput;
+	public Transform tryAgainBtn;
 
 	//Assign vars before start
 	void Active(){
@@ -49,6 +50,7 @@ public class AssetManager : MonoBehaviour {
 		playerScoreBKG.gameObject.SetActive (false);
 		playerScoreSubmitBtn.gameObject.SetActive (false);
 		playerScoreNameInput.gameObject.SetActive (false);
+		tryAgainBtn.gameObject.SetActive (false);
 		
 	}
 	
