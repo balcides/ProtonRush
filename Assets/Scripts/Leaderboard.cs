@@ -5,15 +5,13 @@ using System;
 using System.Linq;
 using UnityEngine.UI;
 
+//AssetManager is any c# script with a refernce to object names called in this code
+[RequireComponent(typeof(AssetManager))]
+
 public class Leaderboard : MonoBehaviour {
 
 	public string defaultNames;
 	public List<PlayerScore> playerScore;
-
-	//player pref keys for save/load
-	//string NameKey = "Name";
-	//string KillKey = "Kills";
-	//string XpTotalKey = "XpTotal";
 
 	//scripts
 	AssetManager AM;
@@ -36,7 +34,7 @@ public class Leaderboard : MonoBehaviour {
 		UpdateScoreText (loadScores, AM.playerScoreName, AM.playerScoreKills, AM.playerScoreXpScore);
 
 		//nuke or reset prefs if need be
-		//PlayerPrefs.DeleteAll();
+		PlayerPrefs.DeleteAll();
 
 	}
 

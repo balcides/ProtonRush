@@ -88,9 +88,6 @@ public class GameManager : MonoBehaviour {
 
 		//load high scores and update text
 		string[] loadScores = leaderboard.LoadScores ();
-		//foreach (string score in loadScores) {
-		//	print (score);
-		//}
 		leaderboard.UpdateScoreText (loadScores, AM.playerScoreName, AM.playerScoreKills, AM.playerScoreXpScore);
 
 		//convert scores to list
@@ -102,7 +99,7 @@ public class GameManager : MonoBehaviour {
 
 		//if kill count is greater, prompt player input
 		if (playerXPscore > lowestTotalXP) {
-			print ("player kill count is greater than lowest = " + playerXPscore + " > " + lowestTotalXP);
+			//print ("player kill count is greater than lowest = " + playerXPscore + " > " + lowestTotalXP);
 
 			//enable input
 			AM.playerScoreNameInput.gameObject.SetActive (true);
@@ -118,11 +115,6 @@ public class GameManager : MonoBehaviour {
 		}
 
 
-	}
-
-
-	public void PrintTest(){
-		print ("button works!");
 	}
 
 
