@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 54137991122106042}
   - component: {fileID: 114454716153302500}
   m_Layer: 0
-  m_Name: photon-torpedo
+  m_Name: photon-torpedo-lv2
   m_TagString: Photon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 50eb63a55e9ad427689db9b1d24ad751, type: 2}
+  - {fileID: 2100000, guid: 674e5acb375f840ac970550d130e2b50, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

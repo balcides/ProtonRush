@@ -29,14 +29,18 @@ public class Cannon : MonoBehaviour {
 	float countdown;
 	float countStart;
 
-
 	//scripts
 	GameMechanics GMX;
+	GameManager GM;
+	AssetManager AM;
 	Unit unit;
 
 	void Awake(){
 
 		GMX= Camera.main.GetComponent<GameMechanics> ();
+		GM= Camera.main.GetComponent<GameManager> ();
+		AM= Camera.main.GetComponent<AssetManager> ();
+
 		unit = GetComponent<Unit> ();
 		speed = unit.speed;
 		attack = unit.attack;
@@ -49,12 +53,11 @@ public class Cannon : MonoBehaviour {
 		countStart = cooldown;
 		countdown = countStart;
 
-		Debug.Log ("Name=" + Unit.instance.modelname);
-		Debug.Log ("speed=" + speed);
-		Debug.Log ("attack=" + speed);
-		Debug.Log ("countdown=" + countdown);
-		Debug.Log ("countStart=" + countStart);
-		
+		//Debug.Log ("Name=" + Unit.instance.modelname);
+		//Debug.Log ("speed=" + speed);
+		//Debug.Log ("attack=" + speed);
+		//Debug.Log ("countdown=" + countdown);
+		//Debug.Log ("countStart=" + countStart);
 	}
 	
 	// Update is called once per frame
@@ -63,6 +66,54 @@ public class Cannon : MonoBehaviour {
 		AutoFire ();
 		
 	}
+
+
+	void OnMouseDown(){
+	/*
+
+		Upgrade unit on click
+
+	 */
+		//TODO: used also in SpawnTile.cs, should be a global method. Level2Credits should be refactored
+		//look at num of credits
+		int numOfCredits = GM.playerXP;
+		Transform tileSpawnAsset = tileSpawer.GetComponent<SpawnTile>().spawnAsset;
+
+		//if there's enough, convert to level 2
+		if (numOfCredits >= GM.creditCostLvl2) {
+
+			//if it's a level 1 cannon, convert to level 2, else, it's maxed out
+			if (tileSpawnAsset.GetComponent<Unit> ().modelname == "photonSE") {
+
+				//set the tile's new asset for the next level
+				tileSpawer.GetComponent<SpawnTile>().spawnAsset = AM.cannons [1];
+
+				//spawn asset after setting prefab
+				tileSpawer.GetComponent<SpawnTile> ().SpawnAsset ();
+
+				//reduce credits 
+				GM.playerXP -= GM.creditCostLvl2;
+
+				//destroy current one
+				GMX.SelfDestruct (gameObject);
+
+			} else {
+				print ("it's already a level 2 cannon.");
+			}
+
+		} else {
+
+			//TODO: This condition is called again under 'if(numOfCredits..' and should probably be refactored to be called once
+			if (tileSpawnAsset.GetComponent<Unit> ().modelname == "photonSE2") {
+				print ("Unit maxed out!");
+
+			} else {
+				//else warn you need more credits
+				print ("Not enough XP to purchase cannon. Must have" + (GMX.creditsRemaining (GM.creditCostLvl2)) + " credits to purchase");
+			}
+		}
+	}
+
 
 	void AutoFire(){
 	/*
@@ -90,26 +141,30 @@ public class Cannon : MonoBehaviour {
 		Generate projectile and it shoots towards it's target
 
 	 */
-
-		// Create the Bullet from the Bullet Prefab
-
+		Quaternion rotateDir = Quaternion.Euler(Vector3.forward);
+			
 		//find closest enemy
 		Transform aimTarget = FindClosestEnemy();
 
-		//calculate cross product
-		Vector3 relativePos = aimTarget.position - bulletSpawn.position;
+		//if there's an aim target, get aim rotation
+		if (aimTarget) {
 
-		//set aim
-		Quaternion aimRotation = Quaternion.LookRotation(relativePos, Vector3.up);
+			//calculate cross product
+			Vector3 relativePos = aimTarget.position - bulletSpawn.position;
 
-		//fire!
-		var bullet = (GameObject)Instantiate (bulletPrefab, bulletSpawn.position, aimRotation);
+			//set aim
+			Quaternion aimRotation = Quaternion.LookRotation (relativePos, Vector3.up);
+			rotateDir = aimRotation;
 
-		// Add velocity to the bullet
-		bullet.GetComponent<Photon>().speed = speed;
-		bullet.GetComponent<Photon> ().damage = attack;
-		//bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
+			//fire!
+			var bullet = (GameObject)Instantiate (bulletPrefab, bulletSpawn.position, rotateDir);
 
+			// Add velocity to the bullet
+			bullet.GetComponent<Photon>().speed = speed;
+			bullet.GetComponent<Photon> ().damage = attack;
+			//bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
+		} 
+			
 	}
 
 	void OnCollisionEnter (Collision col){
@@ -151,18 +206,27 @@ public class Cannon : MonoBehaviour {
 		//loop through all enemies to find nearest
 		GameObject closest = null;
 		float distance = Mathf.Infinity;
+			
+		//Calculate if any enemies found, else return null
+		if (enemies.Any ()) {
+			
+			foreach (GameObject enemy in enemies) {
+				Vector3 diff = enemy.transform.position - transform.position;
+				float curDistance = diff.sqrMagnitude;
 
-		foreach(GameObject enemy in enemies){
-			Vector3 diff = enemy.transform.position - transform.position;
-			float curDistance = diff.sqrMagnitude;
-			if (curDistance < distance)
-			{
-				closest = enemy;
-				distance = curDistance;
+				if (curDistance < distance) {
+					closest = enemy;
+					distance = curDistance;
+				}
 			}
-		}
 
-		return closest.transform;
+			return closest.transform;
+		
+			//return nothing if no enemies found
+		} else {
+			return null;
+		}
+			
 
 	}
 		

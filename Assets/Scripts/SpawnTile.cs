@@ -7,6 +7,7 @@ using UnityEngine;
 /// Spawner.cs
 /// 
 /// Click on this tile and it shall spawn!
+/// (Should also be known as player spawner)
 /// 
 /// </summary>
 
@@ -19,6 +20,15 @@ public class SpawnTile : MonoBehaviour {
 	//stats
 	public Vector3 spawnPointOffset;
 	public bool isSpawned = false;
+
+	//script
+	GameManager GM;
+	GameMechanics GMX;
+
+	void Awake(){
+		GM= Camera.main.GetComponent<GameManager> ();
+		GMX= Camera.main.GetComponent<GameMechanics> ();
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -34,13 +44,25 @@ public class SpawnTile : MonoBehaviour {
 
 		//on mouse click, spawn prefab at point offset if not spawned
 		if (!isSpawned) {
-			
-			SpawnAsset ();
+
+			int unitXP = spawnAsset.GetComponent<Unit> ().xp;
+			int xpDiff = GMX.creditsRemaining(unitXP);
+
+			//if there's enough XP, spawn, else nothing. Note: we're using playerXP as a cost per unit
+			if (-1 * xpDiff >= 0) {
+				
+				SpawnAsset ();
+				//isSpawned = true; //set independent of
+				GM.playerXP -= unitXP;
+
+			} else {
+					Debug.Log ("Not enough XP to purchase cannon. Must have " + xpDiff + " credits to purchase");
+			}
 		}
 	}
 
 	//TODO: on cleanup, we can combine this with Spawner.cs version into a common class in GameMechanics.cs
-	void SpawnAsset(){
+	public void SpawnAsset(){
 	/*
 
 		Spawn asset by instatiate
@@ -55,6 +77,7 @@ public class SpawnTile : MonoBehaviour {
 		var spawned = (GameObject)Instantiate (spawnAsset.gameObject, spawnPoint, transform.rotation);
 
 		//random num to name for ID
+		//TODO: use random generated from camera
 		spawned.name = spawned.name + Random.Range (0, 100);
 
 		//assign this as cannon's tile spawner

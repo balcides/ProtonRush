@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 114119933930160244}
   - component: {fileID: 114842181428177962}
   m_Layer: 0
-  m_Name: spidercrab
+  m_Name: spidercrab-lv1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1278,11 +1278,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modelname: spidercrabMX
   level: 1
-  hp: 100
+  hp: 25
   attack: 10
   defense: 20
-  speed: 1
-  xp: 100
+  speed: 2
+  xp: 10
 --- !u!114 &114842181428177962
 MonoBehaviour:
   m_ObjectHideFlags: 1

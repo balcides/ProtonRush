@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Photon
+  - Spawner
+  - SpawnTile
   layers:
   - Default
   - TransparentFX

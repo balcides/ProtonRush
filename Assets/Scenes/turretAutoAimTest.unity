@@ -953,6 +953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449f22dba80374e8f970867f28d630ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerXP: 0
 --- !u!114 &1256303843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -965,6 +966,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 4957974629904242, guid: eb94016b19d2c41dd8e860b1431fb2e9, type: 2}
+  xpCounter: {fileID: 224374089210728364, guid: 7e9493b11885b4be1b040f32605a277e,
+    type: 2}
 --- !u!114 &1256303844
 MonoBehaviour:
   m_ObjectHideFlags: 0
