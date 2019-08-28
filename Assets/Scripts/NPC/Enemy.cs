@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour {
 		if (GetComponent<Unit>().hp <= 0) {
 
 			//Award player XP for kill
-			GM.playerXP += GetComponent<Unit>().xp;
+			GM.crypto += GetComponent<Unit>().xp;
 			GM.playerXPscore += GetComponent<Unit>().xp;
 			GM.playerKillCount += 1;
 			
@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour {
 		if (col.gameObject.tag == "Player") {
 
 			//Award player XP for kill
-			GM.playerXP += GetComponent<Unit>().xp;
+			GM.crypto += GetComponent<Unit>().xp;
 			GM.playerXPscore += GetComponent<Unit>().xp;
 
 			//SelfDestruct();

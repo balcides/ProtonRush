@@ -13,22 +13,19 @@ using UnityEngine;
 
 public class CommandCenter : MonoBehaviour {
 
-	//attr
-	int maxHP;
 
 	//scripts
 	GameMechanics GMX;
 	GameManager GM;
 	Unit unit;
-
+    GuiManager GUIM;
 
 	void Awake(){
 
 		GMX= Camera.main.GetComponent<GameMechanics> ();
 		GM= Camera.main.GetComponent<GameManager> ();
 		unit = GetComponent<Unit> ();
-
-		maxHP = unit.hp;
+        GUIM = GameObject.Find("GUIManager").GetComponent<GuiManager>();
 
 	}
 
@@ -75,23 +72,23 @@ public class CommandCenter : MonoBehaviour {
 		//when clicking on the command center, charge 500 xp for restoring 50% of it's HP
 
 		//look at num of credits
-		int numOfCredits = GM.playerXP;
+		int numOfCredits = GM.crypto;
 
 		//if there's enough, convert to level 2
 		if (numOfCredits >= GM.creditCostRepairCmdCenter) {
 
 			//reduce credits 
-			GM.playerXP -= GM.creditCostRepairCmdCenter;
+			GM.crypto -= GM.creditCostRepairCmdCenter;
 
 			//heal command center 50% of total
-			int healPoints = Mathf.RoundToInt(maxHP * 0.5f);
-
+			int healPoints = Mathf.RoundToInt(unit.maxHp * 0.5f);
 			unit.hp = unit.hp + healPoints;
-
 		
 		} else {
-			print ("Not enough XP to repair command center. Must have" + (GMX.creditsRemaining (GM.creditCostRepairCmdCenter)) + " credits to restore");
-		}
+
+			print ("Not enough XP to repair command center. Must have " + (GMX.creditsRemaining (GM.creditCostRepairCmdCenter)) + " credits to restore");
+            GUIM.gameStatusText.text = "Not enough XP to repair command center. Must have " + (GMX.creditsRemaining(GM.creditCostRepairCmdCenter)) + " credits to restore";
+        }
 
 	}
 }

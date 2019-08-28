@@ -288,7 +288,6 @@ GameObject:
   - component: {fileID: 4561018691164350}
   - component: {fileID: 114459611837532034}
   - component: {fileID: 114503471487527178}
-  - component: {fileID: 114929385101900476}
   - component: {fileID: 65705961464915634}
   m_Layer: 0
   m_Name: cannon-lv1
@@ -357,20 +356,6 @@ MonoBehaviour:
   bulletSpawn: {fileID: 4452723866562066}
   tileSpawer: {fileID: 0}
   cooldown: 0.75
---- !u!114 &114929385101900476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1620439267312454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce5f760fb6b5b40348f4b89111d28781, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 4107695585849924}
-  healthBarBKG: {fileID: 4042663169299014}
 --- !u!65 &65705961464915634
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1088,10 +1073,35 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 765935985924267243, guid: 83843a8fd7b2e4adbbc562f0df52ad78,
+    - target: {fileID: 3747308095269380178, guid: 83843a8fd7b2e4adbbc562f0df52ad78,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.0326821
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747308095269380178, guid: 83843a8fd7b2e4adbbc562f0df52ad78,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.62323
+      value: 0.0040852623
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747308095269380178, guid: 83843a8fd7b2e4adbbc562f0df52ad78,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.0040852623
+      objectReference: {fileID: 0}
+    - target: {fileID: 1143331447218638736, guid: 83843a8fd7b2e4adbbc562f0df52ad78,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1143331447218638736, guid: 83843a8fd7b2e4adbbc562f0df52ad78,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1143331447218638736, guid: 83843a8fd7b2e4adbbc562f0df52ad78,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.011921406
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83843a8fd7b2e4adbbc562f0df52ad78, type: 3}

@@ -16,7 +16,7 @@ using System.Linq;
 public class GameManager : MonoBehaviour {
 
 	//values
-	public int playerXP;
+	public int crypto;
 	public int playerKillCount;
 	public int playerXPscore;
 	public int creditCostLvl2 = 200;
@@ -35,8 +35,8 @@ public class GameManager : MonoBehaviour {
 		AM = GetComponent<AssetManager> ();
 		GMX = GetComponent<GameMechanics> ();
 		leaderboard = GetComponent<Leaderboard> ();
-		playerXP = 400;
-		playerXPscore = playerXP;
+		crypto = 400;
+		playerXPscore = crypto;
 	}
 
 	// Use this for initialization
@@ -49,9 +49,10 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 
 		//update xp count in GUI
-		AM.xpCounter.GetComponent<Text> ().text = "XP " + playerXP.ToString("00000");
-		AM.killCounter.GetComponent<Text> ().text = "Kill " + playerKillCount.ToString("00000");
-		AM.xpTotalScore.GetComponent<Text> ().text = "XP Score " + playerXPscore.ToString("00000");
+		AM.xpCounter.GetComponent<Text> ().text = "Crypto " + crypto.ToString("00000");
+        AM.xpTotalScore.GetComponent<Text>().text = "Score " + playerXPscore.ToString("00000");
+        AM.killCounter.GetComponent<Text> ().text = "Kill " + playerKillCount.ToString("00000");
+
 
 		//enable temp timer for testing if needed
 		if (enableTempTimer) {    TempTimer ();   }

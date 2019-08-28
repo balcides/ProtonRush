@@ -143,7 +143,7 @@ public class GameMechanics : MonoBehaviour {
 		Gets the remaining number of credits. Convenient for printouts
 
 	*/
-		int numOfCredits = GM.playerXP;
+		int numOfCredits = GM.crypto;
 		int creditDiff = creditCost - numOfCredits;
 
 		return creditDiff;

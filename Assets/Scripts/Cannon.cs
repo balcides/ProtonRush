@@ -34,12 +34,14 @@ public class Cannon : MonoBehaviour {
 	GameManager GM;
 	AssetManager AM;
 	Unit unit;
+    GuiManager GUIM;
 
 	void Awake(){
 
 		GMX= Camera.main.GetComponent<GameMechanics> ();
 		GM= Camera.main.GetComponent<GameManager> ();
 		AM= Camera.main.GetComponent<AssetManager> ();
+        GUIM = GameObject.Find("GUIManager").GetComponent<GuiManager>();
 
 		unit = GetComponent<Unit> ();
 		speed = unit.speed;
@@ -76,7 +78,7 @@ public class Cannon : MonoBehaviour {
 	 */
 		//TODO: used also in SpawnTile.cs, should be a global method. Level2Credits should be refactored
 		//look at num of credits
-		int numOfCredits = GM.playerXP;
+		int numOfCredits = GM.crypto;
 		Transform tileSpawnAsset = tileSpawer.GetComponent<SpawnTile>().spawnAsset;
 
 		//if there's enough, convert to level 2
@@ -92,14 +94,16 @@ public class Cannon : MonoBehaviour {
 				tileSpawer.GetComponent<SpawnTile> ().SpawnAsset ();
 
 				//reduce credits 
-				GM.playerXP -= GM.creditCostLvl2;
+				GM.crypto -= GM.creditCostLvl2;
 
 				//destroy current one
 				GMX.SelfDestruct (gameObject);
 
 			} else {
 				print ("it's already a level 2 cannon.");
-			}
+                GUIM.gameStatusText.text = "it's already a level 2 cannon.";
+
+            }
 
 		} else {
 
@@ -110,7 +114,8 @@ public class Cannon : MonoBehaviour {
 			} else {
 				//else warn you need more credits
 				print ("Not enough XP to purchase cannon. Must have" + (GMX.creditsRemaining (GM.creditCostLvl2)) + " credits to purchase");
-			}
+                GUIM.gameStatusText.text = "Not enough XP to purchase cannon. Must have " + (GMX.creditsRemaining(GM.creditCostLvl2)) + " credits to purchase";
+            }
 		}
 	}
 
