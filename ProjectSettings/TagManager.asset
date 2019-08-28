@@ -8,6 +8,8 @@ TagManager:
   - Photon
   - Spawner
   - SpawnTile
+  - GameManager
+  - AssetManager
   layers:
   - Default
   - TransparentFX

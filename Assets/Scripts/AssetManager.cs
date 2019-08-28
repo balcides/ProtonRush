@@ -20,18 +20,6 @@ public class AssetManager : MonoBehaviour {
 	//FX
 	public Transform explosion;
 
-	//HUD
-	public Transform xpCounter;
-	public Transform killCounter;
-	public Transform xpTotalScore;
-	public Transform gameStatus;
-	public Transform playerScoreName;
-	public Transform playerScoreKills;
-	public Transform playerScoreXpScore;
-	public Transform playerScoreBKG;
-	public Transform playerScoreSubmitBtn;
-	public Transform playerScoreNameInput;
-	public Transform tryAgainBtn;
 
 	//Assign vars before start
 	void Active(){
@@ -43,16 +31,16 @@ public class AssetManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		//disable score text on start
-		playerScoreName.gameObject.GetComponent<Text> ().enabled = false;
-		playerScoreKills.gameObject.GetComponent<Text> ().enabled = false;
-		playerScoreXpScore.gameObject.GetComponent<Text> ().enabled = false;
-		playerScoreBKG.gameObject.SetActive (false);
-		playerScoreSubmitBtn.gameObject.SetActive (false);
-		playerScoreNameInput.gameObject.SetActive (false);
-		tryAgainBtn.gameObject.SetActive (false);
-		
-	}
+        //disable score text on start
+        //playerScoreName.gameObject.GetComponent<Text> ().enabled = false;
+        //playerScoreKills.gameObject.GetComponent<Text> ().enabled = false;
+        //playerScoreXpScore.gameObject.GetComponent<Text> ().enabled = false;
+        //playerScoreBKG.gameObject.SetActive(false);
+        //playerScoreSubmitBtn.gameObject.SetActive(false);
+        //playerScoreNameInput.gameObject.SetActive(false);
+        //tryAgainBtn.gameObject.SetActive(false);
+
+    }
 	
 	// Update is called once per frame
 	void Update () {

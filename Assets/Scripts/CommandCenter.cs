@@ -21,22 +21,24 @@ public class CommandCenter : MonoBehaviour {
     GuiManager GUIM;
 
 	void Awake(){
-
-		GMX= Camera.main.GetComponent<GameMechanics> ();
-		GM= Camera.main.GetComponent<GameManager> ();
-		unit = GetComponent<Unit> ();
+		GMX = GameObject.Find("GameManager").GetComponent<GameMechanics> ();
+		GM = GameObject.Find("GameManager").GetComponent<GameManager> ();
         GUIM = GameObject.Find("GUIManager").GetComponent<GuiManager>();
+        unit = GetComponent<Unit>();
 
-	}
+    }
+
 
 	// Use this for initialization
 	void Start () {
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
 
 	void OnCollisionEnter (Collision col){
 	/*
@@ -67,6 +69,7 @@ public class CommandCenter : MonoBehaviour {
 		}
 	}
 
+
 	void OnMouseDown(){
 
 		//when clicking on the command center, charge 500 xp for restoring 50% of it's HP
@@ -87,7 +90,7 @@ public class CommandCenter : MonoBehaviour {
 		} else {
 
 			print ("Not enough XP to repair command center. Must have " + (GMX.creditsRemaining (GM.creditCostRepairCmdCenter)) + " credits to restore");
-            GUIM.gameStatusText.text = "Not enough XP to repair command center. Must have " + (GMX.creditsRemaining(GM.creditCostRepairCmdCenter)) + " credits to restore";
+            GUIM.gameInfo.text = "Not enough XP to repair command center. Must have " + (GMX.creditsRemaining(GM.creditCostRepairCmdCenter)) + " credits to restore";
         }
 
 	}

@@ -28,9 +28,8 @@ public class Enemy : MonoBehaviour {
 
 	void Awake(){
 
-		//AM = Camera.main.GetComponent<AssetManager> ();
-		GMX= Camera.main.GetComponent<GameMechanics> ();
-		GM= Camera.main.GetComponent<GameManager> ();
+		GMX = GameObject.Find("GameManager").GetComponent<GameMechanics> ();
+		GM = GameObject.Find("GameManager").GetComponent<GameManager> ();
 	}
 
 	// Use this for initialization

@@ -7,9 +7,6 @@ using UnityEngine.UI;
 
 //AssetManager is any c# script with a refernce to object names called in this code
 //GameManager is any c# script with reference to object names called in this code
-[RequireComponent(typeof(AssetManager))]
-[RequireComponent(typeof(GameManager))]
-
 public class Leaderboard : MonoBehaviour {
 
     public string defaultNames;
@@ -18,6 +15,7 @@ public class Leaderboard : MonoBehaviour {
     //scripts
     AssetManager AM;
     GameManager GM;
+    GuiManager GUIM;
 
     //Debug
     public bool enableDeleteAllPrefs = false;
@@ -25,9 +23,10 @@ public class Leaderboard : MonoBehaviour {
 
     void Awake() {
 
-        AM = GetComponent<AssetManager>();
+        AM = GameObject.Find("AssetManager").GetComponent<AssetManager>();
         GM = GetComponent<GameManager>();
         playerScore = new List<PlayerScore>();
+        GUIM = GameObject.Find("GUIManager").GetComponent<GuiManager>();
 
     }
 
@@ -37,7 +36,7 @@ public class Leaderboard : MonoBehaviour {
 
         //load player prefs, if none, set default scores
         string[] loadScores = LoadScores();
-        UpdateScoreText(loadScores,AM.playerScoreName,AM.playerScoreKills,AM.playerScoreXpScore);
+        UpdateScoreText(loadScores,GUIM.playerScoreName, GUIM.playerScoreKills, GUIM.playerScoreXpScore);
 
     }
 
@@ -168,7 +167,7 @@ public class Leaderboard : MonoBehaviour {
     }
 
 
-    public void UpdateScoreText(string[] scores,Transform nameText,Transform killsText,Transform xpscoresText) {
+    public void UpdateScoreText(string[] scores, Text nameText, Text killsText, Text xpscoresText) {
         /*
 
             Takes player score array and sets their string to leaderboard layout.
@@ -176,9 +175,9 @@ public class Leaderboard : MonoBehaviour {
 
          */
 
-        nameText.GetComponent<Text>().text = "NAME\n" + scores[0];
-        killsText.GetComponent<Text>().text = "KILLS\n" + scores[1];
-        xpscoresText.GetComponent<Text>().text = "XP SCORE\n" + scores[2];
+        nameText.text = "NAME\n" + scores[0];
+        killsText.text = "KILLS\n" + scores[1];
+        xpscoresText.text = "XP SCORE\n" + scores[2];
 
     }
 
@@ -197,9 +196,6 @@ public class Leaderboard : MonoBehaviour {
         defaultScores = DefaultScores(defaultScores);
         defaultScores = SortScore(defaultScores);
 
-        //create a load scores that's empty to use for player
-        //List<PlayerScore> loadScores = new List<PlayerScore>();
-
         //convert default list to strings
         string[] defaultScoresToString = ListToStringScores(defaultScores);
 
@@ -210,14 +206,6 @@ public class Leaderboard : MonoBehaviour {
 
         //use player pref scores from string and convert to list
         string[] loadedPrefScores = new string[] { names,kills,xptotal };
-        //loadScores = StringToListScores (loadPrefScores);
-
-        //sort scores and trim to limit
-        //List<PlayerScore> sortedPlayerScore = SortScore(loadScores);
-        //List<PlayerScore> trimScore = TrimScore (sortedPlayerScore, 10);
-
-        //convert sorted and trimmed list scores to string format
-        //string[] scores = ListToStringScores(trimScore);
 
         //return scores;
         return loadedPrefScores;
@@ -249,7 +237,7 @@ public class Leaderboard : MonoBehaviour {
         playerScore = StringToListScores(loadScores);
 
         //Add score from input
-        AddScore(playerScore,AM.playerScoreNameInput.GetComponent<InputField>().text,GM.playerKillCount,GM.playerXPscore);
+        AddScore(playerScore, GUIM.playerScoreNameInput.GetComponent<InputField>().text,GM.playerKillCount,GM.playerXPscore);
 
         //sort the scores by kills, total, and name
         List<PlayerScore> sortedPlayerScore = SortScore(playerScore);
@@ -261,13 +249,13 @@ public class Leaderboard : MonoBehaviour {
         string[] scores = ListToStringScores(trimScore);
 
         //display results and update text
-        UpdateScoreText(scores,AM.playerScoreName,AM.playerScoreKills,AM.playerScoreXpScore);
+        UpdateScoreText(scores, GUIM.playerScoreName, GUIM.playerScoreKills, GUIM.playerScoreXpScore);
 
         //save to playerPrefs
         SaveScores(scores);
 
         //enable try again button (optional)
-        AM.tryAgainBtn.gameObject.SetActive(true);
+        GUIM.tryAgainBtn.gameObject.SetActive(true);
 
     }
 
@@ -280,17 +268,17 @@ public class Leaderboard : MonoBehaviour {
 
         //Board.thisExample; // works!
         // disable game over text
-        AM.gameStatus.GetComponent<Text>().enabled = false;
+        GUIM.gameStatus.GetComponent<Text>().enabled = false;
 
         //enable board
-        AM.playerScoreName.GetComponent<Text>().enabled = true;
-        AM.playerScoreKills.GetComponent<Text>().enabled = true;
-        AM.playerScoreXpScore.GetComponent<Text>().enabled = true;
-        AM.playerScoreBKG.gameObject.SetActive(true);
+        GUIM.playerScoreName.GetComponent<Text>().enabled = true;
+        GUIM.playerScoreKills.GetComponent<Text>().enabled = true;
+        GUIM.playerScoreXpScore.GetComponent<Text>().enabled = true;
+        GUIM.playerScoreBKG.gameObject.SetActive(true);
 
         //load high scores and update text
         string[] loadScores = LoadScores();
-        UpdateScoreText(loadScores,AM.playerScoreName,AM.playerScoreKills,AM.playerScoreXpScore);
+        UpdateScoreText(loadScores, GUIM.playerScoreName, GUIM.playerScoreKills, GUIM.playerScoreXpScore);
 
         //convert scores to list
         List<PlayerScore> playerscore = new List<PlayerScore>();
@@ -304,15 +292,15 @@ public class Leaderboard : MonoBehaviour {
             //print ("player kill count is greater than lowest = " + playerXPscore + " > " + lowestTotalXP);
 
             //enable input
-            AM.playerScoreNameInput.gameObject.SetActive(true);
-            AM.playerScoreSubmitBtn.gameObject.SetActive(true);
+            GUIM.playerScoreNameInput.gameObject.SetActive(true);
+            GUIM.playerScoreSubmitBtn.gameObject.SetActive(true);
 
             //Note: sort, trim, and save handled by SubmitScores() when button is enabled
 
         } else {
 
             //enable try again button (optional)
-            AM.tryAgainBtn.gameObject.SetActive(true);
+            GUIM.tryAgainBtn.gameObject.SetActive(true);
 
         }
     }

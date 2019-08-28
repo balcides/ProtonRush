@@ -26,33 +26,33 @@ public class GameManager : MonoBehaviour {
 	public bool enableTempTimer;
 
 	//script
-	AssetManager AM;
 	GameMechanics GMX;
-	Leaderboard leaderboard;
+    GuiManager GUIM;
 
-	void Awake(){
-		
-		AM = GetComponent<AssetManager> ();
+
+	void Awake(){	
 		GMX = GetComponent<GameMechanics> ();
-		leaderboard = GetComponent<Leaderboard> ();
+        GUIM = GameObject.Find("GUIManager").GetComponent<GuiManager>();
 		crypto = 400;
 		playerXPscore = crypto;
+
 	}
+
 
 	// Use this for initialization
 	void Start () {
 		tempTimer = 10;
 	//	leaderboardTimer = 3;
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
 
 		//update xp count in GUI
-		AM.xpCounter.GetComponent<Text> ().text = "Crypto " + crypto.ToString("00000");
-        AM.xpTotalScore.GetComponent<Text>().text = "Score " + playerXPscore.ToString("00000");
-        AM.killCounter.GetComponent<Text> ().text = "Kill " + playerKillCount.ToString("00000");
-
+		GUIM.cryptoCounter.text = "Crypto: " + crypto.ToString("00000");
+        GUIM.xpScoreCounter.text = "Score: " + playerXPscore.ToString("00000");
+        GUIM.killCounter.text = "Kill: " + playerKillCount.ToString("00000");
 
 		//enable temp timer for testing if needed
 		if (enableTempTimer) {    TempTimer ();   }
@@ -81,7 +81,6 @@ public class GameManager : MonoBehaviour {
 		Restarts game with retry button by reloading the scene
 
 	*/
-
 		SceneManager.LoadScene("FirstPlayable");
 	}
 		

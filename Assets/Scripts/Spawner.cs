@@ -35,9 +35,9 @@ public class Spawner : MonoBehaviour {
 
 	void Awake(){
 
-		GMX = Camera.main.GetComponent<GameMechanics> ();
-		GM = Camera.main.GetComponent<GameManager> ();
-		AM = Camera.main.GetComponent<AssetManager> ();
+		GMX = GameObject.Find("GameManager").GetComponent<GameMechanics>();
+		GM = GameObject.Find("GameManager").GetComponent<GameManager> ();
+		AM = GameObject.Find("AssetManager").GetComponent<AssetManager> ();
 
 	}
 

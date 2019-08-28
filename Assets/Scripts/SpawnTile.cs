@@ -27,8 +27,8 @@ public class SpawnTile : MonoBehaviour {
     GuiManager GUIM;
 
 	void Awake(){
-		GM= Camera.main.GetComponent<GameManager> ();
-		GMX= Camera.main.GetComponent<GameMechanics> ();
+		GM = GameObject.Find("GameManager").GetComponent<GameManager> ();
+		GMX = GameObject.Find("GameManager").GetComponent<GameMechanics> ();
         GUIM = GameObject.Find("GUIManager").GetComponent<GuiManager>();
 	}
 
@@ -59,7 +59,7 @@ public class SpawnTile : MonoBehaviour {
 
 			} else {
 				Debug.Log ("Not enough XP to purchase cannon. Must have " + xpDiff + " credits to purchase");
-                GUIM.gameStatusText.text = "Not enough XP to purchase cannon. Must have " + xpDiff + " credits to purchase";
+                GUIM.gameInfo.text = "Not enough XP to purchase cannon. Must have " + xpDiff + " credits to purchase";
             }
 		}
 	}

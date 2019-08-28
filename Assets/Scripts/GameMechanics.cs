@@ -25,12 +25,14 @@ public class GameMechanics : MonoBehaviour {
 	AssetManager AM;
 	GameManager GM;
 	Leaderboard Scores;
+    GuiManager GUIM;
 
 	void Awake(){
 
-		AM = GetComponent<AssetManager> ();
+		AM = GameObject.Find("AssetManager").GetComponent<AssetManager> ();
 		GM = GetComponent<GameManager> ();
 		Scores = GetComponent<Leaderboard> ();
+        GUIM = GameObject.Find("GUIManager").GetComponent<GuiManager>();
 	}
 
 
@@ -79,7 +81,7 @@ public class GameMechanics : MonoBehaviour {
 	public void GameOver(){
 
 		//Print game over message
-		AM.gameStatus.GetComponent<Text>().text = "GAME OVER";
+		GUIM.gameStatus.text = "GAME OVER";
 
 		//stop all bugs (or destroy)
 		//TODO: maybe make this a global command (allEnemies() or something)
