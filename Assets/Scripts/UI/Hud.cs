@@ -55,6 +55,7 @@ public class Hud : MonoBehaviour
 
 		//get percent of health from total
 		float currentPercentHealth = (currentHealth*100)/maxHP;
+        print(transform.name + " " + currentPercentHealth);
 
 		//scale along x to % of health
 		float currentLengthX = (maxLength * currentPercentHealth)/100;

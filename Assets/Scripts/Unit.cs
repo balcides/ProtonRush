@@ -21,6 +21,8 @@ public class Unit : MonoBehaviour {
 	public int speed;
 	public int xp;
 
+    public int maxHp;
+
 	//initialize
 	public static Unit instance = null;
 
@@ -30,7 +32,7 @@ public class Unit : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        hp = maxHp;
 	}
 	
 	// Update is called once per frame

@@ -8,14 +8,15 @@ namespace UDT.Utilities
 {
     public class Manifest : MonoBehaviour
     {
-		//Manifest
-        static string ManifestRead = "/Volumes/MonarchGameDrive/Monarch/Spacetriss/Assets/";
-        static string ManifestSave = "/Volumes/MonarchGameDrive/Monarch/Spacetriss/Assets/";
+        //Manifest
+        static string ProjectName = "ProtonRush";
+        static string ManifestRead = "/Volumes/MonarchGameDrive/Monarch/" + ProjectName +"/Assets/";
+        static string ManifestSave = "/Volumes/MonarchGameDrive/Monarch/" + ProjectName + "/Assets/";
         static string ManifestFileName = "Asset_Manifest.txt";
 
 		//Backups
-        static string ReadDir = "/Volumes/MonarchGameDrive/Monarch/Spacetriss/";
-        static string SaveDir = "/Volumes/MonarchGameDrive/Dropbox/Monarch_Art/Spacetriss/";
+        static string ReadDir = "/Volumes/MonarchGameDrive/Monarch/" + ProjectName + "/";
+        static string SaveDir = "/Volumes/MonarchGameDrive/Dropbox/Monarch_Art/" + ProjectName + "/";
         
         static string CopyRead = ReadDir + "Assets/AssetPacks/";
         static string CopySave = SaveDir + "AssetPacks/";
