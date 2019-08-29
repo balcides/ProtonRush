@@ -54,7 +54,8 @@ public class CommandCenter : MonoBehaviour {
 
 			//deal damage to player asset based on enemy self attack score
 			unit.hp -= col.gameObject.GetComponent<Unit>().attack;
-		}
+
+        }
 
 		//if we run out of hit points, die or destroy self
 		//TODO: do we centralize this in GMX?

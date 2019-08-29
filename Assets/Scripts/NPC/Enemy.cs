@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 /// <summary>
 ///
@@ -15,36 +16,43 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-	//stats
-	public Vector3 direction;
+    //stats
+    public Vector3 direction;
 
-	//mechanics
+    //mechanics
+
 	public float selfDestructCountdown;
 
 	//scripts
 	//AssetManager AM;
 	GameMechanics GMX;
 	GameManager GM;
+    NavMeshAgent agent;
+
 
 	void Awake(){
 
 		GMX = GameObject.Find("GameManager").GetComponent<GameMechanics> ();
 		GM = GameObject.Find("GameManager").GetComponent<GameManager> ();
-	}
+        agent = GetComponent<NavMeshAgent>();
+
+    }
+
 
 	// Use this for initialization
 	void Start () {
-		
+        agent.destination = GameObject.Find("CommandCenter").transform.position;
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
 
-		//move unit on update
-		Move ();
+        //move unit on update
 		TimeDestruct ();
 		
 	}
+
 
 	void OnCollisionEnter (Collision col)
 	{
@@ -75,7 +83,7 @@ public class Enemy : MonoBehaviour {
 		}
 
 		//if enemy runs into the player, destroy self
-		if (col.gameObject.tag == "Player") {
+		if (col.gameObject.tag == "Player" || col.gameObject.tag == "CommandCenter") {
 
 			//Award player XP for kill
 			GM.crypto += GetComponent<Unit>().cryptoXP;
@@ -89,10 +97,11 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 
+
 	void Move(){
 	/*
 
-		Auto moves the enemy asset
+		Auto moves the enemy asset (Legacy, there just in case. Delete if no longer needed)
 
 	*/
 		//asset moves in direction set by speed set
@@ -100,7 +109,8 @@ public class Enemy : MonoBehaviour {
 		transform.Translate(direction * Time.deltaTime * GetComponent<Unit>().speed);
 	}
 
-	void TimeDestruct(){
+
+    void TimeDestruct(){
 
 		selfDestructCountdown = selfDestructCountdown - Time.deltaTime;
 

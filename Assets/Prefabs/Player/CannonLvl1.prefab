@@ -289,6 +289,7 @@ GameObject:
   - component: {fileID: 114459611837532034}
   - component: {fileID: 114503471487527178}
   - component: {fileID: 65705961464915634}
+  - component: {fileID: 446037324}
   m_Layer: 0
   m_Name: CannonLvl1
   m_TagString: Player
@@ -369,6 +370,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5, y: 4.11, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &446037324
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620439267312454}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.5, y: 2.16, z: 2.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1669199908154874
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,11 +1109,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1143331447218638736, guid: 83843a8fd7b2e4adbbc562f0df52ad78,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1143331447218638736, guid: 83843a8fd7b2e4adbbc562f0df52ad78,
         type: 3}

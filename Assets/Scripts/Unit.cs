@@ -28,13 +28,13 @@ public class Unit : MonoBehaviour {
 
 	void Awake(){
 		instance = this;
+        maxHp = hp;
 
-        
-	}
+    }
 
 	// Use this for initialization
 	void Start () {
-        hp = maxHp;
+
 	}
 	
 	// Update is called once per frame

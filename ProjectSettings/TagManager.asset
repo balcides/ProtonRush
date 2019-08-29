@@ -10,6 +10,7 @@ TagManager:
   - SpawnTile
   - GameManager
   - AssetManager
+  - CommandCenter
   layers:
   - Default
   - TransparentFX
