@@ -25,47 +25,31 @@ public class SpawnTile : MonoBehaviour {
 	GameManager GM;
 	GameMechanics GMX;
     GuiManager GUIM;
+    AssetManager AM;
+
 
 	void Awake(){
 		GM = GameObject.Find("GameManager").GetComponent<GameManager> ();
 		GMX = GameObject.Find("GameManager").GetComponent<GameMechanics> ();
         GUIM = GameObject.Find("GUIManager").GetComponent<GuiManager>();
+
 	}
+
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
+        AM = GameObject.Find("AssetManager").GetComponent<AssetManager>();
+    }
+
+
 	// Update is called once per frame
 	void Update () {
 		
 	}
 
-	void OnMouseDown(){
 
-		//on mouse click, spawn prefab at point offset if not spawned
-		if (!isSpawned) {
-
-			int unitXP = spawnAsset.GetComponent<Unit> ().xp;
-			int xpDiff = GMX.creditsRemaining(unitXP);
-
-			//if there's enough XP, spawn, else nothing. Note: we're using playerXP as a cost per unit
-			if (-1 * xpDiff >= 0) {
-				
-				SpawnAsset ();
-				//isSpawned = true; //set independent of
-				GM.crypto -= unitXP;
-
-			} else {
-				Debug.Log ("Not enough XP to purchase cannon. Must have " + xpDiff + " credits to purchase");
-                GUIM.gameInfo.text = "Not enough XP to purchase cannon. Must have " + xpDiff + " credits to purchase";
-            }
-		}
-	}
-
-	//TODO: on cleanup, we can combine this with Spawner.cs version into a common class in GameMechanics.cs
-	public void SpawnAsset(){
+    //TODO: on cleanup, we can combine this with Spawner.cs version into a common class in GameMechanics.cs
+    public void SpawnAsset(){
 	/*
 
 		Spawn asset by instatiate
@@ -91,4 +75,38 @@ public class SpawnTile : MonoBehaviour {
 
 	}
 
+
+    private void GetCreditXPDiff(out int unitXP,out int xpDiff) {
+        unitXP = spawnAsset.GetComponent<Unit>().cryptoXP;
+        xpDiff = GMX.creditsRemaining(unitXP);
+    }
+
+
+    void OnMouseDown() {
+
+        //on mouse click, spawn prefab at point offset if not spawned
+        if(!isSpawned) {
+            int cryptoXP, xpDiff;
+            GetCreditXPDiff(out cryptoXP,out xpDiff);
+
+            //if there's enough XP, spawn, else nothing. Note: we're using playerXP as a cost per unit
+            if(-1 * xpDiff >= 0) {
+
+                SpawnAsset();
+                //isSpawned = true; //set independent of
+                GM.crypto -= cryptoXP;
+
+            } else {
+                Debug.Log("Not enough XP to purchase cannon. Must have " + xpDiff + " credits to purchase");
+                GUIM.gameInfo.text = "Not enough XP to purchase cannon. Must have " + xpDiff + " credits to purchase";
+            }
+        }
+    }
+
+
+    private void OnMouseOver() {
+        int cryptoXP, xpDiff;
+        GetCreditXPDiff(out cryptoXP,out xpDiff);
+        GUIM.gameInfo.text = "Place Cannon: " + cryptoXP + " Crypto";
+    }
 }

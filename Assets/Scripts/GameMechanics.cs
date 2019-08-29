@@ -31,7 +31,7 @@ public class GameMechanics : MonoBehaviour {
 
 		AM = GameObject.Find("AssetManager").GetComponent<AssetManager> ();
 		GM = GetComponent<GameManager> ();
-		Scores = GetComponent<Leaderboard> ();
+		Scores = GameObject.Find("Leaderboard").GetComponent<Leaderboard> ();
         GUIM = GameObject.Find("GUIManager").GetComponent<GuiManager>();
 	}
 
@@ -40,6 +40,13 @@ public class GameMechanics : MonoBehaviour {
 	void Start () {
 		
 		leaderboardTimer = 3f;
+
+        //experiment to have a buy table for items
+        //cannon level 1 = 100
+        // level 2 = 300
+        //spider = 50
+        //spider lvl2 = 200
+
 	}
 
 
@@ -111,6 +118,7 @@ public class GameMechanics : MonoBehaviour {
 		return random;
 	}
 
+
 	//TODO: on cleanup, we can combine this with Spawner.cs version into a common class in GameMechanics.cs
 	public void SpawnAsset(Transform cannonAsset, Transform tileSpawner, Vector3 spawnPointOffset){
 	/*
@@ -138,6 +146,7 @@ public class GameMechanics : MonoBehaviour {
 		spawned.GetComponent<Cannon> ().tileSpawer = tileSpawner;
 
 	}
+
 
 	public int creditsRemaining(int creditCost){
 	/*

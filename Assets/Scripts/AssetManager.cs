@@ -20,30 +20,8 @@ public class AssetManager : MonoBehaviour {
 	//FX
 	public Transform explosion;
 
-
-	//Assign vars before start
-	void Active(){
-
+    //Asset
+    public Transform background;
 
 
-	}
-
-	// Use this for initialization
-	void Start () {
-
-        //disable score text on start
-        //playerScoreName.gameObject.GetComponent<Text> ().enabled = false;
-        //playerScoreKills.gameObject.GetComponent<Text> ().enabled = false;
-        //playerScoreXpScore.gameObject.GetComponent<Text> ().enabled = false;
-        //playerScoreBKG.gameObject.SetActive(false);
-        //playerScoreSubmitBtn.gameObject.SetActive(false);
-        //playerScoreNameInput.gameObject.SetActive(false);
-        //tryAgainBtn.gameObject.SetActive(false);
-
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

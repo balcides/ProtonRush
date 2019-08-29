@@ -94,4 +94,8 @@ public class CommandCenter : MonoBehaviour {
         }
 
 	}
+
+    private void OnMouseOver() {
+        GUIM.gameInfo.text = "Command Center: Restore 50% HP = 500 Crypto";
+    }
 }

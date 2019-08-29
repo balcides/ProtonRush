@@ -50,3 +50,4 @@ MonoBehaviour:
   - {fileID: 4081879967300166, guid: ad69ffb50e37c42988225e3b1efaec13, type: 3}
   - {fileID: 4081879967300166, guid: 0724bebb16a7b46a7b369cca3cc70b78, type: 3}
   explosion: {fileID: 4957974629904242, guid: eb94016b19d2c41dd8e860b1431fb2e9, type: 3}
+  background: {fileID: 0}

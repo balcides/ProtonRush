@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 65520246307474608}
   - component: {fileID: 114119933930160244}
   m_Layer: 0
-  m_Name: spidercrab-lv2
+  m_Name: SpidercrabLvl2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
   attack: 40
   defense: 20
   speed: 1
-  xp: 40
+  cryptoXP: 200
   maxHp: 100
 --- !u!54 &54802968070710252
 Rigidbody:

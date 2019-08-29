@@ -19,7 +19,7 @@ public class Unit : MonoBehaviour {
 	public int attack;
 	public int defense;
 	public int speed;
-	public int xp;
+	public int cryptoXP;
 
     public int maxHp;
 
@@ -28,6 +28,8 @@ public class Unit : MonoBehaviour {
 
 	void Awake(){
 		instance = this;
+
+        
 	}
 
 	// Use this for initialization
