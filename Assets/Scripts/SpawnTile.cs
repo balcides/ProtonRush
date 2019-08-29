@@ -27,13 +27,23 @@ public class SpawnTile : MonoBehaviour {
     GuiManager GUIM;
     AssetManager AM;
 
+    //color schemes
+    Material mat;
+    private Color defaultColor;
+    private Color highlightColor;
+
 
 	void Awake(){
 		GM = GameObject.Find("GameManager").GetComponent<GameManager> ();
 		GMX = GameObject.Find("GameManager").GetComponent<GameMechanics> ();
         GUIM = GameObject.Find("GUIManager").GetComponent<GuiManager>();
 
-	}
+        //get current tile color and set it to detault
+        mat = GetComponent<Renderer>().material;
+        defaultColor = new Color(1f,1f,1,0f);
+        highlightColor = Color.white;
+        mat.color = defaultColor;
+    }
 
 
 	// Use this for initialization
@@ -108,5 +118,15 @@ public class SpawnTile : MonoBehaviour {
         int cryptoXP, xpDiff;
         GetCreditXPDiff(out cryptoXP,out xpDiff);
         GUIM.gameInfo.text = "Place Cannon: " + cryptoXP + " Crypto";
+
+
+        //highlight tile
+        mat.color = highlightColor;
+    }
+
+    private void OnMouseExit() {
+
+        //restore tile matieral
+        mat.color = defaultColor;
     }
 }

@@ -24,4 +24,10 @@ public class AssetManager : MonoBehaviour {
     public Transform background;
 
 
+    private void Awake() {
+
+    }
+
+
+
 }
