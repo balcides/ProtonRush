@@ -514,6 +514,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e61e2b460cd04428583895d6e6f74605, type: 3}
+--- !u!114 &1203398947 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8306112663938770719, guid: e61e2b460cd04428583895d6e6f74605,
+    type: 3}
+  m_PrefabInstance: {fileID: 1203398946}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce9276dda69df478ba2b5fcafbe45aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1213028011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -521,6 +533,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2065209685787731713, guid: 70e7f9feddfac4285ba44e8986223c3b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1203398947}
+    - target: {fileID: 2065209685787731713, guid: 70e7f9feddfac4285ba44e8986223c3b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DeleteAllPrefs
+      objectReference: {fileID: 0}
     - target: {fileID: 2784790092025561402, guid: 70e7f9feddfac4285ba44e8986223c3b,
         type: 3}
       propertyPath: m_Name
@@ -630,11 +652,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5224019191678876429, guid: 70e7f9feddfac4285ba44e8986223c3b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1371970853, guid: 70e7f9feddfac4285ba44e8986223c3b, type: 3}
       propertyPath: m_Color.r

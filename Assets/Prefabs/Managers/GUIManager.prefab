@@ -1117,11 +1117,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeaderboardGUI
       objectReference: {fileID: 0}
-    - target: {fileID: 2240059055433588687, guid: 2276abcb7eb86424eb8efc383bcfa28e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6298627201404402109, guid: 2276abcb7eb86424eb8efc383bcfa28e,
         type: 3}
       propertyPath: m_LocalPosition.z

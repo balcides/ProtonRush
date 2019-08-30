@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour {
 	void Awake(){	
 		GMX = GetComponent<GameMechanics> ();
         GUIM = GameObject.Find("GUIManager").GetComponent<GuiManager>();
+        leaderboard = GameObject.Find("LeaderboardManager").GetComponent<Leaderboard>();
 		crypto = 400;
 		playerXPscore = crypto;
 	}
@@ -95,7 +96,7 @@ public class GameManager : MonoBehaviour {
 
     //handles input, updates, and loading of leaderboard level
     //Note: We could Dimiter this, but I felt breaking the connections in Unity would cause a ruckus, hardcoding ref makes easier tracking
-    public void LoadScoreEntryOnGameOver() {
+    public void LoadLeaderboardEntryOnGameOver() {
 
         //get input entry
         //if blank, make it "Player" + SessionID

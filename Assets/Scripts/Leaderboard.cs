@@ -20,11 +20,10 @@ public class Leaderboard : MonoBehaviour {
     //Debug
     public bool enableDeleteAllPrefs = false;
 
-
     void Awake() {
 
         AM = GameObject.Find("AssetManager").GetComponent<AssetManager>();
-        GM = GetComponent<GameManager>();
+        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerScore = new List<PlayerScore>();
         GUIM = GameObject.Find("GUIManager").GetComponent<GuiManager>();
 
@@ -34,11 +33,9 @@ public class Leaderboard : MonoBehaviour {
     // Use this for initialization
     void Start() {
 
-
         //load player prefs, if none, set default scores
         string[] loadScores = LoadScores();
         UpdateScoreText(loadScores,GUIM.playerScoreName, GUIM.playerScoreKills, GUIM.playerScoreXpScore);
-
     }
 
 
@@ -46,27 +43,27 @@ public class Leaderboard : MonoBehaviour {
     void Update() {
 
         //deletes prefs if enabled for debugging purposes
-        if(enableDeleteAllPrefs) { DeleteAllPrefs(); }
+        //if(enableDeleteAllPrefs) { DeleteAllPrefs(); }
     }
 
 
     public void AddScore(List<PlayerScore> playerScore,string Name,int Kills,int TotalXp) {
-        /*
+    /*
 
             Fun, easy way to add score without crazy Ienumerator stuff
 
-         */
+    */
 
         playerScore.Add(new PlayerScore { name = Name,kills = Kills,totalxp = TotalXp });
     }
 
 
     public List<PlayerScore> SortScore(List<PlayerScore> playerScore) {
-        /*
+    /*
 
             Quick way to sort player score kills, totalxp, and then name
 
-         */
+    */
 
         List<PlayerScore> sortedPlayerScore = playerScore.OrderByDescending(x => x.totalxp).ThenByDescending(x => x.kills).ThenBy(x => x.name).ToList();
 
@@ -83,9 +80,7 @@ public class Leaderboard : MonoBehaviour {
 
         //get the number of items in list
         for(int i = playerScore.Count - 1; i >= 0; i--) {
-            if(playerScore.Count > maxLimit) {
-                playerScore.RemoveAt(i);
-            }
+            if (playerScore.Count > maxLimit) playerScore.RemoveAt(i);
         }
 
         return playerScore;
@@ -100,16 +95,16 @@ public class Leaderboard : MonoBehaviour {
 
          */
 
-        AddScore(playerScore,"Anon",1,100);
-        AddScore(playerScore,"Anon",200,1300);
-        AddScore(playerScore,"Anon",300,1400);
-        AddScore(playerScore,"Anon",400,1500);
-        AddScore(playerScore,"Anon",500,1550);
-        AddScore(playerScore,"Anon",600,1600);
-        AddScore(playerScore,"Anon",700,1750);
-        AddScore(playerScore,"Anon",800,1800);
-        AddScore(playerScore,"Anon",900,1900);
-        AddScore(playerScore,"Anon",1000,2500);
+        AddScore(playerScore,"Anon",1,10);
+        AddScore(playerScore,"Anon",2,20);
+        AddScore(playerScore,"Anon",3,30);
+        AddScore(playerScore,"Anon",4,40);
+        AddScore(playerScore,"Anon",5,50);
+        AddScore(playerScore,"Anon",6,60);
+        AddScore(playerScore,"Anon",7,70);
+        AddScore(playerScore,"Anon",8,80);
+        AddScore(playerScore,"Anon",9,90);
+        AddScore(playerScore,"Anon",10,100);
 
         return playerScore;
     }
@@ -238,8 +233,12 @@ public class Leaderboard : MonoBehaviour {
         string[] loadScores = LoadScores();
         playerScore = StringToListScores(loadScores);
 
+        //get session id as player name if no input
+        string input = GUIM.playerScoreNameInput.GetComponent<InputField>().text;
+        if (input == "") input = "Player" + GM.sessionID;
+
         //Add score from input
-        AddScore(playerScore, GUIM.playerScoreNameInput.GetComponent<InputField>().text,GM.playerKillCount,GM.playerXPscore);
+        AddScore(playerScore, input, GM.playerKillCount,GM.playerXPscore);
 
         //sort the scores by kills, total, and name
         List<PlayerScore> sortedPlayerScore = SortScore(playerScore);

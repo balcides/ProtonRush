@@ -40,6 +40,6 @@ public class GuiManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //print(playerScoreNameInput.GetComponent<InputField>().text);
     }
 }

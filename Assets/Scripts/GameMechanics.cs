@@ -90,6 +90,7 @@ public class GameMechanics : MonoBehaviour {
 
 		//Print game over message
 		GUIM.gameStatus.text = "GAME OVER";
+        GUIM.gameStatus.gameObject.SetActive(true);
 
 		//stop all bugs (or destroy)
 		//TODO: maybe make this a global command (allEnemies() or something)
@@ -114,18 +115,11 @@ public class GameMechanics : MonoBehaviour {
 
         //check player's score in the top 10
         string[] scores = leaderboard.LoadScores();
-        //print(scores.Length);
-
-        //string[] names = scores[0].Split();
-        //string[] kills = scores[1].Split();
         string[] xptotals = scores[2].Split();
-
         int lastScore = Convert.ToInt16(xptotals[xptotals.Length - 2]);
         int currentScore = GM.playerXPscore;
-        //print("last score=" + xptotals[xptotals.Length - 2]);
 
-        //if player is 
-        currentScore = 1601;
+        //if player is in top 10
         if(currentScore > lastScore) {
 
             //enable score name input
