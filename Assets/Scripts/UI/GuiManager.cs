@@ -20,8 +20,6 @@ public class GuiManager : MonoBehaviour
     public Transform playerScoreNameInput;
     public Transform tryAgainBtn;
 
-
-
     private void Awake() {
         
     }
@@ -30,13 +28,13 @@ public class GuiManager : MonoBehaviour
     void Start()
     {
         gameInfo.text = "Prepare for attack!";
-        playerScoreName.gameObject.GetComponent<Text>().enabled = false;
-        playerScoreKills.gameObject.GetComponent<Text>().enabled = false;
-        playerScoreXpScore.gameObject.GetComponent<Text>().enabled = false;
-        playerScoreBKG.gameObject.SetActive(false);
-        playerScoreSubmitBtn.gameObject.SetActive(false);
-        playerScoreNameInput.gameObject.SetActive(false);
-        tryAgainBtn.gameObject.SetActive(false);
+        //playerScoreName.gameObject.GetComponent<Text>().enabled = false;
+        //playerScoreKills.gameObject.GetComponent<Text>().enabled = false;
+        //playerScoreXpScore.gameObject.GetComponent<Text>().enabled = false;
+        //playerScoreBKG.gameObject.SetActive(false);
+        //playerScoreSubmitBtn.gameObject.SetActive(false);
+        //playerScoreNameInput.gameObject.SetActive(false);
+        //tryAgainBtn.gameObject.SetActive(false);
     }
 
     // Update is called once per frame

@@ -90,8 +90,8 @@ public class CommandCenter : MonoBehaviour {
 		
 		} else {
 
-			print ("Not enough XP to repair command center. Must have " + (GMX.creditsRemaining (GM.creditCostRepairCmdCenter)) + " credits to restore");
-            GUIM.gameInfo.text = "Not enough XP to repair command center. Must have " + (GMX.creditsRemaining(GM.creditCostRepairCmdCenter)) + " credits to restore";
+			print ("Not enough XP to repair command center. Must have " + (GMX.CreditsRemaining (GM.creditCostRepairCmdCenter)) + " credits to restore");
+            GUIM.gameInfo.text = "Not enough XP to repair command center. Must have " + (GMX.CreditsRemaining(GM.creditCostRepairCmdCenter)) + " credits to restore";
         }
 
 	}

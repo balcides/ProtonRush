@@ -49,7 +49,6 @@ public class GameMechanics : MonoBehaviour {
         //spider lvl2 = 200
 
         GUIM.gameStatus.text = "";
-
     }
 
 
@@ -105,7 +104,9 @@ public class GameMechanics : MonoBehaviour {
 		foreach (GameObject spawner in spawners) {		spawner.GetComponent<Spawner> ().enabled = false;	}		
 		foreach (GameObject cannon in cannons) {
             cannon.GetComponent<Cannon> ().enabled = false;
+            //cannon.SetActive(false);
         }
+
         foreach(GameObject spawnTile in spawnTiles) {
             spawnTile.GetComponent<SpawnTile>().isSpawned = true;
             spawnTile.SetActive(false);
@@ -113,7 +114,7 @@ public class GameMechanics : MonoBehaviour {
 
         //check player's score in the top 10
         string[] scores = leaderboard.LoadScores();
-        print(scores.Length);
+        //print(scores.Length);
 
         //string[] names = scores[0].Split();
         //string[] kills = scores[1].Split();
@@ -121,15 +122,13 @@ public class GameMechanics : MonoBehaviour {
 
         int lastScore = Convert.ToInt16(xptotals[xptotals.Length - 2]);
         int currentScore = GM.playerXPscore;
-        print("last score=" + xptotals[xptotals.Length - 2]);
+        //print("last score=" + xptotals[xptotals.Length - 2]);
 
-        //if so
+        //if player is 
+        currentScore = 1601;
         if(currentScore > lastScore) {
+
             //enable score name input
-
-            //enable leaderboard
-            //enableLeaderboardTimer = true;
-
             GUIM.playerScoreSubmitBtn.gameObject.SetActive(true);
             GUIM.playerScoreNameInput.gameObject.SetActive(true);
         }
@@ -160,8 +159,6 @@ public class GameMechanics : MonoBehaviour {
 		cannonAsset = Cannon to use (level 1, 2, etc)
 		spawnPointOffset = position where cannon spawns from
 		tileSpawner = assigns to spawed cannon to know which tile it's rooted from (probably not needed but added just in case)
-		
-
 	 */
 		//get transform and add offset
 		Vector3 spawnPoint = new Vector3 (tileSpawner.position.x,
@@ -176,11 +173,10 @@ public class GameMechanics : MonoBehaviour {
 
 		//assign this as cannon's tile spawner
 		spawned.GetComponent<Cannon> ().tileSpawer = tileSpawner;
-
 	}
 
 
-	public int creditsRemaining(int creditCost){
+	public int CreditsRemaining(int creditCost){
 	/*
 
 		Gets the remaining number of credits. Convenient for printouts
@@ -191,7 +187,6 @@ public class GameMechanics : MonoBehaviour {
 
 		return creditDiff;
 	}
-
 
 
 }

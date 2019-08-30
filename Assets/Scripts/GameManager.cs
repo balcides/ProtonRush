@@ -28,21 +28,26 @@ public class GameManager : MonoBehaviour {
 	//script
 	GameMechanics GMX;
     GuiManager GUIM;
+    Leaderboard leaderboard;
 
+    public int sessionID;
 
 	void Awake(){	
 		GMX = GetComponent<GameMechanics> ();
         GUIM = GameObject.Find("GUIManager").GetComponent<GuiManager>();
 		crypto = 400;
 		playerXPscore = crypto;
-
 	}
 
 
 	// Use this for initialization
 	void Start () {
 		tempTimer = 3f;
-	//	leaderboardTimer = 3;
+        //	leaderboardTimer = 3;
+
+        //load and iterate on latest session ID
+        sessionID = SessionID();
+        print("sessionID =" + sessionID);
 	}
 
 
@@ -65,7 +70,6 @@ public class GameManager : MonoBehaviour {
 			Created for testing game over and score mechanic
 
 	*/
-
 		//print("Temp timer = " + tempTimer);
 		tempTimer -= 1 * Time.deltaTime;
 		if(tempTimer <= 0){
@@ -73,15 +77,33 @@ public class GameManager : MonoBehaviour {
 			GMX.GameOver ();
 		}
 	}
+
+
+    //gets the latest session ID and iterates it
+    public int SessionID() {
+
+        string key = "SessionID";
+        int session = PlayerPrefs.GetInt(key, 0);
+        PlayerPrefs.SetInt(key,(session+1));
+        return session;
+    }
 		
 
-	public void ReloadGame(){
-	/*
+    //Load level on name for buttons. Easy convenience
+    public void LoadScene(string sceneName) => SceneManager.LoadScene(sceneName);
 
-		Restarts game with retry button by reloading the scene
 
-	*/
-		SceneManager.LoadScene("FirstPlayable");
-	}
-		
+    //handles input, updates, and loading of leaderboard level
+    //Note: We could Dimiter this, but I felt breaking the connections in Unity would cause a ruckus, hardcoding ref makes easier tracking
+    public void LoadScoreEntryOnGameOver() {
+
+        //get input entry
+        //if blank, make it "Player" + SessionID
+
+        //update the scores with the new entry, sort, and save
+        leaderboard.SubmitScores();
+
+        //load leaderboad level
+        LoadScene("Leaderboard");
+    }
 }

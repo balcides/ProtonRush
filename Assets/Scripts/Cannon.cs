@@ -235,8 +235,8 @@ public class Cannon : MonoBehaviour {
 
             } else {
                 //else warn you need more credits
-                print("Not enough XP to purchase cannon. Must have" + (GMX.creditsRemaining(GM.creditCostLvl2)) + " credits to purchase");
-                statusMessage = "Not enough XP to purchase cannon. Must have " + (GMX.creditsRemaining(GM.creditCostLvl2)) + " credits to purchase";
+                print("Not enough XP to purchase cannon. Must have" + (GMX.CreditsRemaining(GM.creditCostLvl2)) + " credits to purchase");
+                statusMessage = "Not enough XP to purchase cannon. Must have " + (GMX.CreditsRemaining(GM.creditCostLvl2)) + " credits to purchase";
                 //"Not enough XP to purchase cannon. Must have " + (GMX.creditsRemaining(GM.creditCostLvl2)) + " credits to purchase";
 
             }

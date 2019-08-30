@@ -88,7 +88,7 @@ public class SpawnTile : MonoBehaviour {
 
     private void GetCreditXPDiff(out int unitXP,out int xpDiff) {
         unitXP = spawnAsset.GetComponent<Unit>().cryptoXP;
-        xpDiff = GMX.creditsRemaining(unitXP);
+        xpDiff = GMX.CreditsRemaining(unitXP);
     }
 
 
