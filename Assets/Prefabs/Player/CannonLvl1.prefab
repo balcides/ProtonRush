@@ -290,6 +290,7 @@ GameObject:
   - component: {fileID: 114503471487527178}
   - component: {fileID: 65705961464915634}
   - component: {fileID: 446037324}
+  - component: {fileID: 895419316}
   m_Layer: 0
   m_Name: CannonLvl1
   m_TagString: Player
@@ -368,8 +369,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 4.11, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 5, y: 1.03, z: 5}
+  m_Center: {x: 0, y: -1.43, z: 0}
 --- !u!208 &446037324
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -380,12 +381,25 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 2.5, y: 2.16, z: 2.5}
+  m_Extents: {x: 2.5, y: 2.575, z: 2.5}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.51, z: 0}
   m_TimeToStationary: 0.5
+--- !u!65 &895419316
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620439267312454}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 4.14, z: 1}
+  m_Center: {x: 0, y: -0.09, z: 0}
 --- !u!1 &1669199908154874
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,8 +20,11 @@ public class GuiManager : MonoBehaviour
     public Transform playerScoreNameInput;
     public Transform tryAgainBtn;
 
+    Camera[] cameras;
+    int camIndex;
+
     private void Awake() {
-        
+        cameras = GameObject.Find("Cameras").transform.GetComponentsInChildren<Camera>();
     }
 
     // Start is called before the first frame update
@@ -41,5 +44,30 @@ public class GuiManager : MonoBehaviour
     void Update()
     {
         //print(playerScoreNameInput.GetComponent<InputField>().text);
+    }
+
+
+    //Cycles cameras at the touch of a button
+    public void CycleCameras() {
+
+        print("cycling camera...");
+
+        //grab all the cameras in an array (from parent transform), get the index, and for every camera, 
+        for(int i = 0; i < cameras.Length-1; i++) {
+
+            //if it matches index, set enable
+            if(i == camIndex) cameras[i].gameObject.SetActive(true);
+
+            //else disable
+            else cameras[i].gameObject.SetActive(false);             
+        }
+
+        //if index is greater than length, reset index
+        if(camIndex > cameras.Length - 1) camIndex = 0;
+
+        //else iterate index
+        else camIndex++;
+
+
     }
 }
