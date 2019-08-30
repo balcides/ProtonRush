@@ -30,6 +30,7 @@ public class Leaderboard : MonoBehaviour {
 
     }
 
+
     // Use this for initialization
     void Start() {
 
@@ -182,32 +183,32 @@ public class Leaderboard : MonoBehaviour {
     }
 
 
-    public string[] LoadScores(string nameKey = "Name",string killsKey = "Kills",string xpTotalKey = "XpTotal") {
-        /*
+    public string[] LoadScores(string nameKey = "Name", string killsKey = "Kills", string xpTotalKey = "XpTotal") {
+    /*
 
-            Loads scores and sorts from player prefs. If empty, loads default list
+        Loads scores and sorts from player prefs. If empty, loads default list
 
-         */
+    */
 
-        //set default scores 
+        //Set default scores 
         //TODO: It's maybe more efficient to make default scores in string array instead of list but making it from a list
         //		just seems easier (format friendly)
         List<PlayerScore> defaultScores = new List<PlayerScore>();
         defaultScores = DefaultScores(defaultScores);
         defaultScores = SortScore(defaultScores);
 
-        //convert default list to strings
+        //Convert default list to strings
         string[] defaultScoresToString = ListToStringScores(defaultScores);
 
-        //get player pref key, if not, add a default list
-        string names = PlayerPrefs.GetString(nameKey,defaultScoresToString[0]);
-        string kills = PlayerPrefs.GetString(killsKey,defaultScoresToString[1]);
-        string xptotal = PlayerPrefs.GetString(xpTotalKey,defaultScoresToString[2]);
+        //Get player pref key, if not, add a default list
+        string names = PlayerPrefs.GetString(nameKey, defaultScoresToString[0]);
+        string kills = PlayerPrefs.GetString(killsKey, defaultScoresToString[1]);
+        string xptotal = PlayerPrefs.GetString(xpTotalKey, defaultScoresToString[2]);
 
-        //use player pref scores from string and convert to list
-        string[] loadedPrefScores = new string[] { names,kills,xptotal };
+        //Use player pref scores from string and convert to list
+        string[] loadedPrefScores = { names,kills,xptotal };
 
-        //return scores;
+        //Return scores;
         return loadedPrefScores;
     }
 
@@ -223,6 +224,7 @@ public class Leaderboard : MonoBehaviour {
         PlayerPrefs.SetString(killsKey,scores[1]);
         PlayerPrefs.SetString(xpTotalKey,scores[2]);
     }
+
 
     public void SubmitScores() {
         /*
@@ -304,6 +306,7 @@ public class Leaderboard : MonoBehaviour {
 
         }
     }
+
 
     public void DeleteAllPrefs() {
 

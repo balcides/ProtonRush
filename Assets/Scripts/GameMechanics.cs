@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,15 +25,15 @@ public class GameMechanics : MonoBehaviour {
 	public float random;
 	AssetManager AM;
 	GameManager GM;
-	Leaderboard Scores;
     GuiManager GUIM;
+    Leaderboard leaderboard;
 
 	void Awake(){
 
 		AM = GameObject.Find("AssetManager").GetComponent<AssetManager> ();
 		GM = GetComponent<GameManager> ();
-		Scores = GameObject.Find("Leaderboard").GetComponent<Leaderboard> ();
         GUIM = GameObject.Find("GUIManager").GetComponent<GuiManager>();
+        leaderboard = GameObject.Find("LeaderboardManager").GetComponent<Leaderboard>();
 	}
 
 
@@ -47,14 +48,16 @@ public class GameMechanics : MonoBehaviour {
         //spider = 50
         //spider lvl2 = 200
 
-	}
+        GUIM.gameStatus.text = "";
+
+    }
 
 
 	// Update is called once per frame
 	void Update () {
 
 		//global random num generator
-		random = Random.Range (0, 100);
+		random = UnityEngine.Random.Range (0, 100);
 
 		//start leaderboard timer (called on game over)
 		if (enableLeaderboardTimer) {
@@ -63,7 +66,7 @@ public class GameMechanics : MonoBehaviour {
 			//load leaderboard when timer reaches 0
 			if (leaderboardTimer <= 0) {
 				leaderboardTimer = 0;
-				Scores.LoadLeaderboard ();
+				//Scores.LoadLeaderboard ();
 			}
 		}
 	}
@@ -75,7 +78,6 @@ public class GameMechanics : MonoBehaviour {
 		Asset destroys and all things thereof
 
 	*/
-
 		//release explosion effect
 		Instantiate (AM.explosion.gameObject, asset.transform.position, asset.transform.rotation);
 
@@ -101,15 +103,45 @@ public class GameMechanics : MonoBehaviour {
 		GameObject[] cannons = GameObject.FindGameObjectsWithTag("Player");
 
 		foreach (GameObject spawner in spawners) {		spawner.GetComponent<Spawner> ().enabled = false;	}		
-		foreach (GameObject spawnTile in spawnTiles) {	spawnTile.GetComponent<SpawnTile> ().isSpawned = true; }
-		foreach (GameObject cannon in cannons) {  		cannon.GetComponent<Cannon> ().enabled = false; }
+		foreach (GameObject cannon in cannons) {
+            cannon.GetComponent<Cannon> ().enabled = false;
+        }
+        foreach(GameObject spawnTile in spawnTiles) {
+            spawnTile.GetComponent<SpawnTile>().isSpawned = true;
+            spawnTile.SetActive(false);
+        }
 
-		//enable leaderboard
-		enableLeaderboardTimer = true;
-	}
+        //check player's score in the top 10
+        string[] scores = leaderboard.LoadScores();
+        print(scores.Length);
+
+        //string[] names = scores[0].Split();
+        //string[] kills = scores[1].Split();
+        string[] xptotals = scores[2].Split();
+
+        int lastScore = Convert.ToInt16(xptotals[xptotals.Length - 2]);
+        int currentScore = GM.playerXPscore;
+        print("last score=" + xptotals[xptotals.Length - 2]);
+
+        //if so
+        if(currentScore > lastScore) {
+            //enable score name input
+
+            //enable leaderboard
+            //enableLeaderboardTimer = true;
+
+            GUIM.playerScoreSubmitBtn.gameObject.SetActive(true);
+            GUIM.playerScoreNameInput.gameObject.SetActive(true);
+        }
+
+        //either way, enable try again
+        GUIM.tryAgainBtn.gameObject.SetActive(true);
+
+        //Time.timeScale = 0.001f;
+    }
 
 
-	public float Randomizer(float min, float max, float multiplier){
+    public float Randomizer(float min, float max, float multiplier){
 
 		random = random * multiplier;
 		if (random < min) {			random = min; 
@@ -140,7 +172,7 @@ public class GameMechanics : MonoBehaviour {
 		var spawned = (GameObject)Instantiate (cannonAsset.gameObject, spawnPoint, tileSpawner.rotation);
 
 		//random num to name for ID
-		spawned.name = spawned.name + Random.Range (0, 100);
+		spawned.name = spawned.name + UnityEngine.Random.Range (0, 100);
 
 		//assign this as cannon's tile spawner
 		spawned.GetComponent<Cannon> ().tileSpawer = tileSpawner;

@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		tempTimer = 10;
+		tempTimer = 3f;
 	//	leaderboardTimer = 3;
 	}
 
@@ -56,8 +56,6 @@ public class GameManager : MonoBehaviour {
 
 		//enable temp timer for testing if needed
 		if (enableTempTimer) {    TempTimer ();   }
-
-
 	}
 		
 
