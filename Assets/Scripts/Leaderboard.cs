@@ -156,7 +156,7 @@ public class Leaderboard : MonoBehaviour {
             }
 
             //print (names [i] + " " + kills [i] + " " + xptotals [i]);
-            AddScore(playersScore,names[i],Convert.ToInt16(kills[i]),Convert.ToInt16(xptotals[i]));
+            AddScore(playersScore,names[i],Convert.ToInt32(kills[i]),Convert.ToInt32(xptotals[i]));
         }
 
         return playersScore;

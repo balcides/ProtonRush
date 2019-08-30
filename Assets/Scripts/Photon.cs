@@ -18,6 +18,7 @@ public class Photon : MonoBehaviour {
 	public float longevity;
 	public float speed;
 	public Vector3 direction;
+    public float zLimit;       //bounds by which photons self destruct
 
 	//initialize
 	public static Photon instance = null;
@@ -36,13 +37,12 @@ public class Photon : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-
 		//move this in direction by deltaTime
 		transform.Translate(direction * Time.deltaTime * speed);
 
+		// Destroy the bullet after num seconds if not past bounds of z
+        if (gameObject.transform.position.z > zLimit) Destroy(gameObject);
+        else Destroy(gameObject,longevity);
 
-		// Destroy the bullet after 2 seconds
-		Destroy(gameObject, longevity);
-		
-	}
+    }
 }

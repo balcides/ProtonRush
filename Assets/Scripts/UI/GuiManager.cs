@@ -20,8 +20,8 @@ public class GuiManager : MonoBehaviour
     public Transform playerScoreNameInput;
     public Transform tryAgainBtn;
 
-    Camera[] cameras;
-    int camIndex;
+    public Camera[] cameras;
+    public int camIndex;
 
     private void Awake() {
         cameras = GameObject.Find("Cameras").transform.GetComponentsInChildren<Camera>();
@@ -31,13 +31,9 @@ public class GuiManager : MonoBehaviour
     void Start()
     {
         gameInfo.text = "Prepare for attack!";
-        //playerScoreName.gameObject.GetComponent<Text>().enabled = false;
-        //playerScoreKills.gameObject.GetComponent<Text>().enabled = false;
-        //playerScoreXpScore.gameObject.GetComponent<Text>().enabled = false;
-        //playerScoreBKG.gameObject.SetActive(false);
-        //playerScoreSubmitBtn.gameObject.SetActive(false);
-        //playerScoreNameInput.gameObject.SetActive(false);
-        //tryAgainBtn.gameObject.SetActive(false);
+
+        //current camera is index
+        CycleCameras();
     }
 
     // Update is called once per frame
@@ -53,21 +49,26 @@ public class GuiManager : MonoBehaviour
         print("cycling camera...");
 
         //grab all the cameras in an array (from parent transform), get the index, and for every camera, 
-        for(int i = 0; i < cameras.Length-1; i++) {
+        for(int i = 0; i < cameras.Length; i++) {
 
             //if it matches index, set enable
-            if(i == camIndex) cameras[i].gameObject.SetActive(true);
+            if(i == camIndex) {
+                cameras[i].gameObject.SetActive(true);
+                cameras[i].transform.tag = "MainCamera";
+            }
 
             //else disable
-            else cameras[i].gameObject.SetActive(false);             
+            else {
+                cameras[i].gameObject.SetActive(false);
+                cameras[i].transform.tag = "Untagged";
+            }
         }
 
         //if index is greater than length, reset index
-        if(camIndex > cameras.Length - 1) camIndex = 0;
+        int camLength = (cameras.Length-1);
+        if(camIndex >= camLength) camIndex = 0;
 
         //else iterate index
         else camIndex++;
-
-
     }
 }
