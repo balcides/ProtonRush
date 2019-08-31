@@ -5,21 +5,24 @@ using UnityEngine.UI;
 
 public class GuiManager : MonoBehaviour
 {
-
+    [Header("Text")]
     public Text gameInfo;
     public Text cryptoCounter;
     public Text killCounter;
     public Text xpScoreCounter;
     public Text gameStatus;
+    public Text gameStatusSubtitle;
+
+    [Header("Player Score")]
     public Text playerScoreName;
     public Text playerScoreKills;
     public Text playerScoreXpScore;
-
     public Transform playerScoreBKG;
     public Transform playerScoreSubmitBtn;
     public Transform playerScoreNameInput;
     public Transform tryAgainBtn;
 
+    [Header("Camera")]
     public Camera[] cameras;
     public int camIndex;
 

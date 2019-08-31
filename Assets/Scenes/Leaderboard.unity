@@ -443,6 +443,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8386716344378756488, guid: deb6384d37ffa47518b2967a81511066,
+        type: 3}
+      propertyPath: isGameOver
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386716344378756488, guid: deb6384d37ffa47518b2967a81511066,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386716344378756486, guid: deb6384d37ffa47518b2967a81511066,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: deb6384d37ffa47518b2967a81511066, type: 3}
 --- !u!1001 &1203398946
@@ -533,6 +548,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6787290646029054, guid: 70e7f9feddfac4285ba44e8986223c3b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602106556628321396, guid: 70e7f9feddfac4285ba44e8986223c3b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4012075282057994971, guid: 70e7f9feddfac4285ba44e8986223c3b,
         type: 3}
       propertyPath: m_FontData.m_Font
@@ -580,6 +604,18 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GUIManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 407587119, guid: 70e7f9feddfac4285ba44e8986223c3b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 662972501, guid: 70e7f9feddfac4285ba44e8986223c3b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371970851, guid: 70e7f9feddfac4285ba44e8986223c3b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7909624339808719206, guid: 70e7f9feddfac4285ba44e8986223c3b,
         type: 3}
@@ -860,6 +896,16 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 356.6
       objectReference: {fileID: 0}
+    - target: {fileID: 7592432836900981915, guid: 70e7f9feddfac4285ba44e8986223c3b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6298627200806540370, guid: 70e7f9feddfac4285ba44e8986223c3b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6298627200806540368, guid: 70e7f9feddfac4285ba44e8986223c3b,
         type: 3}
       propertyPath: m_Color.r
@@ -894,7 +940,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1082528210}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 449f22dba80374e8f970867f28d630ae, type: 3}
   m_Name: 

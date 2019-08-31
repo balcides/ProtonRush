@@ -51,28 +51,21 @@ public class Cannon : MonoBehaviour {
 
     }
 
+
     // Use this for initialization
     void Start() {
 
         countStart = cooldown;
         countdown = countStart;
-
-        //Debug.Log ("Name=" + Unit.instance.modelname);
-        //Debug.Log ("speed=" + speed);
-        //Debug.Log ("attack=" + speed);
-        //Debug.Log ("countdown=" + countdown);
-        //Debug.Log ("countStart=" + countStart);
-
         statusMessage = "Cannon: Upgrade to next level= " + GM.creditCostLvl2 + " Crypto";
     }
+
 
     // Update is called once per frame
     void Update() {
 
         AutoFire();
     }
-
-
 
 
     void AutoFire() {
@@ -126,6 +119,7 @@ public class Cannon : MonoBehaviour {
 
     }
 
+
     void OnCollisionEnter(Collision col) {
         /*
 
@@ -151,6 +145,7 @@ public class Cannon : MonoBehaviour {
 
         }
     }
+
 
     Transform FindClosestEnemy() {
         /*

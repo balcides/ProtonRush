@@ -32,6 +32,8 @@ public class SpawnTile : MonoBehaviour {
     private Color defaultColor;
     private Color highlightColor;
 
+    bool isMouseDown;
+
 
 	void Awake(){
 		GM = GameObject.Find("GameManager").GetComponent<GameManager> ();
@@ -94,6 +96,8 @@ public class SpawnTile : MonoBehaviour {
 
     void OnMouseDown() {
 
+        isMouseDown = true;
+
         //on mouse click, spawn prefab at point offset if not spawned
         if(!isSpawned) {
             int cryptoXP, xpDiff;
@@ -105,19 +109,25 @@ public class SpawnTile : MonoBehaviour {
                 SpawnAsset();
                 //isSpawned = true; //set independent of
                 GM.crypto -= cryptoXP;
+                isMouseDown = false; //sets message on mouse over to work, else warns not enough XP
 
             } else {
                 Debug.Log("Not enough XP to purchase cannon. Must have " + xpDiff + " credits to purchase");
                 GUIM.gameInfo.text = "Not enough XP to purchase cannon. Must have " + xpDiff + " credits to purchase";
+
             }
         }
     }
 
 
     private void OnMouseOver() {
+
         int cryptoXP, xpDiff;
         GetCreditXPDiff(out cryptoXP,out xpDiff);
-        GUIM.gameInfo.text = "Place Cannon: " + cryptoXP + " Crypto";
+
+        if(!isMouseDown){
+            GUIM.gameInfo.text = "Place Cannon: " + cryptoXP + " Crypto";
+        }
 
 
         //highlight tile

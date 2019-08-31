@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using System;
 
 /// <summary>
 /// 
@@ -22,15 +23,34 @@ public class GameManager : MonoBehaviour {
 	public int creditCostLvl2 = 200;
 	public int creditCostRepairCmdCenter = 500;
 
-	public float tempTimer;
-	public bool enableTempTimer;
+    public int round;
+    public int sessionID;
+    public bool isGameOver;
+
+    [Header("Game Timers")]
+    public float roundsTextTimer;
+    public float spawnTimer;
+    public float cooldownTimer;
+    public float setNextRoundTimer;
+
+    private float roundsTextTimerMax;
+    private float spawnTimerMax;
+    private float cooldownTimerMax;
+    private float setNextRoundTimerMax;
+    private GameObject portalSpawners;
+
+    public float tempTimer;
+	public bool isTempTimer;
+
+    string roundsTextMsg;
 
 	//script
 	GameMechanics GMX;
     GuiManager GUIM;
     Leaderboard leaderboard;
 
-    public int sessionID;
+    float zerop = 0.0001f;
+
 
 	void Awake(){	
 		GMX = GetComponent<GameMechanics> ();
@@ -38,46 +58,116 @@ public class GameManager : MonoBehaviour {
         leaderboard = GameObject.Find("LeaderboardManager").GetComponent<Leaderboard>();
 		crypto = 400;
 		playerXPscore = crypto;
+        portalSpawners = GameObject.Find("PortalSpawners");
 	}
 
 
 	// Use this for initialization
 	void Start () {
-		tempTimer = 3f;
+        tempTimer = 3f;
         //	leaderboardTimer = 3;
 
         //load and iterate on latest session ID
         sessionID = SessionID();
         print("sessionID =" + sessionID);
-	}
+        round = 1;
+
+        //update timers
+        roundsTextTimerMax = roundsTextTimer;
+        spawnTimerMax = spawnTimer;
+        cooldownTimerMax = cooldownTimer;
+        setNextRoundTimerMax = setNextRoundTimer;
+        ResetTimers();
+
+        //disable spawners
+        portalSpawners.SetActive(false);
+    }
 
 
-	// Update is called once per frame
-	void Update () {
+    //resets timers to their Max values
+    //TODO: Dimiter this (maybe)
+    private void ResetTimers() {
+        roundsTextTimer = roundsTextTimerMax;
+        spawnTimer = spawnTimerMax + roundsTextTimer;
+        cooldownTimer = cooldownTimerMax + spawnTimer;
+        setNextRoundTimer = setNextRoundTimerMax + cooldownTimer;
+    }
 
-		//update xp count in GUI
-		GUIM.cryptoCounter.text = "Crypto: " + crypto.ToString("00000");
+
+    // Update is called once per frame
+    void Update () {
+
+        //update xp count in GUI
+        GUIM.cryptoCounter.text = "Crypto: " + crypto.ToString("00000");
         GUIM.xpScoreCounter.text = "Score: " + playerXPscore.ToString("00000");
         GUIM.killCounter.text = "Kill: " + playerKillCount.ToString("00000");
 
-		//enable temp timer for testing if needed
-		if (enableTempTimer) {    TempTimer ();   }
-	}
-		
+        //Runs any temp scripts within timer
+        tempTimer = RunTempTimerScripts(isTempTimer, tempTimer);
 
-	void TempTimer(){
-	/*
+        //Runs full rounds loop
+        if(!isGameOver) RunGameLoopRounds();
+    }
 
-			Created for testing game over and score mechanic
 
-	*/
-		//print("Temp timer = " + tempTimer);
-		tempTimer -= 1 * Time.deltaTime;
-		if(tempTimer <= 0){
-			tempTimer = 0;
-			GMX.GameOver ();
-		}
-	}
+    private void RunGameLoopRounds() {
+
+        string roundsSubtitleTextMsg = "";
+
+        //run all timers countdown
+        roundsTextTimer = GTimer(roundsTextTimer);
+        spawnTimer = GTimer(spawnTimer);
+        cooldownTimer = GTimer(cooldownTimer);
+        setNextRoundTimer = GTimer(setNextRoundTimer);
+
+        //Rounds event:   display round 1 for x num of seconds
+        if(roundsTextTimer > zerop && spawnTimer > zerop && cooldownTimer > zerop && setNextRoundTimer > zerop) {
+            roundsTextMsg = "Round " + round;
+            GUIM.gameStatus.gameObject.SetActive(true);
+            roundsSubtitleTextMsg = "get ready";
+
+
+        //Spawn event: start spawning for x num of seconds
+        } else if(roundsTextTimer < zerop && spawnTimer < zerop && roundsTextTimer < zerop && cooldownTimer > zerop && setNextRoundTimer > zerop) {
+            roundsSubtitleTextMsg = "incoming";
+            roundsTextMsg = "spawning units!";
+            portalSpawners.SetActive(true);
+            GUIM.gameStatus.gameObject.SetActive(false);
+
+
+        //Cooldown begins: for x num of seconds followed by countdown text        
+        } else if(roundsTextTimer < zerop && spawnTimer < zerop && roundsTextTimer < zerop && cooldownTimer < zerop && setNextRoundTimer > zerop) {
+            roundsTextMsg = "cooldown....";
+            roundsSubtitleTextMsg = "cooling down...";
+            portalSpawners.SetActive(false);
+
+       //Reset event: reset all timers after cooldown for x num of seconds
+        } else if(roundsTextTimer < zerop && spawnTimer < zerop && roundsTextTimer < zerop && cooldownTimer < zerop && setNextRoundTimer < zerop) {
+
+            //next round begins after cooldown
+            ResetTimers();
+            round++;
+
+        } else {
+            roundsSubtitleTextMsg = "Prepare to fortify";
+            roundsTextMsg = "Attack in " + Convert.ToString(Mathf.Round(spawnTimer));
+        }
+
+        //update messages
+        print(roundsTextMsg);
+        GUIM.gameStatus.text = roundsTextMsg;
+        GUIM.gameStatusSubtitle.text = roundsSubtitleTextMsg;
+
+
+    }
+
+
+    //Simple timer handle
+    float GTimer(float xTime) {
+        xTime -= 1 * Time.deltaTime;
+        if (xTime <= 0) xTime = 0;
+        return xTime;
+    }
 
 
     //gets the latest session ID and iterates it
@@ -98,13 +188,29 @@ public class GameManager : MonoBehaviour {
     //Note: We could Dimiter this, but I felt breaking the connections in Unity would cause a ruckus, hardcoding ref makes easier tracking
     public void LoadLeaderboardEntryOnGameOver() {
 
-        //get input entry
-        //if blank, make it "Player" + SessionID
-
         //update the scores with the new entry, sort, and save
         leaderboard.SubmitScores();
 
         //load leaderboad level
         LoadScene("Leaderboard");
+    }
+
+
+    //enable temp timer for testing if needed
+    private float RunTempTimerScripts(bool _isTempTimer,float _tempTimer) {
+
+        if(_isTempTimer) {
+            _tempTimer = GTimer(_tempTimer);
+            if(_tempTimer < zerop) TempScripts();
+        }
+
+        return _tempTimer;
+    }
+
+
+    //Run temp scripts here based on timer
+    void TempScripts() {
+
+        GMX.GameOver();
     }
 }

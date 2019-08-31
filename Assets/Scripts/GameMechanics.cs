@@ -19,7 +19,7 @@ public class GameMechanics : MonoBehaviour {
 
 	//timers
 	float leaderboardTimer;
-	bool enableLeaderboardTimer = false;
+	bool isLeaderboardTimer = false;
 
 	//scripts
 	public float random;
@@ -59,7 +59,7 @@ public class GameMechanics : MonoBehaviour {
 		random = UnityEngine.Random.Range (0, 100);
 
 		//start leaderboard timer (called on game over)
-		if (enableLeaderboardTimer) {
+		if (isLeaderboardTimer) {
 			leaderboardTimer -= 1 * Time.deltaTime;
 
 			//load leaderboard when timer reaches 0
@@ -102,13 +102,9 @@ public class GameMechanics : MonoBehaviour {
 		GameObject[] spawnTiles = GameObject.FindGameObjectsWithTag("SpawnTile");
 		GameObject[] cannons = GameObject.FindGameObjectsWithTag("Player");
 
-		foreach (GameObject spawner in spawners) {		spawner.GetComponent<Spawner> ().enabled = false;	}		
-		foreach (GameObject cannon in cannons) {
-            cannon.GetComponent<Cannon> ().enabled = false;
-            //cannon.SetActive(false);
-        }
-
-        foreach(GameObject spawnTile in spawnTiles) {
+        foreach(GameObject spawner in spawners) { spawner.GetComponent<Spawner>().enabled = false; }
+        foreach (GameObject cannon in cannons) cannon.GetComponent<Cannon>().enabled = false;
+        foreach (GameObject spawnTile in spawnTiles) {
             spawnTile.GetComponent<SpawnTile>().isSpawned = true;
             spawnTile.SetActive(false);
         }
@@ -130,7 +126,11 @@ public class GameMechanics : MonoBehaviour {
         //either way, enable try again
         GUIM.tryAgainBtn.gameObject.SetActive(true);
 
+        //freeze game (maybe
         //Time.timeScale = 0.001f;
+
+        //set game managers over true
+        GM.isGameOver = true;
     }
 
 
