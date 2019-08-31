@@ -40,7 +40,10 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Fonts/bebas_neue/Try_BebasNeuePro.txt.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/sparks.psd
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/sparks.psd.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/AssetPacks/BastilleExport.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/AssetPacks/Standard Assets.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/AssetPacks/BastilleExport/fx_and_gui.unitypackage
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/AssetPacks/BastilleExport/fx_and_gui.unitypackage.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/AssetPacks/Standard Assets/ParticleSystems.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/AssetPacks/Standard Assets/Utility.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/AssetPacks/Standard Assets/ParticleSystems/Materials.meta
@@ -96,7 +99,6 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/white.mat
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/white.mat.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/.DS_Store
-/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/BastilleExport.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Design.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/FX.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Managers.meta
@@ -105,8 +107,6 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NavBlock.prefab.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Player.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/UI.meta
-/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/BastilleExport/fx_and_gui.unitypackage
-/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/BastilleExport/fx_and_gui.unitypackage.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Design/PortalSpawner.prefab
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Design/PortalSpawner.prefab.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/FX/Fireball.prefab
