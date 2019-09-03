@@ -14,22 +14,25 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
 
-	//asset
-	public Transform spawnAsset;
+    //spawn time
+    [Header("Spawn Time")]
+    public int spawnCooldownMin;
+    public int spawnCooldownMax;
+    [SerializeField] float countdown;
+    float countStart;
+    public bool randomCooldown;
+    public float spawnrateExp;
+    public int spawnrateExpBase;
 
-	//stats
-	public Vector3 spawnPointOffset;
+    [Header("Misc")]
+    //asset
+    public Transform spawnAsset;
 
-	//spawn time
-	public int spawnCooldown;
-	public int spawnCooldownMin;
-	public int spawnCooldownMax;
-	float countdown;
-	float countStart;
-	public bool randomCooldown;
+    //stats
+    public Vector3 spawnPointOffset;
 
-	//scripts
-	GameMechanics GMX;
+    //scripts
+    GameMechanics GMX;
 	GameManager GM;
 	AssetManager AM;
 
@@ -38,24 +41,26 @@ public class Spawner : MonoBehaviour {
 		GMX = GameObject.Find("GameManager").GetComponent<GameMechanics>();
 		GM = GameObject.Find("GameManager").GetComponent<GameManager> ();
 		AM = GameObject.Find("AssetManager").GetComponent<AssetManager> ();
-
 	}
 
 	// Use this for initialization
 	void Start () {
 
 		spawnCooldownMin = 1;
-		spawnCooldownMax = 20;
+		spawnCooldownMax = 17;
 
 		countStart = Random.Range(spawnCooldownMin, spawnCooldownMax);
 		countdown = countStart;
+
+        spawnrateExp = 0.37f;
+        spawnrateExpBase = spawnCooldownMax; //based on spreadsheet exp formula
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Spawn ();
-	}
+        Spawn();
+    }
 
 	void Spawn(){
 	/*
@@ -63,8 +68,6 @@ public class Spawner : MonoBehaviour {
 		Spawn asset after countdown runs to the end
 
 	 */
-
-
 		countdown = countdown - Time.deltaTime;
 
 		//every num of seconds
@@ -73,19 +76,21 @@ public class Spawner : MonoBehaviour {
 			//spawn asset from target position
 			SpawnAsset();
 
-			//reset count
-			int killCount = GM.playerKillCount;
+			//reset count(old ramp system)
+			//int killCount = GM.playerKillCount;
+            //if (killCount >= 10) { spawnCooldownMax = 17; }
+            //if (killCount >= 20) { spawnCooldownMax = 14; }
+            //if (killCount >= 30) { spawnCooldownMax = 10; }
+            //if (killCount >= 40) { spawnCooldownMax = 7; }
+            //if (killCount >= 50) { spawnCooldownMax = 4; }
+            //if (killCount >= 100) { spawnCooldownMax = 2; }
 
-			if (killCount >= 10) { spawnCooldownMax = 17; }
-			if (killCount >= 20) { spawnCooldownMax = 14; }
-			if (killCount >= 30) { spawnCooldownMax = 10; }
-			if (killCount >= 40) { spawnCooldownMax = 7; }
-			if (killCount >= 50) { spawnCooldownMax = 4; }
-			if (killCount >= 100) { spawnCooldownMax = 2; }
-
-			countdown = Random.Range(spawnCooldownMin, spawnCooldownMax);
+            //new ramp system
+            spawnCooldownMax = (int) Mathf.Floor(GM.LevelupExpRate(GM.round,spawnrateExp,spawnrateExpBase) / GM.round);
+            countdown = Random.Range(spawnCooldownMin, spawnCooldownMax);
 		}
 	}
+
 
 	void SpawnAsset(){
 	/*

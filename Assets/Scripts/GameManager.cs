@@ -233,4 +233,12 @@ public class GameManager : MonoBehaviour {
 
         GMX.GameOver();
     }
+
+    
+    //principle formula for level up and spawn rates
+    public int LevelupExpRate(int _level,float _spawnExp,float _basePoints) {
+        return (int) (Mathf.Floor(_basePoints * (Mathf.Pow(_level,_spawnExp))));
+    }
+
+
 }
