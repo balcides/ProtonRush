@@ -48,7 +48,7 @@ public class GameMechanics : MonoBehaviour {
         //spider = 50
         //spider lvl2 = 200
 
-        GUIM.gameStatus.text = "";
+        GUIM.gameStatusTitle.text = "";
     }
 
 
@@ -89,8 +89,8 @@ public class GameMechanics : MonoBehaviour {
 	public void GameOver(){
 
 		//Print game over message
-		GUIM.gameStatus.text = "GAME OVER";
-        GUIM.gameStatus.gameObject.SetActive(true);
+		GUIM.gameStatusTitle.text = "GAME OVER";
+        GUIM.gameStatusTitle.gameObject.SetActive(true);
 
 		//stop all bugs (or destroy)
 		//TODO: maybe make this a global command (allEnemies() or something)

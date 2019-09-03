@@ -801,12 +801,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modelname: photonSE2
   level: 2
-  hp: 100
-  attack: 20
+  hp: 300
+  attack: 25
   defense: 10
-  speed: 10
+  speed: 5
   cryptoXP: 300
-  maxHp: 400
+  maxHp: 300
 --- !u!114 &114503471487527178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -823,7 +823,7 @@ MonoBehaviour:
     type: 3}
   bulletSpawn: {fileID: 4452723866562066}
   tileSpawer: {fileID: 0}
-  cooldown: 0.75
+  cooldown: 1.5
 --- !u!65 &65705961464915634
 BoxCollider:
   m_ObjectHideFlags: 0

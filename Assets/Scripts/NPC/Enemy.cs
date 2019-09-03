@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour {
 	void Awake(){
 
 		GMX = GameObject.Find("GameManager").GetComponent<GameMechanics> ();
-		GM = GameObject.Find("GameManager").GetComponent<GameManager> ();
+        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         agent = GetComponent<NavMeshAgent>();
 
     }
@@ -41,6 +41,7 @@ public class Enemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
         agent.destination = GameObject.Find("CommandCenter").transform.position;
 	}
 
@@ -71,26 +72,21 @@ public class Enemy : MonoBehaviour {
 
 		//if we run out of hit points, die or destroy self
 		if (GetComponent<Unit>().hp <= 0) {
+            AwardPoints();
 
-			//Award player XP for kill
-			GM.crypto += GetComponent<Unit>().cryptoXP;
-			GM.playerXPscore += GetComponent<Unit>().cryptoXP;
-			GM.playerKillCount += 1;
-			
-			//SelfDestruct ();
-			GMX.SelfDestruct (gameObject);
+            //SelfDestruct ();
+            GMX.SelfDestruct(gameObject);
 
-		}
+        }
 
-		//if enemy runs into the player, destroy self
-		if (col.gameObject.tag == "Player" || col.gameObject.tag == "CommandCenter") {
+        //if enemy runs into the player, destroy self
+        if (col.gameObject.tag == "Player" || col.gameObject.tag == "CommandCenter") {
 
-			//Award player XP for kill
-			GM.crypto += GetComponent<Unit>().cryptoXP;
-			GM.playerXPscore += GetComponent<Unit>().cryptoXP;
+            //Award player XP for kill
+            AwardPoints();
 
-			//SelfDestruct();
-			GMX.SelfDestruct (gameObject);
+            //SelfDestruct();
+            GMX.SelfDestruct (gameObject);
 
 			//deal damage to player asset based on enemy self attack score
 			col.gameObject.GetComponent<Unit>().hp -= GetComponent<Unit>().attack;
@@ -98,7 +94,18 @@ public class Enemy : MonoBehaviour {
 	}
 
 
-	void Move(){
+    //Award player XP for kill
+    private void AwardPoints() {
+
+        GM.playerKillCount += 1;
+        GM.crypto += GetComponent<Unit>().cryptoXP;
+        GM.playerXPscore += GetComponent<Unit>().cryptoXP;
+
+        GM.enemiesDefeatedPerRound += 1;
+    }
+
+
+    void Move(){
 	/*
 
 		Auto moves the enemy asset (Legacy, there just in case. Delete if no longer needed)

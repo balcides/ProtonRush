@@ -269,7 +269,7 @@ public class Leaderboard : MonoBehaviour {
 
         //Board.thisExample; // works!
         // disable game over text
-        GUIM.gameStatus.GetComponent<Text>().enabled = false;
+        GUIM.gameStatusTitle.GetComponent<Text>().enabled = false;
 
         //enable board
         GUIM.playerScoreName.GetComponent<Text>().enabled = true;

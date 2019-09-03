@@ -75,14 +75,13 @@ public class Cannon : MonoBehaviour {
 
          */
 
+
         countdown = countdown - Time.deltaTime;
         if(countdown <= 0) {
             countdown = countStart;
 
             //countdown actions 
             Fire();
-
-
         }
     }
 

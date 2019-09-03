@@ -10,7 +10,7 @@ public class GuiManager : MonoBehaviour
     public Text cryptoCounter;
     public Text killCounter;
     public Text xpScoreCounter;
-    public Text gameStatus;
+    public Text gameStatusTitle;
     public Text gameStatusSubtitle;
 
     [Header("Player Score")]
@@ -21,6 +21,9 @@ public class GuiManager : MonoBehaviour
     public Transform playerScoreSubmitBtn;
     public Transform playerScoreNameInput;
     public Transform tryAgainBtn;
+
+    [Header("Misc")]
+    public Transform gameStatusTitleBKG;
 
     [Header("Camera")]
     public Camera[] cameras;

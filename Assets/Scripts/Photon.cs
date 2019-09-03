@@ -14,14 +14,17 @@ using UnityEngine;
 public class Photon : MonoBehaviour {
 
 	//Stats
-	public int damage;
-	public float longevity;
-	public float speed;
-	public Vector3 direction;
+    [Header("Local")]
+    public float longevity;
     public float zLimit;       //bounds by which photons self destruct
+    public Vector3 direction;
 
-	//initialize
-	public static Photon instance = null;
+    [Header("Inherited")]
+    public int damage;
+    public float speed;
+
+    //initialize
+    public static Photon instance = null;
 
 	void Awake(){
 

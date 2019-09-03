@@ -26,30 +26,37 @@ public class GameManager : MonoBehaviour {
     public int round;
     public int sessionID;
     public bool isGameOver;
+    public bool isCamAutoSwitch;
 
     [Header("Game Timers")]
     public float roundsTextTimer;
     public float spawnTimer;
     public float cooldownTimer;
     public float setNextRoundTimer;
+    public float cameraSwitchTimer;
 
     private float roundsTextTimerMax;
     private float spawnTimerMax;
     private float cooldownTimerMax;
     private float setNextRoundTimerMax;
-    private GameObject portalSpawners;
+    private float cameraSwitchTimerMax;
 
+    private GameObject portalSpawners;
     public float tempTimer;
 	public bool isTempTimer;
 
+    [Header("Misc")]
     string roundsTextMsg;
+    public int enemiesDefeatedPerRound;
 
-	//script
-	GameMechanics GMX;
+    //script
+    GameMechanics GMX;
     GuiManager GUIM;
     Leaderboard leaderboard;
 
     float zerop = 0.0001f;
+
+
 
 
 	void Awake(){	
@@ -77,6 +84,7 @@ public class GameManager : MonoBehaviour {
         spawnTimerMax = spawnTimer;
         cooldownTimerMax = cooldownTimer;
         setNextRoundTimerMax = setNextRoundTimer;
+        cameraSwitchTimerMax = cameraSwitchTimer;
         ResetTimers();
 
         //disable spawners
@@ -107,6 +115,8 @@ public class GameManager : MonoBehaviour {
 
         //Runs full rounds loop
         if(!isGameOver) RunGameLoopRounds();
+
+
     }
 
 
@@ -119,46 +129,56 @@ public class GameManager : MonoBehaviour {
         spawnTimer = GTimer(spawnTimer);
         cooldownTimer = GTimer(cooldownTimer);
         setNextRoundTimer = GTimer(setNextRoundTimer);
+        cameraSwitchTimer = GTimer(cameraSwitchTimer);
 
         //Rounds event:   display round 1 for x num of seconds
         if(roundsTextTimer > zerop && spawnTimer > zerop && cooldownTimer > zerop && setNextRoundTimer > zerop) {
             roundsTextMsg = "Round " + round;
-            GUIM.gameStatus.gameObject.SetActive(true);
             roundsSubtitleTextMsg = "get ready";
+            GUIM.gameStatusTitle.gameObject.SetActive(true);
+            GUIM.gameStatusTitleBKG.gameObject.SetActive(true);
+            enemiesDefeatedPerRound = 0;
 
-
-        //Spawn event: start spawning for x num of seconds
+            //Spawn event: start spawning for x num of seconds
         } else if(roundsTextTimer < zerop && spawnTimer < zerop && roundsTextTimer < zerop && cooldownTimer > zerop && setNextRoundTimer > zerop) {
-            roundsSubtitleTextMsg = "incoming";
+            roundsSubtitleTextMsg = "Round" + round + "...incoming";
             roundsTextMsg = "spawning units!";
             portalSpawners.SetActive(true);
-            GUIM.gameStatus.gameObject.SetActive(false);
+            GUIM.gameStatusTitle.gameObject.SetActive(false);
+            GUIM.gameStatusTitleBKG.gameObject.SetActive(false);
 
-
-        //Cooldown begins: for x num of seconds followed by countdown text        
+            //Cooldown begins: for x num of seconds followed by countdown text        
         } else if(roundsTextTimer < zerop && spawnTimer < zerop && roundsTextTimer < zerop && cooldownTimer < zerop && setNextRoundTimer > zerop) {
-            roundsTextMsg = "cooldown....";
-            roundsSubtitleTextMsg = "cooling down...";
+            roundsTextMsg = "Enemy retreat...";
+            roundsSubtitleTextMsg = enemiesDefeatedPerRound + " Defeated. Prepare to fortify...";
             portalSpawners.SetActive(false);
 
-       //Reset event: reset all timers after cooldown for x num of seconds
+            //Reset event: reset all timers after cooldown for x num of seconds
         } else if(roundsTextTimer < zerop && spawnTimer < zerop && roundsTextTimer < zerop && cooldownTimer < zerop && setNextRoundTimer < zerop) {
 
             //next round begins after cooldown
             ResetTimers();
+            GUIM.gameStatusTitle.gameObject.SetActive(false);
+            GUIM.gameStatusTitleBKG.gameObject.SetActive(false);
             round++;
 
+
         } else {
-            roundsSubtitleTextMsg = "Prepare to fortify";
+            
             roundsTextMsg = "Attack in " + Convert.ToString(Mathf.Round(spawnTimer));
+            roundsSubtitleTextMsg = roundsTextMsg;
         }
 
         //update messages
-        print(roundsTextMsg);
-        GUIM.gameStatus.text = roundsTextMsg;
+        //print(roundsTextMsg);
+        GUIM.gameStatusTitle.text = roundsTextMsg;
         GUIM.gameStatusSubtitle.text = roundsSubtitleTextMsg;
 
-
+        //swtich cameras every xNum of seconds
+        if(isCamAutoSwitch && cameraSwitchTimer < zerop) {
+            GUIM.CycleCameras();
+            cameraSwitchTimer = cameraSwitchTimerMax;
+        }
     }
 
 
