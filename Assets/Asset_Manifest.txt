@@ -1,10 +1,19 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/.DS_Store
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Fonts.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/grid-desert 1.psd
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/grid-desert 1.psd.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/grid-desert.psd
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/grid-desert.psd.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/cannon.fbx
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/cannon.fbx.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/cannon.mlt
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/cannon.mlt.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/cannon2.fbx
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/cannon2.fbx.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/cube.fbx
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/cube.fbx.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Fonts/.DS_Store
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Fonts/Cinzel-Black.ttf
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Fonts/Cinzel-Black.ttf.meta
@@ -38,6 +47,15 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Fonts/bebas_neue/OFL.txt.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Fonts/bebas_neue/Try_BebasNeuePro.txt
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Fonts/bebas_neue/Try_BebasNeuePro.txt.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/.jpg
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/cannon1.psd
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/cannon1.psd.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/cannon2.psd
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/cannon2.psd.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/e_cannon1.jpg
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/e_cannon1.jpg.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/outUV.jpg
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/outUV.jpg.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/sparks.psd
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/sparks.psd.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/AssetPacks/BastilleExport.meta
@@ -74,6 +92,10 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/beige-grid.mat.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/beige.mat
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/beige.mat.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/cannon1.mat
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/cannon1.mat.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/cannon2.mat
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/cannon2.mat.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/dark-grey-50alpha.mat
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/dark-grey-50alpha.mat.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/dark-grey.mat
@@ -140,6 +162,8 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NPC/SpidercrabLvl2.prefab.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Player/Cameras.prefab
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Player/Cameras.prefab.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Player/Cannon.prefab
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Player/Cannon.prefab.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Player/CannonLvl1.prefab
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Player/CannonLvl1.prefab.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Player/CannonLvl2.prefab
