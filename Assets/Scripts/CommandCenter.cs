@@ -13,18 +13,30 @@ using UnityEngine;
 
 public class CommandCenter : MonoBehaviour {
 
-
 	//scripts
 	GameMechanics GMX;
 	GameManager GM;
 	Unit unit;
     GuiManager GUIM;
 
-	void Awake(){
+    //color schemes
+    Material mat;
+    private Color defaultColor;
+    private Color highlightColor;
+    public Renderer rend;
+
+
+    void Awake(){
 		GMX = GameObject.Find("GameManager").GetComponent<GameMechanics> ();
 		GM = GameObject.Find("GameManager").GetComponent<GameManager> ();
         GUIM = GameObject.Find("GUIManager").GetComponent<GuiManager>();
         unit = GetComponent<Unit>();
+
+        //get current tile color and set it to detault
+        mat = rend.material;
+        defaultColor = new Color(1f,1f,1,0f);
+        highlightColor = Color.green;
+        mat.color = defaultColor;
 
     }
 
@@ -73,13 +85,14 @@ public class CommandCenter : MonoBehaviour {
 
 	void OnMouseDown(){
 
-		//when clicking on the command center, charge 500 xp for restoring 50% of it's HP
+        //when clicking on the command center, charge 500 xp for restoring 50% of it's HP
+        unit = GetComponent<Unit>();    //update on mousedown
 
 		//look at num of credits
 		int numOfCredits = GM.crypto;
 
 		//if there's enough, convert to level 2
-		if (numOfCredits >= GM.creditCostRepairCmdCenter) {
+		if (numOfCredits >= GM.creditCostRepairCmdCenter && unit.hp < unit.maxHp) {
 
 			//reduce credits 
 			GM.crypto -= GM.creditCostRepairCmdCenter;
@@ -87,6 +100,7 @@ public class CommandCenter : MonoBehaviour {
 			//heal command center 50% of total
 			int healPoints = Mathf.RoundToInt(unit.maxHp * 0.5f);
 			unit.hp = unit.hp + healPoints;
+            if(unit.hp > unit.maxHp) unit.hp = unit.maxHp;
 		
 		} else {
 
@@ -96,7 +110,16 @@ public class CommandCenter : MonoBehaviour {
 
 	}
 
+
     private void OnMouseOver() {
         GUIM.gameInfo.text = "Command Center: Restore 50% HP = 500 Crypto";
+        mat.color = highlightColor;
+    }
+
+
+    private void OnMouseExit() {
+
+        //restore tile material
+        mat.color = defaultColor;
     }
 }

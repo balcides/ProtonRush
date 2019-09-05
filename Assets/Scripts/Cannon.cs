@@ -58,7 +58,7 @@ public class Cannon : MonoBehaviour {
         //get current tile color and set it to detault
         mat = rend.material;
         defaultColor = new Color(1f,1f,1,0f);
-        highlightColor = Color.cyan;
+        highlightColor = Color.magenta;
         mat.color = defaultColor;
     }
 
@@ -257,7 +257,7 @@ public class Cannon : MonoBehaviour {
         GUIM.gameInfo.text = statusMessage;
 
         //highlight tile
-        mat.color = highlightColor;
+        if(GetComponent<Unit>().level == 1) mat.color = highlightColor;
     }
 
     private void OnMouseExit() {
