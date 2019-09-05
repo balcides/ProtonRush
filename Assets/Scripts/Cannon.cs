@@ -38,6 +38,12 @@ public class Cannon : MonoBehaviour {
 
     private string statusMessage;
 
+    //color schemes
+    Material mat;
+    private Color defaultColor;
+    private Color highlightColor;
+    public Renderer rend;
+
     void Awake() {
 
         GMX = GameObject.Find("GameManager").GetComponent<GameMechanics>();
@@ -49,6 +55,11 @@ public class Cannon : MonoBehaviour {
         speed = unit.speed;
         attack = unit.attack;
 
+        //get current tile color and set it to detault
+        mat = rend.material;
+        defaultColor = new Color(1f,1f,1,0f);
+        highlightColor = Color.cyan;
+        mat.color = defaultColor;
     }
 
 
@@ -244,5 +255,14 @@ public class Cannon : MonoBehaviour {
 
         if(GetComponent<Unit>().level == 2) statusMessage = "Unit maxed out!";
         GUIM.gameInfo.text = statusMessage;
+
+        //highlight tile
+        mat.color = highlightColor;
+    }
+
+    private void OnMouseExit() {
+
+        //restore tile matieral
+        mat.color = defaultColor;
     }
 }
