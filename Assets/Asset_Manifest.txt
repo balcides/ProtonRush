@@ -1,3 +1,5 @@
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Animation/AnimController.controller
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Animation/AnimController.controller.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/.DS_Store
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Fonts.meta
@@ -16,6 +18,9 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/cmdCenter.fbx.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/cube.fbx
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/cube.fbx.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/spider.fbx
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/spider.fbx.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/.mayaSwatches/cannon.mlt.swatches
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Fonts/.DS_Store
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Fonts/Cinzel-Black.ttf
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Fonts/Cinzel-Black.ttf.meta
@@ -49,6 +54,7 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Fonts/bebas_neue/OFL.txt.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Fonts/bebas_neue/Try_BebasNeuePro.txt
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Fonts/bebas_neue/Try_BebasNeuePro.txt.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/.DS_Store
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/.jpg
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/cannon1.psd
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/cannon1.psd.meta
@@ -60,6 +66,8 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/outUV.jpg.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/outUV_cmdCenter.jpg
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/outUV_cmdCenter.jpg.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/outUV_cmdCenter.psd
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/outUV_cmdCenter.psd.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/sparks.psd
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/sparks.psd.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/AssetPacks/BastilleExport.meta
