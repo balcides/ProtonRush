@@ -28,6 +28,7 @@ public class Cannon : MonoBehaviour {
     int attack;
     float countdown;
     float countStart;
+    public float attackDistance;
 
     //scripts
     GameMechanics GMX;
@@ -117,14 +118,25 @@ public class Cannon : MonoBehaviour {
             //set aim
             Quaternion aimRotation = Quaternion.LookRotation(relativePos,Vector3.up);
             rotateDir = aimRotation;
+            print((aimTarget.position - bulletSpawn.position).sqrMagnitude);
+            //if the enemy is within attack distance
+            if((aimTarget.position - bulletSpawn.position).sqrMagnitude < attackDistance) {
 
-            //fire!
-            var bullet = (GameObject) Instantiate(bulletPrefab,bulletSpawn.position,rotateDir);
+                //fire!
+                var bullet = (GameObject) Instantiate(bulletPrefab,bulletSpawn.position,rotateDir);
 
-            // Add velocity to the bullet
-            bullet.GetComponent<Photon>().speed = speed;
-            bullet.GetComponent<Photon>().damage = attack;
-            //bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
+                // Add velocity to the bullet
+                bullet.GetComponent<Photon>().speed = speed;
+                bullet.GetComponent<Photon>().damage = attack;
+                //bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
+
+                //if the bullet is past distance, destroy
+                if((bullet.transform.position - bulletSpawn.position).sqrMagnitude > attackDistance) {
+                    Destroy(bullet);
+                }
+            }
+
+
         }
 
     }

@@ -75,6 +75,7 @@ MonoBehaviour:
   bulletSpawn: {fileID: 2594289073064223905}
   tileSpawer: {fileID: 0}
   cooldown: 0.75
+  attackDistance: 20
   rend: {fileID: 8838849236736168477}
 --- !u!65 &65705961464915634
 BoxCollider:
