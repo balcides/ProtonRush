@@ -1,5 +1,7 @@
-/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Animation/AnimController.controller
-/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Animation/AnimController.controller.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Animation/SpiderAnimController.controller
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Animation/SpiderAnimController.controller.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Animation/SpiderAnimControllerBig.controller
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Animation/SpiderAnimControllerBig.controller.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/.DS_Store
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Fonts.meta
@@ -174,6 +176,10 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NPC/SpidercrabLvl1.prefab.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NPC/SpidercrabLvl2.prefab
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NPC/SpidercrabLvl2.prefab.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NPC/Spidercrab_LVL1.prefab
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NPC/Spidercrab_LVL1.prefab.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NPC/Spidercrab_LVL2.prefab
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NPC/Spidercrab_LVL2.prefab.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Player/Cameras.prefab
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Player/Cameras.prefab.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Player/Cannon.prefab
