@@ -18,16 +18,18 @@ public class Enemy : MonoBehaviour {
 
     //stats
     public Vector3 direction;
+    public float speed;
+    public Animator animator;
 
     //mechanics
-
-	public float selfDestructCountdown;
+    public float selfDestructCountdown;
 
 	//scripts
 	//AssetManager AM;
 	GameMechanics GMX;
 	GameManager GM;
     NavMeshAgent agent;
+    Unit unit;
 
 
 	void Awake(){
@@ -35,15 +37,20 @@ public class Enemy : MonoBehaviour {
 		GMX = GameObject.Find("GameManager").GetComponent<GameMechanics> ();
         GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         agent = GetComponent<NavMeshAgent>();
+        unit = GetComponent<Unit>();
+
+        //navmesh agent and read unit speed initial
+        agent.speed = unit.speed;
 
     }
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 
         agent.destination = GameObject.Find("CommandCenter").transform.position;
-	}
+
+    }
 
 
 	// Update is called once per frame
@@ -51,8 +58,12 @@ public class Enemy : MonoBehaviour {
 
         //move unit on update
 		TimeDestruct ();
-		
-	}
+
+
+        speed = Mathf.Lerp(speed,agent.velocity.magnitude,Time.deltaTime * 10);
+        animator.SetFloat("WalkD",speed);
+
+    }
 
 
 	void OnCollisionEnter (Collision col)

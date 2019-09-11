@@ -24,7 +24,7 @@ public class Cannon : MonoBehaviour {
 
     //Mechanics
     public float cooldown;
-    int speed;
+    float speed;
     int attack;
     float countdown;
     float countStart;

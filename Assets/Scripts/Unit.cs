@@ -18,7 +18,7 @@ public class Unit : MonoBehaviour {
 	public int hp;
 	public int attack;
 	public int defense;
-	public int speed;
+	public float speed;
 	public int cryptoXP;
 
     public int maxHp;
