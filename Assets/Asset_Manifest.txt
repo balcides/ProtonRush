@@ -72,6 +72,12 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/outUV_cmdCenter.psd.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/sparks.psd
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/sparks.psd.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/spiderBody.psd
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/spiderBody.psd.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/spiderBodyWhite.psd
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/spiderBodyWhite.psd.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/spiderLeg.jpg
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/spiderLeg.jpg.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/AssetPacks/BastilleExport.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/AssetPacks/Standard Assets.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/AssetPacks/BastilleExport/fx_and_gui.unitypackage
@@ -134,6 +140,14 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/red.mat.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/sky-blue.mat
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/sky-blue.mat.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/spider1-body.mat
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/spider1-body.mat.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/spider1-legs.mat
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/spider1-legs.mat.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/spider2-body.mat
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/spider2-body.mat.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/spider2-legs.mat
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/spider2-legs.mat.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/white.mat
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/white.mat.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/.DS_Store
