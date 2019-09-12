@@ -271,7 +271,7 @@ public class Enemy : MonoBehaviour {
         else if(numRoll > 22 && numRoll <= 27) randomBe = Behavior.Epsilon;
         else if(numRoll > 27) randomBe = Behavior.Gamma;
 
-        print("rolled a :" + numRoll + " AI=" + randomBe.ToString());
+        //print("rolled a :" + numRoll + " AI=" + randomBe.ToString());
 
         return randomBe;
     }
