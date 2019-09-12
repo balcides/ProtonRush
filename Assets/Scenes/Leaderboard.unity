@@ -284,6 +284,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114151725135848298, guid: 0724bebb16a7b46a7b369cca3cc70b78,
+        type: 3}
+      propertyPath: speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6541229803200438524, guid: 0724bebb16a7b46a7b369cca3cc70b78,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114119933930160244, guid: 0724bebb16a7b46a7b369cca3cc70b78, type: 3}
     - {fileID: 839804970, guid: 0724bebb16a7b46a7b369cca3cc70b78, type: 3}
@@ -553,10 +563,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GUIManager
       objectReference: {fileID: 0}
-    - target: {fileID: 6787290646029054, guid: 70e7f9feddfac4285ba44e8986223c3b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7909624339808719206, guid: 70e7f9feddfac4285ba44e8986223c3b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -770,6 +776,15 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5339555434711493452, guid: 70e7f9feddfac4285ba44e8986223c3b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6787290646029054, guid: 70e7f9feddfac4285ba44e8986223c3b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3270977426529487568, guid: 70e7f9feddfac4285ba44e8986223c3b,
         type: 3}
       propertyPath: m_IsActive
@@ -883,6 +898,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 213230131423371067, guid: 70e7f9feddfac4285ba44e8986223c3b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4012075282057994971, guid: 70e7f9feddfac4285ba44e8986223c3b,
         type: 3}
       propertyPath: m_FontData.m_Font
@@ -930,16 +950,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: DeleteAllPrefs
-      objectReference: {fileID: 0}
-    - target: {fileID: 5339555434711493452, guid: 70e7f9feddfac4285ba44e8986223c3b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 213230131423371067, guid: 70e7f9feddfac4285ba44e8986223c3b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70e7f9feddfac4285ba44e8986223c3b, type: 3}

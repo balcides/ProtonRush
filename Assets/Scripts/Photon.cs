@@ -15,13 +15,14 @@ public class Photon : MonoBehaviour {
 
 	//Stats
     [Header("Local")]
-    public float longevity;
+    //public float longevity;
     public float zLimit;       //bounds by which photons self destruct
     public Vector3 direction;
 
     [Header("Inherited")]
     public int damage;
     public float speed;
+    public Transform source;
 
     //initialize
     public static Photon instance = null;
@@ -45,7 +46,7 @@ public class Photon : MonoBehaviour {
 
 		// Destroy the bullet after num seconds if not past bounds of z
         if (gameObject.transform.position.z > zLimit) Destroy(gameObject);
-        else Destroy(gameObject,longevity);
+        //else Destroy(gameObject,longevity);
 
     }
 }

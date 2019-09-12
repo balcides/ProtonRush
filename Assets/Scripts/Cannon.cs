@@ -118,7 +118,8 @@ public class Cannon : MonoBehaviour {
             //set aim
             Quaternion aimRotation = Quaternion.LookRotation(relativePos,Vector3.up);
             rotateDir = aimRotation;
-            print((aimTarget.position - bulletSpawn.position).sqrMagnitude);
+            //print((aimTarget.position - bulletSpawn.position).sqrMagnitude);
+
             //if the enemy is within attack distance
             if((aimTarget.position - bulletSpawn.position).sqrMagnitude < attackDistance) {
 
@@ -128,7 +129,9 @@ public class Cannon : MonoBehaviour {
                 // Add velocity to the bullet
                 bullet.GetComponent<Photon>().speed = speed;
                 bullet.GetComponent<Photon>().damage = attack;
+                bullet.GetComponent<Photon>().source = transform;
                 //bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 6;
+
 
                 //if the bullet is past distance, destroy
                 if((bullet.transform.position - bulletSpawn.position).sqrMagnitude > attackDistance) {
