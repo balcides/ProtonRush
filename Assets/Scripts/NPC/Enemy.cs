@@ -147,12 +147,14 @@ public class Enemy : MonoBehaviour {
 		TimeDestruct (3f);
 
         //set animation speed and gesture to go with navMeshAgent velocity
-        speed = Mathf.Lerp(speed,agent.velocity.magnitude,Time.deltaTime * 10);
+        speed = Mathf.Lerp(speed,agent.velocity.magnitude, Time.deltaTime * 10);
         animator.SetFloat("WalkD",speed);
 
-        //set destination target on update
-        destinedTarget = SetTargetBasedOnBehavior(commandCenter, behavior);
-        agent.destination = destinedTarget.position;
+        //set destination target on updated
+        if(behavior != Behavior.Alpha) {
+            destinedTarget = SetTargetBasedOnBehavior(commandCenter,behavior);
+            agent.destination = destinedTarget.position;
+        }
 
     }
 

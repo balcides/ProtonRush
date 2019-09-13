@@ -10,6 +10,8 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/grid-desert 1.psd.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/grid-desert.psd
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/grid-desert.psd.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/grid-ramp.psd
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/grid-ramp.psd.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/cannon.fbx
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/cannon.fbx.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/cannon.mlt
@@ -20,6 +22,8 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/cmdCenter.fbx.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/cube.fbx
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/cube.fbx.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/rampBlock.fbx
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/rampBlock.fbx.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/spider.fbx
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/spider.fbx.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/FBX/.mayaSwatches/cannon.mlt.swatches
@@ -70,6 +74,8 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/outUV_cmdCenter.jpg.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/outUV_cmdCenter.psd
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/outUV_cmdCenter.psd.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/outUV_ramp.jpg
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/outUV_ramp.jpg.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/sparks.psd
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/sparks.psd.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Art/Textures/spiderBody.psd
@@ -108,6 +114,8 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/ParticleSparkle.mat.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/beige-grid-box.mat
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/beige-grid-box.mat.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/beige-grid-ramp.mat
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/beige-grid-ramp.mat.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/beige-grid.mat
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/beige-grid.mat.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/beige.mat
@@ -151,6 +159,7 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/white.mat
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Materials/white.mat.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/.DS_Store
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/BKG.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Design.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/FX.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Managers.meta
@@ -159,6 +168,18 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NavBlock.prefab.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Player.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/UI.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/BKG/bkgSpawner.prefab
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/BKG/bkgSpawner.prefab.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/BKG/lBlock.prefab
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/BKG/lBlock.prefab.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/BKG/rampBlock.prefab
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/BKG/rampBlock.prefab.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/BKG/squareBlock.prefab
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/BKG/squareBlock.prefab.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/BKG/tBlock.prefab
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/BKG/tBlock.prefab.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/BKG/twoBlock.prefab
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/BKG/twoBlock.prefab.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Design/PortalSpawner.prefab
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Design/PortalSpawner.prefab.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/FX/Fireball.prefab
@@ -186,10 +207,6 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/Managers/LeaderboardManager.prefab.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NPC/PortalSpawners.prefab
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NPC/PortalSpawners.prefab.meta
-/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NPC/SpidercrabLvl1.prefab
-/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NPC/SpidercrabLvl1.prefab.meta
-/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NPC/SpidercrabLvl2.prefab
-/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NPC/SpidercrabLvl2.prefab.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NPC/Spidercrab_LVL1.prefab
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NPC/Spidercrab_LVL1.prefab.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Prefabs/NPC/Spidercrab_LVL2.prefab
@@ -254,6 +271,8 @@
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Scripts/.DS_Store
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Scripts/AssetManager.cs
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Scripts/AssetManager.cs.meta
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Scripts/BKGSpawner.cs
+/Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Scripts/BKGSpawner.cs.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Scripts/Cannon.cs
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Scripts/Cannon.cs.meta
 /Volumes/MonarchGameDrive/Monarch/ProtonRush/Assets/Scripts/CommandCenter.cs

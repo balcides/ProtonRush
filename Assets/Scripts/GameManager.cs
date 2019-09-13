@@ -57,13 +57,11 @@ public class GameManager : MonoBehaviour {
     float zerop = 0.0001f;
 
 
-
-
 	void Awake(){	
 		GMX = GetComponent<GameMechanics> ();
         GUIM = GameObject.Find("GUIManager").GetComponent<GuiManager>();
         leaderboard = GameObject.Find("LeaderboardManager").GetComponent<Leaderboard>();
-		crypto = 400;
+		crypto = 1200;
 		playerXPscore = crypto;
         portalSpawners = GameObject.Find("PortalSpawners");
 	}
@@ -115,8 +113,6 @@ public class GameManager : MonoBehaviour {
 
         //Runs full rounds loop
         if(!isGameOver) RunGameLoopRounds();
-
-
     }
 
 
