@@ -167,7 +167,6 @@ public class Cannon : MonoBehaviour {
 
             //self-destroy cannon
             GMX.SelfDestruct(gameObject);
-
         }
     }
 
@@ -217,7 +216,7 @@ public class Cannon : MonoBehaviour {
         //TODO: used also in SpawnTile.cs, should be a global method. Level2Credits should be refactored
         //look at num of credits
         int numOfCredits = GM.crypto;
-        Transform tileSpawnAsset = tileSpawer.GetComponent<SpawnTile>().spawnAsset;
+        Transform startTileSpawnAsset = tileSpawer.GetComponent<SpawnTile>().spawnAsset;
 
         //set default status message
         statusMessage = "Cannon: Upgrade to next level= " + GM.creditCostLvl2 + " Crypto";
@@ -226,13 +225,16 @@ public class Cannon : MonoBehaviour {
         if(numOfCredits >= GM.creditCostLvl2) {
 
             //if it's a level 1 cannon, convert to level 2, else, it's maxed out
-            if(tileSpawnAsset.GetComponent<Unit>().modelname == "photonSE") {
+            if(startTileSpawnAsset.GetComponent<Unit>().modelname == "photonSE") {
+
+                //level2 asset
+                Transform nextSpawnAsset = AM.cannons[1];
 
                 //set the tile's new asset for the next level
-                tileSpawer.GetComponent<SpawnTile>().spawnAsset = AM.cannons[1];
+                tileSpawer.GetComponent<SpawnTile>().spawnAsset = nextSpawnAsset;
 
                 //spawn asset after setting prefab
-                tileSpawer.GetComponent<SpawnTile>().SpawnAsset();
+                tileSpawer.GetComponent<SpawnTile>().SpawnAsset(nextSpawnAsset, tileSpawer.GetComponent<SpawnTile>().spawnPointOffset);
 
                 //reduce credits 
                 GM.crypto -= GM.creditCostLvl2;
@@ -249,13 +251,13 @@ public class Cannon : MonoBehaviour {
         } else {
 
             //TODO: This condition is called again under 'if(numOfCredits..' and should probably be refactored to be called once
-            if(tileSpawnAsset.GetComponent<Unit>().modelname == "photonSE2") {
+            if(startTileSpawnAsset.GetComponent<Unit>().modelname == "photonSE2") {
                 print("Unit maxed out!");
                 statusMessage = "Unit maxed out!";
 
             } else {
                 //else warn you need more credits
-                print("Not enough XP to purchase cannon. Must have" + (GMX.CreditsRemaining(GM.creditCostLvl2)) + " credits to purchase");
+                //print("Not enough XP to purchase cannon. Must have" + (GMX.CreditsRemaining(GM.creditCostLvl2)) + " credits to purchase");
                 statusMessage = "Not enough XP to purchase cannon. Must have " + (GMX.CreditsRemaining(GM.creditCostLvl2)) + " credits to purchase";
                 //"Not enough XP to purchase cannon. Must have " + (GMX.creditsRemaining(GM.creditCostLvl2)) + " credits to purchase";
 

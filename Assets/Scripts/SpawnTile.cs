@@ -14,8 +14,9 @@ using UnityEngine;
 
 public class SpawnTile : MonoBehaviour {
 
-	//asset
-	public Transform spawnAsset;
+    //asset
+    public Transform currentAsset;
+    public Transform spawnAsset;
 
 	//stats
 	public Vector3 spawnPointOffset;
@@ -56,12 +57,18 @@ public class SpawnTile : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
+
+        //reset cannon asset on die
+        if(currentAsset == null) { 
+            isSpawned = false;
+            spawnAsset = AM.cannons[0];
+         }else
+            isSpawned = true;
 	}
 
 
     //TODO: on cleanup, we can combine this with Spawner.cs version into a common class in GameMechanics.cs
-    public void SpawnAsset(){
+    public void SpawnAsset(Transform prefab, Vector3 _spawnOffset){
 	/*
 
 		Spawn asset by instatiate
@@ -69,14 +76,14 @@ public class SpawnTile : MonoBehaviour {
 	 */
 		//get transform and add offset
 		Vector3 spawnPoint = new Vector3 (transform.position.x,
-			transform.position.y + spawnPointOffset.y,
+			transform.position.y + _spawnOffset.y,
 			transform.position.z);
 
 		// Create the Bullet from the Bullet Prefab
-		var spawned = (GameObject)Instantiate (spawnAsset.gameObject, spawnPoint, transform.rotation);
+		var spawned = (GameObject)Instantiate (prefab.gameObject, spawnPoint, transform.rotation);
+        currentAsset = spawned.transform;
 
 		//random num to name for ID
-		//TODO: use random generated from camera
 		spawned.name = spawned.name + Random.Range (0, 100);
 
 		//assign this as cannon's tile spawner
@@ -106,8 +113,7 @@ public class SpawnTile : MonoBehaviour {
             //if there's enough XP, spawn, else nothing. Note: we're using playerXP as a cost per unit
             if(-1 * xpDiff >= 0) {
 
-                SpawnAsset();
-                //isSpawned = true; //set independent of
+                SpawnAsset(spawnAsset, spawnPointOffset);
                 GM.crypto -= cryptoXP;
                 isMouseDown = false; //sets message on mouse over to work, else warns not enough XP
 

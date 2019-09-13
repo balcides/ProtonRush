@@ -47,7 +47,7 @@ public class Spawner : MonoBehaviour {
 	void Start () {
 
 		spawnCooldownMin = 1;
-		spawnCooldownMax = 17;
+		spawnCooldownMax = 25;
 
 		countStart = Random.Range(spawnCooldownMin, spawnCooldownMax);
 		countdown = countStart;
