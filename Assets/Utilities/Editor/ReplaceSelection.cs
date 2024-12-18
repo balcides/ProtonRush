@@ -41,8 +41,7 @@ public class ReplaceSelection : ScriptableWizard
 
         Undo.RegisterSceneUndo("Replace Selection");
 
-        Transform[] transforms = Selection.GetTransforms(
-            SelectionMode.TopLevel | SelectionMode.OnlyUserModifiable);
+        Transform[] transforms = Selection.GetTransforms(SelectionMode.TopLevel | SelectionMode.Editable);
 
         foreach (Transform t in transforms)
         {
