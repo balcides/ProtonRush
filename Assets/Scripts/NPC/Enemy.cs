@@ -46,17 +46,26 @@ public class Enemy : MonoBehaviour {
         GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         agent = GetComponent<NavMeshAgent>();
         unit = GetComponent<Unit>();
-        commandCenter = GameObject.Find("CommandCenter").transform;
-
+      
         //navmesh agent and read unit speed initial
         agent.speed = unit.speed;
 
         behavior = GetRandomRollBehavior();
-        //print("random behavior =" + behavior);
 
-        //sets target based on AI preset
-        destinedTarget = SetTargetBasedOnBehavior(commandCenter, behavior);
+        //find and set up command center
+        GameObject commandCenterObj = GameObject.Find("CommandCenter");
+        commandCenter = commandCenterObj != null ? commandCenterObj.transform : null;
 
+        //if command center is found, set target based on AI preset
+        if(commandCenter){
+
+            //sets target based on AI preset
+            destinedTarget = SetTargetBasedOnBehavior(commandCenter, behavior);
+
+        }else{ print("Command Center not found");  }
+
+
+     
     }
 
 
@@ -75,15 +84,15 @@ public class Enemy : MonoBehaviour {
 
         } else if(_behavior == Behavior.Gamma) {
             //if Gamma, it follows the closest spider buddy it sees unless the command center is closer
-            _destinedTarget = GetClostestUnit(_destinedTarget, "Enemy");
+            _destinedTarget = GetClosestUnit(_destinedTarget, "Enemy");
 
         } else if(_behavior == Behavior.Delta) {
             //if Delta, it follows any random cannon unless the command center is closer
-            _destinedTarget = GetClostestUnit(_destinedTarget, "Player");
+            _destinedTarget = GetClosestUnit(_destinedTarget, "Player");
 
         } else if(_behavior == Behavior.Epsilon) {
             //if Delta, it follows any random cannon unless the command center is closer
-            _destinedTarget = GetClostestUnit(_destinedTarget, "EnemyAlpha");
+            _destinedTarget = GetClosestUnit(_destinedTarget, "EnemyAlpha");
 
         }
 
@@ -94,7 +103,7 @@ public class Enemy : MonoBehaviour {
 
 
     //gets closest target if not the destined one
-    private Transform GetClostestUnit(Transform _destinedTarget,string tagType) {
+    private Transform GetClosestUnit(Transform _destinedTarget,string tagType) {
 
         bool isAlpha = false;
         if(tagType == "EnemyAlpha") {
@@ -102,7 +111,12 @@ public class Enemy : MonoBehaviour {
             isAlpha = true;
         }
 
+        //get all units of type
         List<GameObject> allUnits = GameObject.FindGameObjectsWithTag(tagType).ToList();
+
+        //if destined target or gameObject null, return null
+        if(_destinedTarget == null || _destinedTarget.gameObject == null) return null;
+   
         allUnits.Add(_destinedTarget.gameObject);
         allUnits.Remove(gameObject);
         float defaultDistance = 10000000;
@@ -135,7 +149,9 @@ public class Enemy : MonoBehaviour {
     void Start () {
 
         //agent.destination = GameObject.Find("CommandCenter").transform.position;
-        agent.destination = destinedTarget.position;
+
+        // if destined target is not null, set agent destination to target
+        if(destinedTarget != null) agent.destination = destinedTarget.position;
 
     }
 
@@ -234,7 +250,7 @@ public class Enemy : MonoBehaviour {
 
 		if (selfDestructCountdown<= 0) {
 
-            Transform target = GetClostestUnit(commandCenter,"Player");
+            Transform target = GetClosestUnit(commandCenter,"Player");
             if ((target.position - transform.position).sqrMagnitude < destroyDistance) GMX.SelfDestruct(target.gameObject);
             GMX.SelfDestruct (gameObject);
 		}

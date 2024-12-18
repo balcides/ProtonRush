@@ -56,5 +56,9 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "ProtonRush.sln"
+    "dotnet.defaultSolution": "ProtonRush.sln",
+    "cSpell.words": [
+        "Behaviour",
+        "Scriptable"
+    ]
 }

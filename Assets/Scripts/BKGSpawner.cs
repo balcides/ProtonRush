@@ -20,7 +20,8 @@ public class BKGSpawner : MonoBehaviour
         //go through the array of prefabs and pick a random num
         if(prefabs.Length > 0) {
 
-            int choosePrefab = Random.Range(0,prefabs.Length + 1);
+            //random prefab from array
+            int choosePrefab = Random.Range(0,prefabs.Length);
 
             //random x and z scale
             int randomX = Random.Range(0,2);
@@ -32,6 +33,7 @@ public class BKGSpawner : MonoBehaviour
             //spawn prefab
             var bkgPrefab = (Transform) Instantiate(prefabs[choosePrefab],transform.position,transform.rotation);
             bkgPrefab.transform.localScale = new Vector3(randomX,1,randomZ);
+
         }
     }
 
