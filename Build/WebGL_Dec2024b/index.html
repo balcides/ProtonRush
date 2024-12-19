@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width="960" height="540" tabindex="-1"></canvas>
+      <canvas id="unity-canvas" width=960 height=540 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -57,11 +57,11 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/WebGL_Dec2024.loader.js";
+      var loaderUrl = buildUrl + "/WebGL_Dec2024b.loader.js";
       var config = {
-        dataUrl: buildUrl + "/WebGL_Dec2024.data.gz",
-        frameworkUrl: buildUrl + "/WebGL_Dec2024.framework.js.gz",
-        codeUrl: buildUrl + "/WebGL_Dec2024.wasm.gz",
+        dataUrl: buildUrl + "/WebGL_Dec2024b.data.gz",
+        frameworkUrl: buildUrl + "/WebGL_Dec2024b.framework.js.gz",
+        codeUrl: buildUrl + "/WebGL_Dec2024b.wasm.gz",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "MonarchGames",
         productName: "ProtonRush",
@@ -98,7 +98,7 @@
         canvas.style.height = "540px";
       }
 
-      canvas.style.background = "url('" + buildUrl + "/WebGL_Dec2024.jpg') center / cover";
+      canvas.style.background = "url('" + buildUrl + "/WebGL_Dec2024b.jpg') center / cover";
       loadingBar.style.display = "block";
 
       var script = document.createElement("script");

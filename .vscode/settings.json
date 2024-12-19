@@ -59,6 +59,8 @@
     "dotnet.defaultSolution": "ProtonRush.sln",
     "cSpell.words": [
         "Behaviour",
+        "Lerp",
+        "Mathf",
         "Scriptable"
     ]
 }
