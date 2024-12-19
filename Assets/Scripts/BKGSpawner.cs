@@ -23,27 +23,28 @@ public class BKGSpawner : MonoBehaviour
             //random prefab from array
             int choosePrefab = Random.Range(0,prefabs.Length);
 
-            //random x and z scale
-            int randomX = Random.Range(0,2);
-            int randomZ = Random.Range(0,2);
+            // Randomize the y-axis rotation (0 or 90 degrees)
+            float randomRotationY = Random.Range(0, 2) * 90f;
 
-            randomX = GetRandomInverse(randomX);
-            randomZ = GetRandomInverse(randomZ);
+            // Spawn prefab
+            var bkgPrefab = (Transform)Instantiate(prefabs[choosePrefab], transform.position, transform.rotation);
 
-            //spawn prefab
-            var bkgPrefab = (Transform) Instantiate(prefabs[choosePrefab],transform.position,transform.rotation);
-            bkgPrefab.transform.localScale = new Vector3(randomX,1,randomZ);
-
+            // Set rotation instead of scale
+            bkgPrefab.transform.eulerAngles = new Vector3(
+                bkgPrefab.transform.eulerAngles.x,
+                randomRotationY,
+                bkgPrefab.transform.eulerAngles.z
+            );
         }
     }
 
 
     //easy way to get random val
-    private static int GetRandomInverse(int _randomVal) {
-        if(_randomVal == 0) _randomVal = -1;
-        else _randomVal = 1;
-        return _randomVal;
-    }
+    // private static int GetRandomInverse(int _randomVal) {
+    //     if(_randomVal == 0) _randomVal = -1;
+    //     else _randomVal = 1;
+    //     return _randomVal;
+    // }
 
 
     // Update is called once per frame

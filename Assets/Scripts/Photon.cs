@@ -15,7 +15,6 @@ public class Photon : MonoBehaviour {
 
 	//Stats
     [Header("Local")]
-    //public float longevity;
     public float zLimit;       //bounds by which photons self destruct
     public Vector3 direction;
 
@@ -27,26 +26,58 @@ public class Photon : MonoBehaviour {
     //initialize
     public static Photon instance = null;
 
+    // Reference to the cube platform for photon bounds
+    public GameObject platform; 
+
+    //private vars
+    private float xMin, xMax, zMin, zMax;
+
 	void Awake(){
 
 		//works best when you need to run a method or run a class but not for update info
 		instance = this;
+
+        //search for platform 
+        platform = GameObject.Find("TerrainPlane");
 	}
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    void Start() {
+
+        // Get the bounds of the platform's Renderer or Collider
+        Bounds bounds = platform.GetComponent<Renderer>().bounds;
+
+        // Set the bounding box edges
+        xMin = bounds.min.x;
+        xMax = bounds.max.x;
+        zMin = bounds.min.z;
+        zMax = bounds.max.z;
+
+        // Start the coroutine to check the bounds
+        StartCoroutine(CheckBoundsRoutine(0.1f));
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
-		//move this in direction by deltaTime
+		//move this set direction by deltaTime
 		transform.Translate(direction * Time.deltaTime * speed);
 
-		// Destroy the bullet after num seconds if not past bounds of z
-        if (gameObject.transform.position.z > zLimit) Destroy(gameObject);
-        //else Destroy(gameObject,longevity);
+    }
 
+
+    //destroy photon after num seconds. Coroutine lightens load on update
+    private IEnumerator CheckBoundsRoutine(float waitTime = 0.1f) {
+        while (true){
+            yield return new WaitForSeconds(waitTime);
+            Vector3 position = transform.position;
+
+            //check if photon is past bounds of z platform
+            if (position.x < xMin || position.x > xMax ||
+                position.z < zMin || position.z > zMax){
+
+                //destroy photon
+                Destroy(gameObject);
+            }
+        }
     }
 }

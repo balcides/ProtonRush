@@ -21,8 +21,8 @@ public class Spawner : MonoBehaviour {
     [SerializeField] float countdown;
     float countStart;
     public bool randomCooldown;
-    public float spawnrateExp;
-    public int spawnrateExpBase;
+    public float spawnRateExp;
+    public int spawnRateExpBase;
 
     [Header("Misc")]
     //asset
@@ -52,8 +52,8 @@ public class Spawner : MonoBehaviour {
 		countStart = Random.Range(spawnCooldownMin, spawnCooldownMax);
 		countdown = countStart;
 
-        spawnrateExp = 0.37f;
-        spawnrateExpBase = spawnCooldownMax; //based on spreadsheet exp formula
+        spawnRateExp = 0.37f;
+        spawnRateExpBase = spawnCooldownMax; //based on spreadsheet exp formula
 
 	}
 	
@@ -86,18 +86,14 @@ public class Spawner : MonoBehaviour {
             //if (killCount >= 100) { spawnCooldownMax = 2; }
 
             //new ramp system
-            spawnCooldownMax = (int) Mathf.Floor(GM.LevelupExpRate(GM.round,spawnrateExp,spawnrateExpBase) / GM.round);
+            spawnCooldownMax = (int) Mathf.Floor(GM.LevelupExpRate(GM.round,spawnRateExp,spawnRateExpBase) / GM.round);
             countdown = Random.Range(spawnCooldownMin, spawnCooldownMax);
 		}
 	}
 
-
+	//spawn asset from target position
 	void SpawnAsset(){
-	/*
 
-		Spawn asset by instatiate
-
-	 */
 		//get transform and add offset
 		Vector3 spawnPoint = new Vector3 (transform.position.x,
 			                     		  transform.position.y + spawnPointOffset.y,

@@ -39,6 +39,9 @@ public class Enemy : MonoBehaviour {
 
     Transform commandCenter;
 
+    //used for navmesh agent optimization (only update destination if target has moved significantly)
+    private Vector3 lastTargetPosition;
+
 
     void Awake() {
 
@@ -64,8 +67,6 @@ public class Enemy : MonoBehaviour {
 
         }else{ print("Command Center not found");  }
 
-
-     
     }
 
 
@@ -96,8 +97,7 @@ public class Enemy : MonoBehaviour {
 
         }
 
-        //print("behavior=" + _behavior.ToString());
-
+        //return the target
         return _destinedTarget;
     }
 
@@ -122,7 +122,10 @@ public class Enemy : MonoBehaviour {
         float defaultDistance = 10000000;
         float closestDistance = defaultDistance;
 
+        //if there are units, go through them and find the closest
         if(allUnits.Count > 0) {
+
+            //go through all units
             foreach(GameObject _unit in allUnits) {
 
                 //measure distance from transform to object
@@ -134,25 +137,30 @@ public class Enemy : MonoBehaviour {
                     if(isAlpha) {
 
                         //check the status of enemy and if not, then ignore
-                        if (_unit.GetComponent<Enemy>() != null && _unit.GetComponent<Enemy>().behavior == Behavior.Alpha) _destinedTarget = _unit.transform;
-                        else
-                            closestDistance = defaultDistance;
-                    } else
-                        _destinedTarget = _unit.transform;   
+                        if (_unit.GetComponent<Enemy>() != null && _unit.GetComponent<Enemy>().behavior == Behavior.Alpha)
+                            _destinedTarget = _unit.transform;
+
+                        //set to default distance if no component and behavior is not alpha
+                        else closestDistance = defaultDistance;
+
+                    //if not looking for alpha, just set the target
+                    } else _destinedTarget = _unit.transform;   
                 }
             }
         }
+
+        //return the closest target
         return _destinedTarget;
     }
 
     // Use this for initialization
     void Start () {
 
-        //agent.destination = GameObject.Find("CommandCenter").transform.position;
-
         // if destined target is not null, set agent destination to target
         if(destinedTarget != null) agent.destination = destinedTarget.position;
 
+        //set navmesh agent behavior
+        StartCoroutine(UpdateDestinationCoroutine(0.5f));
     }
 
 
@@ -165,21 +173,29 @@ public class Enemy : MonoBehaviour {
         //set animation speed and gesture to go with navMeshAgent velocity
         speed = Mathf.Lerp(speed,agent.velocity.magnitude, Time.deltaTime * 10);
         animator.SetFloat("WalkD",speed);
-
-        //set destination target on updated
-        if(behavior != Behavior.Alpha) {
-            destinedTarget = SetTargetBasedOnBehavior(commandCenter,behavior);
-            agent.destination = destinedTarget.position;
-        }
-
     }
 
 
-	void OnCollisionEnter (Collision col)
-	{
+    // Update the destination of the agent to the destined target every 0.1 seconds
+    private IEnumerator UpdateDestinationCoroutine(float waitTime = 0.1f) {
+        while (true){
+            if (agent != null && agent.isActiveAndEnabled && behavior != Behavior.Alpha && destinedTarget != null){
+                
+                // Set the target based on the behavior, switches target based on AI behavior type
+                destinedTarget = SetTargetBasedOnBehavior(commandCenter,behavior);
+                agent.destination = destinedTarget.position;
+            }
+
+            // Wait for 0.1 seconds before running again
+            yield return new WaitForSeconds(waitTime);
+        }
+    }
+
+
+	void OnCollisionEnter (Collision col){
 		
-		if(col.gameObject.tag == "Photon")
-		{
+		if(col.gameObject.tag == "Photon"){
+
 			//destroy photon on collision enter against enemy
 			Destroy(col.gameObject);
 
@@ -230,20 +246,17 @@ public class Enemy : MonoBehaviour {
         GM.enemiesDefeatedPerRound += 1;
     }
 
-
+		
+    // Auto moves the enemy asset (Legacy, there just in case. Delete if no longer needed)
     void Move(){
-	/*
 
-		Auto moves the enemy asset (Legacy, there just in case. Delete if no longer needed)
-
-	*/
 		//asset moves in direction set by speed set
 		//move this in direction by deltaTime
 		transform.Translate(direction * Time.deltaTime * GetComponent<Unit>().speed);
 	}
 
 
-    //self destrcut after a time period, take out someone within distance
+    //self destruct after a time period, take out someone within distance
     void TimeDestruct(float destroyDistance){
 
 		selfDestructCountdown = selfDestructCountdown - Time.deltaTime;
@@ -277,6 +290,7 @@ public class Enemy : MonoBehaviour {
     }
 
 
+    //random behavior roll
     public Behavior GetRandomRollBehavior() {
         Behavior randomBe = Behavior.Alpha;
 
