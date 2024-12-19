@@ -49,10 +49,6 @@ public class Enemy : MonoBehaviour {
         GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         agent = GetComponent<NavMeshAgent>();
         unit = GetComponent<Unit>();
-      
-        //navmesh agent and read unit speed initial
-        agent.speed = unit.speed;
-
         behavior = GetRandomRollBehavior();
 
         //find and set up command center
@@ -117,6 +113,7 @@ public class Enemy : MonoBehaviour {
         //if destined target or gameObject null, return null
         if(_destinedTarget == null || _destinedTarget.gameObject == null) return null;
    
+        //add all units to list and remove self, get default distance
         allUnits.Add(_destinedTarget.gameObject);
         allUnits.Remove(gameObject);
         float defaultDistance = 10000000;
@@ -156,11 +153,23 @@ public class Enemy : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
+        //navmesh agent and read unit speed initial
+        agent.speed = unit.speed;
+
+        //initialize navmesh hit for position check
+        NavMeshHit hit;
+
+        //check position to align with navmesh to avoid performance degradation on failed pathfinding
+        if (NavMesh.SamplePosition(transform.position, out hit, 1.0f, NavMesh.AllAreas)) {
+            transform.position = hit.position;
+        }else { Debug.LogError($"Enemy {gameObject.name} not placed on NavMesh!");}
+
         // if destined target is not null, set agent destination to target
         if(destinedTarget != null) agent.destination = destinedTarget.position;
 
-        //set navmesh agent behavior
-        StartCoroutine(UpdateDestinationCoroutine(0.5f));
+        //set navmesh agent behavior to check target every 0.5 seconds
+        StartCoroutine(UpdateDestinationCoroutine(0.1f));
+
     }
 
 

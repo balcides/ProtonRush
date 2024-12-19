@@ -56,8 +56,9 @@ public class Photon : MonoBehaviour {
         StartCoroutine(CheckBoundsRoutine(0.1f));
     }
 	
+    
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 		//move this set direction by deltaTime
 		transform.Translate(direction * Time.deltaTime * speed);
