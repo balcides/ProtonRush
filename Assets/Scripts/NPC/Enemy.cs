@@ -159,7 +159,7 @@ public class Enemy : MonoBehaviour {
         //initialize navmesh hit for position check
         NavMeshHit hit;
 
-        //check position to align with navmesh to avoid performance degradation on failed pathfinding
+        //check position to align with navmesh to avoid performance degradation on failed path finding
         if (NavMesh.SamplePosition(transform.position, out hit, 1.0f, NavMesh.AllAreas)) {
             transform.position = hit.position;
         }else { Debug.LogError($"Enemy {gameObject.name} not placed on NavMesh!");}

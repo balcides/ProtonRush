@@ -31,6 +31,7 @@ public class Photon : MonoBehaviour {
 
     //private vars
     private float xMin, xMax, zMin, zMax;
+    private Rigidbody photonRigidbody;
 
 	void Awake(){
 
@@ -39,6 +40,9 @@ public class Photon : MonoBehaviour {
 
         //search for platform 
         platform = GameObject.Find("TerrainPlane");
+
+        //assign rigidbody
+        photonRigidbody = GetComponent<Rigidbody>();
 	}
 
     void Start() {
@@ -60,13 +64,34 @@ public class Photon : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-		//move this set direction by deltaTime
-		transform.Translate(direction * Time.deltaTime * speed);
+
+        /*
+        * Physics-aware movement, convert direction to world space, then move the Rigidbody's position toward
+        * that direction by deltaTime
+        * 
+        * Note: this can be done with a simple Translate, which we keep here as a fallback example . But 
+        * using the Rigidbody's MovePosition is more accurate and physics-aware.
+```     *
+        * //move this set direction by deltaTime
+		*  transform.Translate(direction * Time.fixedDeltaTime * speed);
+        */
+        Vector3 worldDirection = transform.TransformDirection(direction); 
+        Vector3 newPosition = transform.position + worldDirection * Time.fixedDeltaTime * speed;
+        photonRigidbody.MovePosition(newPosition);
+
 
     }
 
 
     //destroy photon after num seconds. Coroutine lightens load on update
+
+    /**
+    * <summary>
+    * Destroy photon after num seconds. Coroutine lightens load on update
+    * </summary>
+    * 
+    * <param name="num">Number of seconds before photon is destroyed</param>
+    */
     private IEnumerator CheckBoundsRoutine(float waitTime = 0.1f) {
         while (true){
             yield return new WaitForSeconds(waitTime);

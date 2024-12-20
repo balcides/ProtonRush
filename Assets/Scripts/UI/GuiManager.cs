@@ -52,8 +52,6 @@ public class GuiManager : MonoBehaviour
     //Cycles cameras at the touch of a button
     public void CycleCameras() {
 
-        print("cycling camera...");
-
         //grab all the cameras in an array (from parent transform), get the index, and for every camera, 
         for(int i = 0; i < cameras.Length; i++) {
 

@@ -61,6 +61,7 @@
         "Behaviour",
         "Lerp",
         "Mathf",
+        "Rigidbody",
         "Scriptable"
     ]
 }
