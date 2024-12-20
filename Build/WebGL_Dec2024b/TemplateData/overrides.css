@@ -1,0 +1,92 @@
+/* Unity file overrides for WebGL */
+body{
+    background-color: darkslategray;
+}
+
+/* ID */
+
+#unity-container{
+    background-color: black;
+    padding: 73px;
+    border-radius: 36px;
+    border: 1px solid white;
+}
+
+/* 
+    Pad bar is a div that goes above the unity-footer 
+    Note: make sure to add a paragraph element inside the div
+*/
+#pad-bar{
+    font-family:Helvetica, Arial, sans-serif;
+    color: darkslategray;
+    text-align: center;
+    margin: auto;
+    padding: 0px;
+
+    position: absolute;
+    top: 95%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#pad-bar p::after{
+    content:"Monarch Pad";
+}
+
+/* Unity footer hidden for WebGL */
+#unity-footer{
+    /* visibility: hidden; */
+    position: absolute;
+    top: 720px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* 
+    MOBILE 
+*/
+/* Polish: rare fix for right arrow behind img */
+@media only screen and (max-width: 960px), (max-height: 540px){
+
+    body{
+        background-color: black;
+    }
+
+    #unity-canvas{
+        visibility: hidden;
+    }
+
+    #unity-container{
+        /* background-color: initial; */
+        padding: 0;
+        border-radius: 0;
+        border: 1px solid white;
+    }
+
+    #pad-bar{
+        width: 100%;
+        height: 100%;
+        color: white;
+        background-color: #141414;
+
+        top: 0;
+        left:0;
+        transform: translate(0, 0);
+
+        display: flex;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #pad-bar p{
+        font-size: 3vw;
+        max-width: 50%;
+    }
+
+    #pad-bar p::after{
+        content: "Your screen size is too small to display this content. Please ensure your viewport is at least 960 x 540 or larger to proceed.";
+    }
+
+}
