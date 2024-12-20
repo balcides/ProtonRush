@@ -11446,6 +11446,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 56.89083
       objectReference: {fileID: 0}
+    - target: {fileID: 213230131423371067, guid: 70e7f9feddfac4285ba44e8986223c3b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2718112445312188366, guid: 70e7f9feddfac4285ba44e8986223c3b,
         type: 3}
       propertyPath: m_SizeDelta.y
@@ -11481,11 +11486,21 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1256303840}
+    - target: {fileID: 2784790092095620504, guid: 70e7f9feddfac4285ba44e8986223c3b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 278.61328
+      objectReference: {fileID: 0}
     - target: {fileID: 7908515291367423608, guid: 70e7f9feddfac4285ba44e8986223c3b,
         type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1256303840}
+    - target: {fileID: 7908515291367423608, guid: 70e7f9feddfac4285ba44e8986223c3b,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7909624339808719206, guid: 70e7f9feddfac4285ba44e8986223c3b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -11529,6 +11544,21 @@ PrefabInstance:
     - target: {fileID: 7909624339808719206, guid: 70e7f9feddfac4285ba44e8986223c3b,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909624339808719206, guid: 70e7f9feddfac4285ba44e8986223c3b,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909624339808719206, guid: 70e7f9feddfac4285ba44e8986223c3b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7909624339808719206, guid: 70e7f9feddfac4285ba44e8986223c3b,
+        type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7909624339808719206, guid: 70e7f9feddfac4285ba44e8986223c3b,
@@ -11589,6 +11619,26 @@ PrefabInstance:
     - target: {fileID: 7909624339808719206, guid: 70e7f9feddfac4285ba44e8986223c3b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8020212238019088036, guid: 70e7f9feddfac4285ba44e8986223c3b,
+        type: 3}
+      propertyPath: m_ScaleFactor
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8020212238019088036, guid: 70e7f9feddfac4285ba44e8986223c3b,
+        type: 3}
+      propertyPath: m_DefaultSpriteDPI
+      value: 54.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 8020212238019088036, guid: 70e7f9feddfac4285ba44e8986223c3b,
+        type: 3}
+      propertyPath: m_FallbackScreenDPI
+      value: 78.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8020212238019088036, guid: 70e7f9feddfac4285ba44e8986223c3b,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

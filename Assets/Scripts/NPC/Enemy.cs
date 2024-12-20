@@ -162,7 +162,7 @@ public class Enemy : MonoBehaviour {
         //check position to align with navmesh to avoid performance degradation on failed path finding
         if (NavMesh.SamplePosition(transform.position, out hit, 1.0f, NavMesh.AllAreas)) {
             transform.position = hit.position;
-        }else { Debug.LogError($"Enemy {gameObject.name} not placed on NavMesh!");}
+        }
 
         // if destined target is not null, set agent destination to target
         if(destinedTarget != null) agent.destination = destinedTarget.position;
